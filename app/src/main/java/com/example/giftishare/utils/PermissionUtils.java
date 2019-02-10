@@ -20,8 +20,6 @@ public final class PermissionUtils {
 
     public static final int PERMISSION_STORAGE_TAG = 255;
 
-    private static Dialog sAlertDialog;
-
     public static boolean canReadStorage(Activity activity) {
         return ContextCompat.checkSelfPermission(activity,
                 Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
