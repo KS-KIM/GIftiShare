@@ -3,15 +3,10 @@ package com.example.giftishare.view.addwallet;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
-import android.content.Context;
 import android.text.TextUtils;
 
 import com.example.giftishare.Event;
 import com.example.giftishare.data.DataManager;
-import com.example.giftishare.data.model.Coupon;
-import com.example.giftishare.utils.PermissionUtils;
-
-import java.util.List;
 
 import static com.google.android.gms.common.internal.Preconditions.checkNotNull;
 

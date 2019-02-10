@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.example.giftishare.utils.FileUtils;
-import com.example.giftishare.utils.PermissionUtils;
 
 import org.web3j.crypto.CipherException;
 import org.web3j.crypto.WalletUtils;

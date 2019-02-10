@@ -25,7 +25,6 @@ import com.example.giftishare.data.AppDataManager;
 import com.example.giftishare.data.DataManager;
 import com.example.giftishare.data.local.db.AppDatabase;
 import com.example.giftishare.data.local.db.AppDbHelper;
-import com.example.giftishare.data.local.db.dao.CouponsDao;
 import com.example.giftishare.data.local.file.AppKeystoreGenerationHelper;
 import com.example.giftishare.data.local.prefs.AppPreferencesHelper;
 import com.example.giftishare.view.addwallet.AddWalletViewModel;
