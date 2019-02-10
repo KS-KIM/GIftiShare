@@ -16,8 +16,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     dataBinding {
-        enabled = true;
+        enabled = true
     }
 }
 
@@ -46,7 +50,7 @@ dependencies {
     annotationProcessor "android.arch.lifecycle:compiler:$rootProject.archLifecycleVersion"
 
     // web3j components
-    implementation "org.web3j:core:$rootProject.web3jVersion"
+    implementation("org.web3j:core:3.3.1-android")
 
     // test components
     testImplementation 'junit:junit:4.12'
