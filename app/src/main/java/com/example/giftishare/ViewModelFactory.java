@@ -23,10 +23,11 @@ import android.arch.lifecycle.ViewModelProvider;
 
 import com.example.giftishare.data.AppDataManager;
 import com.example.giftishare.data.DataManager;
+import com.example.giftishare.data.local.db.AppDatabase;
+import com.example.giftishare.data.local.db.AppDbHelper;
+import com.example.giftishare.data.local.db.dao.CouponsDao;
 import com.example.giftishare.data.local.file.AppKeystoreGenerationHelper;
-import com.example.giftishare.data.local.file.KeystoreGenerationHelper;
 import com.example.giftishare.data.local.prefs.AppPreferencesHelper;
-import com.example.giftishare.data.local.prefs.PreferencesHelper;
 import com.example.giftishare.view.addwallet.AddWalletViewModel;
 
 /**
@@ -48,10 +49,14 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
         if (INSTANCE == null) {
             synchronized (ViewModelFactory.class) {
                 if (INSTANCE == null) {
-                    AppPreferencesHelper preferencesHelper = new AppPreferencesHelper(
-                            application.getApplicationContext(), "USER_PREF");
+                    // @TODO data source의 인스턴스 생성 방식 고민해보기
+                    AppDatabase db = AppDatabase.getInstance(application.getApplicationContext());
+                    AppDbHelper dbHelper = AppDbHelper.getInstance(db.couponDao());
+                    AppPreferencesHelper preferencesHelper = AppPreferencesHelper.getInstance(
+                            application.getApplicationContext());
                     AppKeystoreGenerationHelper keystoreGenerationHelper = new AppKeystoreGenerationHelper();
-                    DataManager dataManager = AppDataManager.getInstance(keystoreGenerationHelper, preferencesHelper);
+                    DataManager dataManager = AppDataManager.getInstance(dbHelper,
+                            keystoreGenerationHelper, preferencesHelper);
                     INSTANCE = new ViewModelFactory(application, dataManager);
                 }
             }
