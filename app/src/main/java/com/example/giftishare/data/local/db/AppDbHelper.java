@@ -45,7 +45,7 @@ public class AppDbHelper implements DbHelper {
 
     @Override
     public void deleteAllCoupons() {
-
+        mCouponsDao.deleteAllCoupons();
     }
 
     @Override
