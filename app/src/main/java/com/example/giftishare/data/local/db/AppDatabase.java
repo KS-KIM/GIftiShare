@@ -3,6 +3,7 @@ package com.example.giftishare.data.local.db;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.example.giftishare.data.local.db.dao.CouponsDao;
 
@@ -18,7 +19,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     private static final Object sLock = new Object();
 
-    public static AppDatabase getInstance(Context context) {
+    public static AppDatabase getInstance(@NonNull Context context) {
         synchronized (sLock) {
             if (INSTANCE == null) {
                 INSTANCE = Room.databaseBuilder(context.getApplicationContext(),

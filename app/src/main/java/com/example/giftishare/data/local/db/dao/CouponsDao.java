@@ -26,6 +26,4 @@ public interface CouponsDao {
 
     @Delete
     void delete(Coupon coupon);
-
-
 }

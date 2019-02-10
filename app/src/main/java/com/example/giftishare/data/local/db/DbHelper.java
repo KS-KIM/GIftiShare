@@ -15,7 +15,7 @@ public interface DbHelper {
 
     LiveData<List<Coupon>> getAllCoupons();
 
-    void saveCoupon(Coupon coupon);
+    void saveCoupon(@NonNull Coupon coupon);
 
     void deleteAllCoupons();
 

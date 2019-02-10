@@ -1,7 +1,10 @@
-package com.example.giftishare.util;
+package com.example.giftishare.data.local.file;
 
-import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.util.Log;
+
+import com.example.giftishare.utils.FileUtils;
+import com.example.giftishare.utils.PermissionUtils;
 
 import org.web3j.crypto.CipherException;
 import org.web3j.crypto.WalletUtils;
@@ -16,15 +19,20 @@ import java.security.NoSuchProviderException;
  * Created by KS-KIM on 19/02/06.
  */
 
-public class FileUtil {
+public class AppKeystoreGenerationHelper implements KeystoreGenerationHelper {
 
-    public static final String WALLET_KEYSTORE_FILE_DIR = "/giftishare";
+    private static final String TAG = AppKeystoreGenerationHelper.class.getSimpleName();
 
+    private static final String WALLET_KEYSTORE_FILE_DIR = "/GiftiShare";
+
+    @Override
     public String createWallet(@NonNull final String password) {
-        File walletDirectory = getDirectory(WALLET_KEYSTORE_FILE_DIR);
+        File walletDirectory = FileUtils.getDirectory(WALLET_KEYSTORE_FILE_DIR);
         String walletFileName = null;
         try {
-            walletFileName = WalletUtils.generateLightNewWalletFile(password, walletDirectory);
+            Log.d(TAG, walletDirectory.toString());
+            walletFileName = walletDirectory.getPath().concat("/");
+            walletFileName += WalletUtils.generateLightNewWalletFile(password, walletDirectory);
         } catch (NoSuchAlgorithmException
                 | NoSuchProviderException
                 | InvalidAlgorithmParameterException
@@ -32,17 +40,7 @@ public class FileUtil {
                 | CipherException e) {
             e.printStackTrace();
         }
+        Log.d(TAG, walletFileName);
         return walletFileName;
-    }
-
-    private File getDirectory(@NonNull String specificDirectory) {
-        File walletDirectory = new File(Environment.getExternalStorageDirectory()
-                .getAbsolutePath()
-                .concat(specificDirectory)
-        );
-        if (!walletDirectory.exists()) {
-            walletDirectory.mkdir();
-        }
-        return walletDirectory;
     }
 }

@@ -11,6 +11,7 @@ import java.util.UUID;
 /**
  * Created by KS-KIM on 19/02/04.
  */
+
 @Entity(tableName = "coupons")
 public class Coupon {
 
