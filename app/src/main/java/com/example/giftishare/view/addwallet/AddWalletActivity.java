@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class AddWalletActivity extends AppCompatActivity {
         mBinding.setLifecycleOwner(this);
         mBinding.setAddWalletViewModel(mAddWalletViewModel);
 
+        setupToolbar();
         setupCreateWalletButton();
     }
 
@@ -46,6 +48,11 @@ public class AddWalletActivity extends AppCompatActivity {
         ViewModelFactory factory = ViewModelFactory.getInstance(activity.getApplication());
         AddWalletViewModel addWalletViewModel = ViewModelProviders.of(this, factory).get(AddWalletViewModel.class);
         return addWalletViewModel;
+    }
+
+    private void setupToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
     }
 
     private void setupCreateWalletButton() {

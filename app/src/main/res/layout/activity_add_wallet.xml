@@ -9,96 +9,94 @@
             type="com.example.giftishare.view.addwallet.AddWalletViewModel" />
     </data>
 
-    <LinearLayout
-        android:layout_height="match_parent"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <android.support.design.widget.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                app:popupTheme="@style/AppTheme.PopupOverlay">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:text="지갑 생성하기" />
-            </android.support.v7.widget.Toolbar>
-
-        </android.support.design.widget.AppBarLayout>
-
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
+        <android.support.design.widget.CoordinatorLayout
             android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="vertical">
 
-            tools:context=".view.addwallet.AddWalletActivity">
-
-            <ImageView
-                android:id="@+id/iv_wallet"
+            <android.support.design.widget.AppBarLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:paddingTop="32dp"
-                android:paddingBottom="32dp"
-                android:src="@drawable/ethereum_wallet"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <EditText
-                android:id="@+id/et_user_name"
-                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="32dp"
-                android:ems="10"
-                android:hint="User Name"
-                android:inputType="textEmailAddress"
-                android:text="@={AddWalletViewModel.mUserName}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iv_wallet" />
+                app:elevation="0dp"
+                android:theme="@style/AppTheme">
 
-            <EditText
-                android:id="@+id/et_wallet_password"
-                android:layout_width="0dp"
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/colorPrimary" />
+
+            </android.support.design.widget.AppBarLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
-                android:ems="10"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:text="@={AddWalletViewModel.mWalletPassword}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_user_name" />
+                android:layout_gravity="center"
+                tools:context=".view.addwallet.AddWalletActivity">
 
-            <Button
-                android:id="@+id/btn_create_wallet"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="32dp"
-                android:text="Create Wallet"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_wallet_password" />
+                <ImageView
+                    android:id="@+id/iv_wallet"
+                    android:layout_width="match_parent"
+                    android:layout_height="254dp"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:src="@drawable/wallet"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        </android.support.constraint.ConstraintLayout>
+                <EditText
+                    android:id="@+id/et_user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:ems="10"
+                    android:hint="User Name"
+                    android:inputType="textEmailAddress"
+                    android:text="@={AddWalletViewModel.mUserName}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_wallet" />
 
-    </LinearLayout>
+                <EditText
+                    android:id="@+id/et_wallet_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="32dp"
+                    android:ems="10"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:text="@={AddWalletViewModel.mWalletPassword}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_user_name" />
+
+                <Button
+                    android:id="@+id/btn_create_wallet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Create Wallet"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:textSize="18sp"
+                    android:background="@drawable/transparent_bg_bordered_button"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_wallet_password" />
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.design.widget.CoordinatorLayout>
+
+    </RelativeLayout>
 
 </layout>
