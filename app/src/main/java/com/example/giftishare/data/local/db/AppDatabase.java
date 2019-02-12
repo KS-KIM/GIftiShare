@@ -1,16 +1,19 @@
 package com.example.giftishare.data.local.db;
 
+import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.example.giftishare.data.local.db.dao.CouponsDao;
+import com.example.giftishare.data.model.Coupon;
 
 /**
  * Created by KS-KIM on 19/02/06.
  */
 
+@Database(entities = {Coupon.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;

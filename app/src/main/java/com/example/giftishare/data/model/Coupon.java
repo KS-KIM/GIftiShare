@@ -2,10 +2,10 @@ package com.example.giftishare.data.model;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -13,33 +13,36 @@ import java.util.UUID;
  */
 
 @Entity(tableName = "coupons")
-public class Coupon {
+public final class Coupon {
 
     @PrimaryKey
+    @NonNull
     @ColumnInfo(name = "id")
-    String mId;
+    public String mId;
 
     @ColumnInfo(name = "name")
-    String mName;
+    public String mName;
 
     @ColumnInfo(name = "category")
-    String mCategory;
+    public String mCategory;
 
     @ColumnInfo(name = "company")
-    String mCompany;
+    public String mCompany;
 
     @ColumnInfo(name = "price")
-    Integer mPrice;
+    public Integer mPrice;
 
+    // Date is stored as a timestamp
     @ColumnInfo(name = "deadline")
-    Date mDeadline;
+    public Long mDeadline;
 
     @ColumnInfo(name = "owner")
-    String mOwner;
+    public String mOwner;
 
-    // get coupon from firebase realtime database
+    // RoomDatabase에서는 오직 하나의 생성자만 허용하므로 나머지는 @Ignore를 통해 처리를 해주어야 함
+    @Ignore
     public Coupon(@NonNull String id, @NonNull String name, @NonNull String category,
-                  @NonNull String company, @NonNull Integer price, @NonNull Date deadline,
+                  @NonNull String company, @NonNull Integer price, @NonNull Long deadline,
                   @NonNull String owner) {
         mId = id;
         mName = name;
@@ -52,7 +55,7 @@ public class Coupon {
 
     // generate new coupon from user
     public Coupon(@NonNull String name, @NonNull String category, @NonNull String company,
-                  @NonNull Integer price, @NonNull Date deadline, @NonNull String owner) {
+                  @NonNull Integer price, @NonNull Long deadline, @NonNull String owner) {
         this(UUID.randomUUID().toString(), name, category, company, price, deadline, owner);
     }
 }
