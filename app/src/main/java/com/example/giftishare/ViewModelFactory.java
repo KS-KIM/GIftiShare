@@ -27,6 +27,7 @@ import com.example.giftishare.data.local.db.AppDatabase;
 import com.example.giftishare.data.local.db.AppDbHelper;
 import com.example.giftishare.data.local.file.AppKeystoreGenerationHelper;
 import com.example.giftishare.data.local.prefs.AppPreferencesHelper;
+import com.example.giftishare.data.remote.firebase.AppFirebaseDbHelper;
 import com.example.giftishare.view.addwallet.AddWalletViewModel;
 
 /**
@@ -51,11 +52,12 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
                     // @TODO data source의 인스턴스 생성 방식 고민해보기
                     AppDatabase db = AppDatabase.getInstance(application.getApplicationContext());
                     AppDbHelper dbHelper = AppDbHelper.getInstance(db.couponDao());
+                    AppFirebaseDbHelper appFirebaseDbHelper = AppFirebaseDbHelper.getInstance();
                     AppPreferencesHelper preferencesHelper = AppPreferencesHelper.getInstance(
                             application.getApplicationContext());
                     AppKeystoreGenerationHelper keystoreGenerationHelper = new AppKeystoreGenerationHelper();
                     DataManager dataManager = AppDataManager.getInstance(dbHelper,
-                            keystoreGenerationHelper, preferencesHelper);
+                            appFirebaseDbHelper, keystoreGenerationHelper, preferencesHelper);
                     INSTANCE = new ViewModelFactory(application, dataManager);
                 }
             }
@@ -83,5 +85,4 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }
-
 }
