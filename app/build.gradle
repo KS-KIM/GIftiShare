@@ -16,8 +16,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     dataBinding {
-        enabled = true;
+        enabled = true
     }
 }
 
@@ -32,6 +36,10 @@ dependencies {
     implementation "com.android.support:design:$rootProject.supportLibraryVersion"
     implementation "com.android.support.constraint:constraint-layout:$rootProject.constraintLayoutVersion"
 
+    // lifecycle components (view model)
+    implementation "android.arch.lifecycle:extensions:$rootProject.archLifecycleVersion"
+    annotationProcessor "android.arch.lifecycle:compiler:$rootProject.archLifecycleVersion"
+
     // room components
     implementation "android.arch.persistence.room:runtime:$rootProject.roomVersion"
     annotationProcessor "android.arch.persistence.room:compiler:$rootProject.roomVersion"
@@ -41,12 +49,8 @@ dependencies {
     implementation "com.google.firebase:firebase-core:$rootProject.firebaseVersion"
     implementation "com.google.firebase:firebase-database:$rootProject.firebaseVersion"
 
-    // lifecycle components (view model)
-    implementation "android.arch.lifecycle:extensions:$rootProject.archLifecycleVersion"
-    annotationProcessor "android.arch.lifecycle:compiler:$rootProject.archLifecycleVersion"
-
     // web3j components
-    implementation "org.web3j:core:$rootProject.web3jVersion"
+    implementation("org.web3j:core:4.1.0-android")
 
     // test components
     testImplementation 'junit:junit:4.12'
