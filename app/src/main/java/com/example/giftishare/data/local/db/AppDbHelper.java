@@ -18,7 +18,7 @@ public class AppDbHelper implements DbHelper {
 
     private CouponsDao mCouponsDao;
 
-    public AppDbHelper(CouponsDao couponsDao) {
+    public AppDbHelper(@NonNull CouponsDao couponsDao) {
         mCouponsDao = couponsDao;
     }
 
@@ -39,13 +39,13 @@ public class AppDbHelper implements DbHelper {
     }
 
     @Override
-    public void saveCoupon(Coupon coupon) {
+    public void saveCoupon(@NonNull Coupon coupon) {
         mCouponsDao.insert(coupon);
     }
 
     @Override
     public void deleteAllCoupons() {
-
+        mCouponsDao.deleteAllCoupons();
     }
 
     @Override
