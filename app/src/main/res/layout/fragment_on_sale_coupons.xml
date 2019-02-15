@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="OnSaleCouponsViewModel"
+            type="com.example.giftishare.view.onSaleCoupons.OnSaleCouponsViewModel" />
+    </data>
+
+    <!-- @TODO ScrollChildSwipeRefreshLayout-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/coupons_list_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="LinearLayoutManager"
+        bind:item="@{OnSaleCouponsViewModel.mCoupons}" />
+    
+</layout>
