@@ -13,11 +13,11 @@ import java.util.List;
 
 public interface DbHelper {
 
-    LiveData<List<Coupon>> getAllCoupons();
+    LiveData<List<Coupon>> getAllPurchasedCoupons();
 
-    void saveCoupon(@NonNull Coupon coupon);
+    void savePurchasedCoupon(@NonNull Coupon coupon);
 
-    void deleteAllCoupons();
+    void deleteAllPurchasedCoupons();
 
-    void deleteCoupon(@NonNull Coupon coupon);
+    void deletePurchasedCoupon(@NonNull Coupon coupon);
 }
