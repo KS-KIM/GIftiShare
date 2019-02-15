@@ -1,5 +1,6 @@
 package com.example.giftishare.view.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.giftishare.R;
+import com.example.giftishare.view.onSaleCoupons.OnSaleCouponsActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -71,7 +73,8 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_buy_list) {
-
+            Intent intent = new Intent(this, OnSaleCouponsActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_sell_list) {
 
         } else if (id == R.id.nav_contact_us) {
