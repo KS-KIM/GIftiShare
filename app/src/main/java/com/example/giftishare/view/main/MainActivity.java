@@ -1,5 +1,6 @@
 package com.example.giftishare.view.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -9,8 +10,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.giftishare.R;
+import com.example.giftishare.view.addcoupon.AddCouponActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -58,6 +61,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_sell_coupon) {
+            openAddCouponActivity();
             return true;
         }
 
@@ -84,4 +88,10 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public void openAddCouponActivity() {
+        Intent intent = new Intent(this, AddCouponActivity.class);
+        startActivity(intent);
+    }
+
 }

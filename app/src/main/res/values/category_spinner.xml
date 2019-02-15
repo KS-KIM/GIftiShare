@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--array 이름은 category_name-->
+    <string-array name="category_name">
+        <item>메뉴 선택</item>
+        <item>음료</item>
+        <item>배달음식</item>
+        <item>음식점</item>
+        <item>편의점</item>
+        <item>뷰티</item>
+        <item>여행</item>
+        <item>상품권</item>
+        <item>책</item>
+        <item>모바일 데이터</item>
+        <item>영화</item>
+        <item>리빙/가전</item>
+        <item>교육</item>
+    </string-array>
+</resources>

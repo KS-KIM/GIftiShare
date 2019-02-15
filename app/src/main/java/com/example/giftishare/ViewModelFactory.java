@@ -20,6 +20,7 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
+import android.util.Log;
 
 import com.example.giftishare.data.AppDataManager;
 import com.example.giftishare.data.DataManager;
@@ -28,6 +29,8 @@ import com.example.giftishare.data.local.db.AppDbHelper;
 import com.example.giftishare.data.local.file.AppKeystoreGenerationHelper;
 import com.example.giftishare.data.local.prefs.AppPreferencesHelper;
 import com.example.giftishare.data.remote.firebase.AppFirebaseDbHelper;
+
+import com.example.giftishare.view.addcoupon.AddCouponViewModel;
 import com.example.giftishare.view.addwallet.AddWalletViewModel;
 
 /**
@@ -82,6 +85,8 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     public <T extends ViewModel> T create(Class<T> modelClass) {
         if (modelClass.isAssignableFrom(AddWalletViewModel.class)) {
             return (T) new AddWalletViewModel(mApplication, mDataManager);
+        }else if (modelClass.isAssignableFrom(AddCouponViewModel.class)) {
+            return (T) new AddCouponViewModel(mApplication, mDataManager);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }
