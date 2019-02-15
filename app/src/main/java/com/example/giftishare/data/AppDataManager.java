@@ -13,6 +13,7 @@ import com.example.giftishare.data.model.Coupon;
 import com.example.giftishare.data.remote.firebase.AppFirebaseDbHelper;
 import com.example.giftishare.data.remote.firebase.FirebaseDbHelper;
 import com.example.giftishare.data.remote.firebase.FirebaseQueryLiveData;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.List;
 
@@ -84,11 +85,6 @@ public class AppDataManager implements DataManager {
     @Override
     public void saveCoupon(Coupon coupon) {
         mFirebaseDbHelper.saveCoupon(coupon);
-    }
-
-    @Override
-    public FirebaseQueryLiveData getCoupons(String category) {
-        return mFirebaseDbHelper.getCoupons(category);
     }
 
     @Override

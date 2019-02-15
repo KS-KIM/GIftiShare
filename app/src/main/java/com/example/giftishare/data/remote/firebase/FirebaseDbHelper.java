@@ -6,6 +6,6 @@ public interface FirebaseDbHelper {
 
     void saveCoupon(Coupon coupon);
 
-    FirebaseQueryLiveData getCoupons(String category);
+    // FirebaseQueryLiveData getCoupons(String category);
 
 }

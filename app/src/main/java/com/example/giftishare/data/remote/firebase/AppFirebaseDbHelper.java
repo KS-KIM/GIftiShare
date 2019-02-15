@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class AppFirebaseDbHelper implements FirebaseDbHelper {
 
-    private final static String FIREBASE_CATEGORY_COUPONS = "coupons";
+    public final static String FIREBASE_CATEGORY_COUPONS = "coupons";
 
     private static volatile AppFirebaseDbHelper INSTANCE;
 
@@ -42,10 +42,12 @@ public class AppFirebaseDbHelper implements FirebaseDbHelper {
                 .updateChildren(couponValues);
     }
 
+    /*
     @Override
     public FirebaseQueryLiveData getCoupons(String category) {
         // @TODO enum 타입으로 카테고리 분류 가능 (1: 카페, 2: 편의점 ...)
         FirebaseQueryLiveData coupons = new FirebaseQueryLiveData(mDatabase.child(category));
         return coupons;
     }
+    */
 }
