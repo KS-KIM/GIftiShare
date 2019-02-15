@@ -21,9 +21,43 @@
         <item name="android:windowBackground">@drawable/splash</item>
     </style>
 
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
     <!-- Button theme. -->
     <style name="AppTheme.Button" parent="@style/Widget.AppCompat.Button.Borderless">
 
+    </style>
+
+    <style name="AppTheme.NoActionAndStatusBar" parent="AppTheme.NoActionBar">
+        <item name="android:statusBarColor">@color/colorPrimary</item>
+    </style>
+
+    <!--TextStyle.-->
+    <style name="TextStyle_Title">
+        <item name="android:textSize">21sp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:fontFamily">@font/notosanskr_medium</item>
+    </style>
+
+    <style name="TextStyle_Button">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:fontFamily">@font/notosanskr_medium</item>
+    </style>
+
+    <style name="TextStyle_tag">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:fontFamily">@font/notosanskr_medium</item>
+    </style>
+
+    <style name="TextStyle">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/colorGray</item>
+        <item name="android:fontFamily">@font/notosanskr_medium</item>
     </style>
 
 </resources>
