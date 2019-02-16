@@ -10,4 +10,5 @@
     <dimen name="category_margin">4dp</dimen>
     <dimen name="corner_radius_cardview">10dp</dimen>
     <dimen name="content_margin">2dp</dimen>
+    <dimen name="round_button_radius">25dp</dimen>
 </resources>
