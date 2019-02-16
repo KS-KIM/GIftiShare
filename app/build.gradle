@@ -50,7 +50,7 @@ dependencies {
     implementation "com.google.firebase:firebase-database:$rootProject.firebaseDatabaseVersion"
 
     // web3j components
-    implementation("org.web3j:core:4.1.0-android")
+    implementation "org.web3j:core:$rootProject.web3jVersion"
 
     // test components
     testImplementation 'junit:junit:4.12'
