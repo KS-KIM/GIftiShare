@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.giftishare.R;
+import com.example.giftishare.view.addcoupon.AddCouponActivity;
 import com.example.giftishare.view.onSaleCoupons.OnSaleCouponsActivity;
 
 public class MainActivity extends AppCompatActivity
@@ -60,6 +61,8 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_sell_coupon) {
+            Intent intent = new Intent(this, AddCouponActivity.class);
+            startActivity(intent);
             return true;
         }
 

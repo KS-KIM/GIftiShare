@@ -28,6 +28,7 @@ import com.example.giftishare.data.local.db.AppDbHelper;
 import com.example.giftishare.data.local.file.AppKeystoreGenerationHelper;
 import com.example.giftishare.data.local.prefs.AppPreferencesHelper;
 import com.example.giftishare.data.remote.firebase.AppFirebaseDbHelper;
+import com.example.giftishare.view.addcoupon.AddCouponViewModel;
 import com.example.giftishare.view.addwallet.AddWalletViewModel;
 import com.example.giftishare.view.onSaleCoupons.OnSaleCouponsViewModel;
 
@@ -86,6 +87,8 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
             return (T) new AddWalletViewModel(mApplication, mDataManager);
         } else if (modelClass.isAssignableFrom(OnSaleCouponsViewModel.class)) {
             return (T) new OnSaleCouponsViewModel(mApplication, mDataManager);
+        }else if (modelClass.isAssignableFrom(AddCouponViewModel.class)) {
+            return (T) new AddCouponViewModel(mApplication, mDataManager);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

@@ -32,11 +32,17 @@
 
         <activity android:name=".view.addwallet.AddWalletActivity"
             android:label="@string/new_user_title"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionAndStatusBar" />
 
         <activity android:name=".view.onSaleCoupons.OnSaleCouponsActivity"
             android:label="coupon list"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionAndStatusBar" />
+
+        <activity
+            android:name=".view.addcoupon.AddCouponActivity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionAndStatusBar" />
+
     </application>
 
 </manifest>
