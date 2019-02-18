@@ -10,6 +10,10 @@ import com.example.giftishare.data.local.file.KeystoreGenerationHelper;
 import com.example.giftishare.data.local.prefs.AppPreferencesHelper;
 import com.example.giftishare.data.local.prefs.PreferencesHelper;
 import com.example.giftishare.data.model.Coupon;
+import com.example.giftishare.data.remote.firebase.AppFirebaseDbHelper;
+import com.example.giftishare.data.remote.firebase.FirebaseDbHelper;
+import com.example.giftishare.data.remote.firebase.FirebaseQueryLiveData;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.List;
 
@@ -23,25 +27,30 @@ public class AppDataManager implements DataManager {
 
     private final DbHelper mDbHelper;
 
+    private final FirebaseDbHelper mFirebaseDbHelper;
+
     private final KeystoreGenerationHelper mKeystoreGenerationHelper;
 
     private final PreferencesHelper mPreferencesHelper;
 
     private AppDataManager(@NonNull AppDbHelper appDbHelper,
+                           @NonNull AppFirebaseDbHelper appFirebaseDbHelper,
                            @NonNull AppKeystoreGenerationHelper appKeystoreGenerationHelper,
                            @NonNull AppPreferencesHelper appPreferencesHelper) {
         mDbHelper = appDbHelper;
+        mFirebaseDbHelper = appFirebaseDbHelper;
         mKeystoreGenerationHelper = appKeystoreGenerationHelper;
         mPreferencesHelper = appPreferencesHelper;
     }
 
     public static DataManager getInstance(@NonNull AppDbHelper appDbHelper,
+                                          @NonNull AppFirebaseDbHelper appFirebaseDbHelper,
                                           @NonNull AppKeystoreGenerationHelper appKeystoreGenerationHelper,
                                           @NonNull AppPreferencesHelper appPreferencesHelper) {
         if (INSTANCE == null) {
             synchronized (AppDataManager.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = new AppDataManager(appDbHelper, appKeystoreGenerationHelper, appPreferencesHelper);
+                    INSTANCE = new AppDataManager(appDbHelper, appFirebaseDbHelper, appKeystoreGenerationHelper, appPreferencesHelper);
                 }
             }
         }
@@ -53,24 +62,29 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public LiveData<List<Coupon>> getAllCoupons() {
-        return mDbHelper.getAllCoupons();
+    public LiveData<List<Coupon>> getAllPurchasedCoupons() {
+        return mDbHelper.getAllPurchasedCoupons();
     }
 
 
     @Override
-    public void saveCoupon(@NonNull Coupon coupon) {
-        mDbHelper.saveCoupon(coupon);
+    public void savePurchasedCoupon(@NonNull Coupon coupon) {
+        mDbHelper.savePurchasedCoupon(coupon);
     }
 
     @Override
-    public void deleteAllCoupons() {
-        mDbHelper.deleteAllCoupons();
+    public void deleteAllPurchasedCoupons() {
+        mDbHelper.deleteAllPurchasedCoupons();
     }
 
     @Override
-    public void deleteCoupon(@NonNull Coupon coupon) {
-        mDbHelper.deleteCoupon(coupon);
+    public void deletePurchasedCoupon(@NonNull Coupon coupon) {
+        mDbHelper.deletePurchasedCoupon(coupon);
+    }
+
+    @Override
+    public void saveCoupon(Coupon coupon) {
+        mFirebaseDbHelper.saveCoupon(coupon);
     }
 
     @Override
@@ -103,6 +117,7 @@ public class AppDataManager implements DataManager {
         return mPreferencesHelper.getWalletPath();
     }
 
+    @Override
     public void setWalletPath(@NonNull String walletPath) {
         mPreferencesHelper.setWalletPath(walletPath);
     }

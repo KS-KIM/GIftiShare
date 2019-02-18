@@ -34,7 +34,7 @@ public final class Coupon {
     public String mCompany;
 
     @ColumnInfo(name="price")
-    public Integer mPrice;
+    public String mPrice;
 
     @ColumnInfo(name="barcode")
     public String mBarcode;
@@ -52,10 +52,14 @@ public final class Coupon {
     @ColumnInfo(name="used")
     public Boolean mUsed;
 
+    public Coupon() {
+        // require empty constructor
+    }
+
     // RoomDatabase에서는 오직 하나의 생성자만 허용하므로 나머지는 @Ignore를 통해 처리를 해주어야 함
     @Ignore
     public Coupon(@NonNull String id, @NonNull String name, @NonNull String category,
-                  @NonNull String company, @NonNull Integer price, @NonNull String barcode,
+                  @NonNull String company, @NonNull String price, @NonNull String barcode,
                   @NonNull Long deadline, @NonNull String owner, @NonNull Boolean onSale,
                   @NonNull Boolean used) {
         mId = id;
@@ -72,7 +76,7 @@ public final class Coupon {
 
     // generate new coupon from user
     public Coupon(@NonNull String name, @NonNull String category, @NonNull String company,
-                  @NonNull Integer price, @NonNull String barcode, @NonNull Long deadline,
+                  @NonNull String price, @NonNull String barcode, @NonNull Long deadline,
                   @NonNull String owner) {
         this(UUID.randomUUID().toString(), name, category, company, price, barcode, deadline, owner,
                 true, false);
@@ -111,11 +115,11 @@ public final class Coupon {
         this.mCompany = company;
     }
 
-    public Integer getPrice() {
+    public String getPrice() {
         return mPrice;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(String price) {
         this.mPrice = price;
     }
 

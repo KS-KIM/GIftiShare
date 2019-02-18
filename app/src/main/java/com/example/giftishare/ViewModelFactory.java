@@ -27,7 +27,9 @@ import com.example.giftishare.data.local.db.AppDatabase;
 import com.example.giftishare.data.local.db.AppDbHelper;
 import com.example.giftishare.data.local.file.AppKeystoreGenerationHelper;
 import com.example.giftishare.data.local.prefs.AppPreferencesHelper;
+import com.example.giftishare.data.remote.firebase.AppFirebaseDbHelper;
 import com.example.giftishare.view.addwallet.AddWalletViewModel;
+import com.example.giftishare.view.onSaleCoupons.OnSaleCouponsViewModel;
 
 /**
  * A creator is used to inject the product ID into the ViewModel
@@ -51,11 +53,13 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
                     // @TODO data source의 인스턴스 생성 방식 고민해보기
                     AppDatabase db = AppDatabase.getInstance(application.getApplicationContext());
                     AppDbHelper dbHelper = AppDbHelper.getInstance(db.couponDao());
+                    // FirebaseApp.initializeApp(application.getApplicationContext());
+                    AppFirebaseDbHelper appFirebaseDbHelper = AppFirebaseDbHelper.getInstance();
                     AppPreferencesHelper preferencesHelper = AppPreferencesHelper.getInstance(
                             application.getApplicationContext());
                     AppKeystoreGenerationHelper keystoreGenerationHelper = new AppKeystoreGenerationHelper();
                     DataManager dataManager = AppDataManager.getInstance(dbHelper,
-                            keystoreGenerationHelper, preferencesHelper);
+                            appFirebaseDbHelper, keystoreGenerationHelper, preferencesHelper);
                     INSTANCE = new ViewModelFactory(application, dataManager);
                 }
             }
@@ -80,8 +84,9 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     public <T extends ViewModel> T create(Class<T> modelClass) {
         if (modelClass.isAssignableFrom(AddWalletViewModel.class)) {
             return (T) new AddWalletViewModel(mApplication, mDataManager);
+        } else if (modelClass.isAssignableFrom(OnSaleCouponsViewModel.class)) {
+            return (T) new OnSaleCouponsViewModel(mApplication, mDataManager);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }
-
 }
