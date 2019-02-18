@@ -8,4 +8,6 @@
     <string name="action_settings">Settings</string>
     <string name="new_user_title">Create New Wallet</string>
     <string name="firebase_category_coupons">coupons</string>
+    <string name="btn_acc">등록하기</string>
+    <string name="spinner_title">쿠폰메뉴선택</string>
 </resources>
