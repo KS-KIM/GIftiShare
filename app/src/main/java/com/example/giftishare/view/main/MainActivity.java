@@ -1,38 +1,85 @@
 package com.example.giftishare.view.main;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.example.giftishare.Event;
 import com.example.giftishare.R;
+import com.example.giftishare.ViewModelFactory;
+import com.example.giftishare.data.model.CouponsCategoryType;
+import com.example.giftishare.utils.ActivityUtils;
 import com.example.giftishare.view.addcoupon.AddCouponActivity;
 import com.example.giftishare.view.onSaleCoupons.OnSaleCouponsActivity;
 
+// @TODO MVVM 패턴으로 변경
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    public static final String CATEGORY_COUPONS = "CATEGORY_COUPONS";
+
+    private DrawerLayout mDrawerLayout;
+
+    private Toolbar mToolbar;
+
+    private MainViewModel mViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setupToolbar();
+        setupNavigationDrawer();
+        setupViewFragment();
+        mViewModel = obtainViewModel(this);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mViewModel.getOpenOnSaleCouponsEvent().observe(this,
+                (Event<CouponsCategoryType> CouponIdEvent) -> {
+            CouponsCategoryType category = CouponIdEvent.getContentIfNotHandled();
+            if (category != null) {
+                openOnSaleActivity(category);
+            }
+        });
+    }
+
+    private void setupToolbar() {
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+    }
+
+    public static MainViewModel obtainViewModel(FragmentActivity activity) {
+        ViewModelFactory factory = ViewModelFactory.getInstance(activity.getApplication());
+        MainViewModel viewModel = ViewModelProviders.of(activity, factory).get(MainViewModel.class);
+        return viewModel;
+    }
+
+    private void setupNavigationDrawer() {
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
+                this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void setupViewFragment() {
+        MainFragment mainFragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.content_frame);
+        if (mainFragment == null) {
+            mainFragment = MainFragment.newInstance();
+            ActivityUtils.replaceFragmentInActivity(getSupportFragmentManager(), mainFragment, R.id.content_frame);
+        }
     }
 
     @Override
@@ -45,49 +92,56 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_home:
+                break;
+            case R.id.nav_buy_list:
+
+                break;
+            case R.id.nav_sell_list:
+
+                break;
+            case R.id.nav_contact_us:
+
+                break;
+            case R.id.nav_manage:
+
+                break;
+            default:
+                break;
+        }
+        item.setChecked(true);
+        mDrawerLayout.closeDrawers();
+        return true;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_sell_coupon) {
-            Intent intent = new Intent(this, AddCouponActivity.class);
-            startActivity(intent);
-            return true;
+        switch(item.getItemId()) {
+            case R.id.action_sell_coupon:
+                openAddCouponActivity();
+                return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
+    public void openOnSaleActivity(CouponsCategoryType category) {
+        Intent intent = new Intent(this, OnSaleCouponsActivity.class);
+        intent.putExtra(CATEGORY_COUPONS, category);
+        startActivity(intent);
+    }
 
-        if (id == R.id.nav_buy_list) {
-            Intent intent = new Intent(this, OnSaleCouponsActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_sell_list) {
-
-        } else if (id == R.id.nav_contact_us) {
-
-        } else if (id == R.id.nav_manage) {
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+    public void openAddCouponActivity() {
+        Intent intent = new Intent(this, AddCouponActivity.class);
+        startActivity(intent);
     }
 }
