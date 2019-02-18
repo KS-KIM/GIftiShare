@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorGray"
-    android:padding="@dimen/category_padding"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".view.main.MainActivity"
-    tools:showIn="@layout/app_bar_main">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.example.giftishare.data.model.CouponsCategoryType" />
+
+        <variable
+            name="viewmodel"
+            type="com.example.giftishare.view.main.MainViewModel" />
+    </data>
 
     <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:scrollbars="none"
+        android:background="@color/colorGray"
+        android:padding="@dimen/category_padding"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".view.main.MainActivity"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -26,6 +31,7 @@
             app:cardElevation="2dp">
 
             <LinearLayout
+                android:id="@+id/category_main"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -36,9 +42,11 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/category_caffee"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:onClick="@{() -> viewmodel.openOnSaleCoupons(CouponsCategoryType.CAFFEE)}"
                         android:gravity="center"
                         android:orientation="vertical">
 
@@ -49,7 +57,6 @@
                             android:text="음료" />
 
                         <ImageView
-                            android:id="@+id/category_caffee"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/category_margin"
@@ -69,9 +76,11 @@
                         android:background="@color/colorGray" />
 
                     <LinearLayout
+                        android:id="@+id/category_food"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:onClick="@{() -> viewmodel.openOnSaleCoupons(CouponsCategoryType.DELIVERY_FOOD)}"
                         android:gravity="center"
                         android:orientation="vertical">
 
@@ -82,7 +91,6 @@
                             android:text="배달음식" />
 
                         <ImageView
-                            android:id="@+id/category_food"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/category_margin"
@@ -102,9 +110,11 @@
                         android:background="@color/colorGray" />
 
                     <LinearLayout
+                        android:id="@+id/category_restaurant"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:onClick="@{() -> viewmodel.openOnSaleCoupons(CouponsCategoryType.RESTAURANT)}"
                         android:gravity="center"
                         android:orientation="vertical">
 
@@ -115,7 +125,6 @@
                             android:text="음식점" />
 
                         <ImageView
-                            android:id="@+id/category_restaurant"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/category_margin"
@@ -142,9 +151,11 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/category_mart"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:onClick="@{() -> viewmodel.openOnSaleCoupons(CouponsCategoryType.MART)}"
                         android:gravity="center"
                         android:orientation="vertical">
 
@@ -155,7 +166,6 @@
                             android:text="편의점" />
 
                         <ImageView
-                            android:id="@+id/category_mart"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/category_margin"
@@ -174,9 +184,11 @@
                         android:background="@color/colorGray" />
 
                     <LinearLayout
+                        android:id="@+id/category_beauty"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:onClick="@{() -> viewmodel.openOnSaleCoupons(CouponsCategoryType.BEAUTY)}"
                         android:gravity="center"
                         android:orientation="vertical">
 
@@ -187,7 +199,6 @@
                             android:text="뷰티" />
 
                         <ImageView
-                            android:id="@+id/category_beauty"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/category_margin"
@@ -206,9 +217,11 @@
                         android:background="@color/colorGray" />
 
                     <LinearLayout
+                        android:id="@+id/category_trip"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:onClick="@{() -> viewmodel.openOnSaleCoupons(CouponsCategoryType.TRIP)}"
                         android:gravity="center"
                         android:orientation="vertical">
 
@@ -219,7 +232,6 @@
                             android:text="여행" />
 
                         <ImageView
-                            android:id="@+id/category_trip"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/category_margin"
@@ -246,9 +258,11 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/category_gift_coupon"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:onClick="@{() -> viewmodel.openOnSaleCoupons(CouponsCategoryType.GIFT_COUPON)}"
                         android:gravity="center"
                         android:orientation="vertical">
 
@@ -259,7 +273,6 @@
                             android:text="상품권" />
 
                         <ImageView
-                            android:id="@+id/category_gift_coupon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/category_margin"
@@ -278,9 +291,11 @@
                         android:background="@color/colorGray" />
 
                     <LinearLayout
+                        android:id="@+id/category_book"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:onClick="@{() -> viewmodel.openOnSaleCoupons(CouponsCategoryType.BOOK)}"
                         android:gravity="center"
                         android:orientation="vertical">
 
@@ -291,7 +306,6 @@
                             android:text="책" />
 
                         <ImageView
-                            android:id="@+id/category_book"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/category_margin"
@@ -310,9 +324,11 @@
                         android:background="@color/colorGray" />
 
                     <LinearLayout
+                        android:id="@+id/category_mobile_data"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:onClick="@{() -> viewmodel.openOnSaleCoupons(CouponsCategoryType.MOBILE_DATA)}"
                         android:gravity="center"
                         android:orientation="vertical">
 
@@ -323,7 +339,6 @@
                             android:text="모바일 데이터" />
 
                         <ImageView
-                            android:id="@+id/category_mobile_data"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/category_margin"
@@ -350,9 +365,11 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/category_movie"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:onClick="@{() -> viewmodel.openOnSaleCoupons(CouponsCategoryType.MOVIE)}"
                         android:gravity="center"
                         android:orientation="vertical">
 
@@ -363,7 +380,6 @@
                             android:text="영화" />
 
                         <ImageView
-                            android:id="@+id/category_movie"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/category_margin"
@@ -383,9 +399,11 @@
                         android:background="@color/colorGray" />
 
                     <LinearLayout
+                        android:id="@+id/category_living"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:onClick="@{() -> viewmodel.openOnSaleCoupons(CouponsCategoryType.LIVING)}"
                         android:gravity="center"
                         android:orientation="vertical">
 
@@ -396,7 +414,6 @@
                             android:text="리빙/가전" />
 
                         <ImageView
-                            android:id="@+id/category_living"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/category_margin"
@@ -416,9 +433,11 @@
                         android:background="@color/colorGray" />
 
                     <LinearLayout
+                        android:id="@+id/category_education"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:onClick="@{() -> viewmodel.openOnSaleCoupons(CouponsCategoryType.EDUCATION)}"
                         android:gravity="center"
                         android:orientation="vertical">
 
@@ -429,7 +448,6 @@
                             android:text="교육" />
 
                         <ImageView
-                            android:id="@+id/category_education"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/category_margin"
@@ -450,4 +468,4 @@
 
     </ScrollView>
 
-</android.support.constraint.ConstraintLayout>
+</layout>

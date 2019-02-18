@@ -37,7 +37,7 @@
     <!--TextStyle.-->
     <style name="TextStyle_Title">
         <item name="android:textSize">21sp</item>
-        <item name="android:textColor">#ffffff</item>
+        <item name="android:textColor">@color/logoGray</item>
         <item name="android:fontFamily">@font/notosanskr_medium</item>
     </style>
 

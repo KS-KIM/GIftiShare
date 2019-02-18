@@ -4,16 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="AddCouponViewModel"
             type="com.example.giftishare.view.addcoupon.AddCouponViewModel" />
+
     </data>
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.giftishare.view.addcoupon.AddCouponActivity"
-        android:background="@color/colorGray">
+        android:background="@color/colorGray"
+        tools:context="com.example.giftishare.view.addcoupon.AddCouponActivity">
 
         <!--액션바-->
         <android.support.design.widget.AppBarLayout
@@ -22,35 +24,27 @@
             android:theme="@style/AppTheme.AppBarOverlay">
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar1"
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
                 app:popupTheme="@style/AppTheme.PopupOverlay">
+
                 <ImageButton
-                    android:id="@+id/back_btn"
+                    android:id="@+id/btn_back"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_back"
                     android:layout_marginRight="16dp"
-                    android:background="@color/colorPrimary"/>
+                    android:background="@color/colorPrimary"
+                    android:src="@drawable/ic_back" />
 
                 <TextView
                     style="@style/TextStyle_Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
                     android:text="쿠폰 등록하기" />
-
-                <ImageView
-                    android:id="@+id/app_logo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="28dp"
-                    android:layout_gravity="right"
-                    android:adjustViewBounds="true"
-                    android:layout_marginRight="25dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/logo_transparent" />
 
             </android.support.v7.widget.Toolbar>
 
@@ -59,8 +53,8 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context="com.example.giftishare.view.addcoupon.AddCouponActivity"
-            android:background="@color/colorGray">
+            android:background="@color/colorGray"
+            tools:context="com.example.giftishare.view.addcoupon.AddCouponActivity">
 
             <android.support.constraint.Guideline
                 android:id="@+id/guideline"
@@ -73,10 +67,10 @@
                 android:id="@+id/scroll_view"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:layout_constraintTop_toTopOf="@+id/guideline"
-                app:layout_constraintBottom_toBottomOf="@+id/guideline1"
                 android:fillViewport="true"
-                android:paddingTop="16dp" >
+                android:paddingTop="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/guideline1"
+                app:layout_constraintTop_toTopOf="@+id/guideline">
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
@@ -84,103 +78,109 @@
                     android:animateLayoutChanges="true">
 
                     <android.support.design.widget.TextInputLayout
-                        android:id="@+id/text_input_layout_name"
+                        android:id="@+id/input_layout_name"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         app:layout_constraintLeft_toRightOf="@+id/guideline_left"
                         app:layout_constraintRight_toLeftOf="@+id/guideline_right"
-                        app:layout_constraintTop_toTopOf="parent" >
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <android.support.design.widget.TextInputEditText
-                            android:id="@+id/coupon_name"
+                            android:id="@+id/et_coupon_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="쿠폰명*"
-                            android:text="@={AddCouponViewModel.mCouponName}"/>
+                            android:inputType="text"
+                            android:text="@={AddCouponViewModel.mCouponName}" />
 
                     </android.support.design.widget.TextInputLayout>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:id="@+id/input_layout_extra_1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        app:layout_constraintLeft_toLeftOf="@+id/guideline_left"
-                        app:layout_constraintRight_toLeftOf="@+id/guideline_right"
-                        app:layout_constraintTop_toBottomOf="@+id/text_input_layout_name">
-
-                        <android.support.design.widget.TextInputEditText
-                            android:id="@+id/company_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="회사 이름*"
-                            android:text="@={AddCouponViewModel.mCompanyName}"/>
-
-                    </android.support.design.widget.TextInputLayout>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:id="@+id/input_layout_extra_2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        app:layout_constraintLeft_toLeftOf="@+id/guideline_left"
-                        app:layout_constraintRight_toLeftOf="@+id/guideline_right"
-                        app:layout_constraintTop_toBottomOf="@+id/input_layout_extra_1">
-
-                        <android.support.design.widget.TextInputEditText
-                            android:id="@+id/sale_price"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="쿠폰 가격*"
-                            android:text="@={AddCouponViewModel.mSalePrice}"/>
-
-                    </android.support.design.widget.TextInputLayout>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:id="@+id/input_layout_extra_3"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        app:layout_constraintLeft_toLeftOf="@+id/guideline_left"
-                        app:layout_constraintRight_toLeftOf="@+id/guideline_right"
-                        app:layout_constraintTop_toBottomOf="@+id/input_layout_extra_2">
-
-                        <android.support.design.widget.TextInputEditText
-                            android:id="@+id/bar_code"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="일련 번호*"
-                            android:text="@={AddCouponViewModel.mBarCode}"/>
-
-                    </android.support.design.widget.TextInputLayout>
-
-                    <Button
-                        android:id="@+id/date_btn"
-                        style="@style/Widget.AppCompat.Button.Borderless"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="20dp"
-                        app:layout_constraintLeft_toRightOf="@+id/guideline_left"
-                        app:layout_constraintRight_toLeftOf="@+id/guideline_right"
-                        app:layout_constraintTop_toBottomOf="@+id/input_layout_extra_3"
-                        android:background="@drawable/text_field_line"
-                        android:gravity="center_vertical"
-                        android:textSize="15sp"
-                        android:text="  유효 기간"/>
 
                     <Spinner
                         android:id="@+id/coupon_category"
                         style="@style/TextStyle"
+                        android:background="@drawable/text_field_line"
                         android:layout_width="0dp"
                         android:layout_height="40dp"
-                        android:layout_marginTop="25dp"
-                        android:background="@drawable/text_field_line"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="5dp"
                         android:overlapAnchor="false"
                         android:prompt="@string/spinner_title"
                         app:layout_constraintLeft_toRightOf="@+id/guideline_left"
                         app:layout_constraintRight_toLeftOf="@+id/guideline_right"
-                        app:layout_constraintTop_toBottomOf="@+id/date_btn" />
+                        app:layout_constraintTop_toBottomOf="@+id/input_layout_name" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_company_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        app:layout_constraintLeft_toLeftOf="@+id/guideline_left"
+                        app:layout_constraintRight_toLeftOf="@+id/guideline_right"
+                        app:layout_constraintTop_toBottomOf="@+id/coupon_category">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/et_company_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:imeOptions="actionNext"
+                            android:hint="회사 이름*"
+                            android:text="@={AddCouponViewModel.mCompanyName}" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_price"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        app:layout_constraintLeft_toLeftOf="@+id/guideline_left"
+                        app:layout_constraintRight_toLeftOf="@+id/guideline_right"
+                        app:layout_constraintTop_toBottomOf="@+id/input_layout_company_name">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/et_price"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            android:hint="쿠폰 가격*"
+                            android:text="@={AddCouponViewModel.mPrice}" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_barcode"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        app:layout_constraintLeft_toLeftOf="@+id/guideline_left"
+                        app:layout_constraintRight_toLeftOf="@+id/guideline_right"
+                        app:layout_constraintTop_toBottomOf="@+id/input_layout_price">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/et_barcode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            android:hint="일련 번호*"
+                            android:text="@={AddCouponViewModel.mBarcode}" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/btn_deadline"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/text_field_line"
+                        android:gravity="center_vertical"
+                        android:text="  유효기간"
+                        android:textSize="15sp"
+                        app:layout_constraintLeft_toRightOf="@+id/guideline_left"
+                        app:layout_constraintRight_toLeftOf="@+id/guideline_right"
+                        app:layout_constraintTop_toBottomOf="@+id/input_layout_barcode" />
 
                     <android.support.constraint.Guideline
                         android:id="@+id/guideline_left"
@@ -208,16 +208,20 @@
                 app:layout_constraintGuide_end="70dp" />
 
             <Button
-                android:id="@+id/create_btn"
+                android:id="@+id/btn_create_wallet"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="7dp"
                 android:layout_marginBottom="3dp"
                 android:text="등록하기"
+                android:elevation="0dp"
+                android:layout_margin="16dp"
+                android:textColor="@android:color/white"
+                android:background="@drawable/button_gradient"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/guideline1"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@+id/guideline1" />
 
         </android.support.constraint.ConstraintLayout>
 
