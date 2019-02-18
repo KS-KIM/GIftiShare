@@ -51,7 +51,7 @@ public class OnSaleCouponsViewModel extends AndroidViewModel {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 List<Coupon> coupons = new ArrayList<>();
-                for (DataSnapshot ds: dataSnapshot.getChildren()) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     Coupon coupon = ds.getValue(Coupon.class);
                     Log.d(TAG, coupon.getBarcode());
                     coupons.add(coupon);
@@ -59,6 +59,7 @@ public class OnSaleCouponsViewModel extends AndroidViewModel {
                 Log.d(TAG, "Coupon list Created. Number of coupons: " + coupons.size());
                 mCoupons.setValue(coupons);
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // setValue(new ArrayList<>());

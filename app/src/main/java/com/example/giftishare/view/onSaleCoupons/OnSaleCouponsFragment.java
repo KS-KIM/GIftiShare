@@ -1,15 +1,19 @@
 package com.example.giftishare.view.onSaleCoupons;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.DividerItemDecoration;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.giftishare.databinding.FragmentOnSaleCouponsBinding;
+import com.example.giftishare.data.model.CouponsCategoryType;
 
 import io.reactivex.annotations.Nullable;
+
+import static com.example.giftishare.view.main.MainActivity.CATEGORY_COUPONS;
 
 public class OnSaleCouponsFragment extends Fragment {
 
@@ -47,6 +51,10 @@ public class OnSaleCouponsFragment extends Fragment {
     private void setupListAdapter() {
         mOnSaleCouponsAdapter = new OnSaleCouponsAdapter(mOnSaleCouponsViewModel);
         mFragmentOnSaleCouponsBinding.couponsListRecyclerView.setAdapter(mOnSaleCouponsAdapter);
-        mOnSaleCouponsViewModel.start("rrrrr");
+        mFragmentOnSaleCouponsBinding.couponsListRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
+
+        Intent intent = getActivity().getIntent();
+        CouponsCategoryType category = (CouponsCategoryType) intent.getSerializableExtra(CATEGORY_COUPONS);
+        mOnSaleCouponsViewModel.start(category.toEng());
     }
 }
