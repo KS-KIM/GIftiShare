@@ -28,6 +28,7 @@ import com.example.giftishare.data.local.db.AppDbHelper;
 import com.example.giftishare.data.local.file.AppKeystoreGenerationHelper;
 import com.example.giftishare.data.local.prefs.AppPreferencesHelper;
 import com.example.giftishare.data.remote.firebase.AppFirebaseDbHelper;
+import com.example.giftishare.utils.AppExecutors;
 import com.example.giftishare.view.addcoupon.AddCouponViewModel;
 import com.example.giftishare.view.addwallet.AddWalletViewModel;
 import com.example.giftishare.view.main.MainViewModel;
@@ -53,13 +54,17 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
             synchronized (ViewModelFactory.class) {
                 if (INSTANCE == null) {
                     // @TODO data source의 인스턴스 생성 방식 고민해보기
+                    AppExecutors appExecutors = new AppExecutors();
                     AppDatabase db = AppDatabase.getInstance(application.getApplicationContext());
-                    AppDbHelper dbHelper = AppDbHelper.getInstance(db.couponDao());
-                    // FirebaseApp.initializeApp(application.getApplicationContext());
+                    AppDbHelper dbHelper = AppDbHelper.getInstance(appExecutors, db.couponDao());
+
                     AppFirebaseDbHelper appFirebaseDbHelper = AppFirebaseDbHelper.getInstance();
-                    AppPreferencesHelper preferencesHelper = AppPreferencesHelper.getInstance(
-                            application.getApplicationContext());
+
+                    AppPreferencesHelper preferencesHelper = AppPreferencesHelper
+                            .getInstance(application.getApplicationContext());
+
                     AppKeystoreGenerationHelper keystoreGenerationHelper = new AppKeystoreGenerationHelper();
+
                     DataManager dataManager = AppDataManager.getInstance(dbHelper,
                             appFirebaseDbHelper, keystoreGenerationHelper, preferencesHelper);
                     INSTANCE = new ViewModelFactory(application, dataManager);

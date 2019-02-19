@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 
 import com.example.giftishare.data.local.db.dao.CouponsDao;
 import com.example.giftishare.data.model.Coupon;
+import com.example.giftishare.utils.AppExecutors;
 
 import java.util.List;
 
@@ -18,15 +19,19 @@ public class AppDbHelper implements DbHelper {
 
     private CouponsDao mCouponsDao;
 
-    private AppDbHelper(@NonNull CouponsDao couponsDao) {
+    private AppExecutors mAppExecutors;
+
+    private AppDbHelper(@NonNull AppExecutors appExecutors, @NonNull CouponsDao couponsDao) {
+        mAppExecutors = appExecutors;
         mCouponsDao = couponsDao;
     }
 
-    public static AppDbHelper getInstance(@NonNull CouponsDao couponsDao) {
+    public static AppDbHelper getInstance(@NonNull AppExecutors appExecutors,
+                                          @NonNull CouponsDao couponsDao) {
         if (INSTANCE == null) {
             synchronized (AppDbHelper.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = new AppDbHelper(couponsDao);
+                    INSTANCE = new AppDbHelper(appExecutors, couponsDao);
                 }
             }
         }
@@ -40,16 +45,19 @@ public class AppDbHelper implements DbHelper {
 
     @Override
     public void savePurchasedCoupon(@NonNull Coupon coupon) {
-        mCouponsDao.insert(coupon);
+        Runnable runnable = () -> mCouponsDao.insert(coupon);
+        mAppExecutors.diskIO().execute(runnable);
     }
 
     @Override
     public void deleteAllPurchasedCoupons() {
-        mCouponsDao.deleteAllCoupons();
+        Runnable runnable = () -> mCouponsDao.deleteAllCoupons();
+        mAppExecutors.diskIO().execute(runnable);
     }
 
     @Override
     public void deletePurchasedCoupon(@NonNull Coupon coupon) {
-        mCouponsDao.delete(coupon);
+        Runnable runnable = () -> mCouponsDao.delete(coupon);
+        mAppExecutors.diskIO().execute(runnable);
     }
 }
