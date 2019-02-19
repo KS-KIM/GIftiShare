@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -33,15 +34,14 @@ public class AddCouponActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         mAddCouponViewModel = obtainViewModel(this);
 
         mBinding = DataBindingUtil.setContentView(AddCouponActivity.this, R.layout.activity_add_coupon);
         mBinding.setLifecycleOwner(this);
         mBinding.setAddCouponViewModel(mAddCouponViewModel);
         mBinding.etCouponName.requestFocus();
+
+        setupToolBar();
         setupCategorySpinner();
         setupDateButton();
         setupCreateCouponButton();
@@ -57,6 +57,12 @@ public class AddCouponActivity extends AppCompatActivity {
     public void onBackPressed() {
         // @TODO 두 번 눌러 취소하기 구현
         finish();
+    }
+
+    private void setupToolBar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        mBinding.btnBack.setOnClickListener((View v) -> onBackPressed());
     }
 
     private void setupCategorySpinner() {

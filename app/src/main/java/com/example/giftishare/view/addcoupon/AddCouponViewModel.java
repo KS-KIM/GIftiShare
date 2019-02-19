@@ -38,11 +38,7 @@ public class AddCouponViewModel extends AndroidViewModel {
     }
 
     public boolean isEmptyField(String field) {
-        if (field == null) {
-            return true;
-        } else {
-            return field.replace(" ", "").equals("");
-        }
+        return field == null || field.replace(" ", "").equals("");
     }
 
     public void setDeadline(int year, int month, int date) {
