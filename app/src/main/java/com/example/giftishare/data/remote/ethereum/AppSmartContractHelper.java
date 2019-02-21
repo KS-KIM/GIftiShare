@@ -1,6 +1,7 @@
 package com.example.giftishare.data.remote.ethereum;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.example.giftishare.data.model.Coupon;
 
@@ -17,9 +18,11 @@ import java8.util.concurrent.CompletableFuture;
 
 public class AppSmartContractHelper implements SmartContractHelper {
 
+    private static final String TAG = AppSmartContractHelper.class.getSimpleName();
+
     private static volatile AppSmartContractHelper INSTANCE;
 
-    public static final String ROPSTEN_NETWORK_ADDRESS = "https://https://ropsten.infura.io/v3/cab60b4fc0594563881813d8f5f5349b";
+    public static final String ROPSTEN_NETWORK_ADDRESS = "https://ropsten.infura.io/v3/cab60b4fc0594563881813d8f5f5349b";
 
     public static final String CONTRACT_ADDRESS = "0x7755a9B5678358cf2736296Aa840734dF48b7791";
 
@@ -35,6 +38,7 @@ public class AppSmartContractHelper implements SmartContractHelper {
         mWeb3j = web3j;
         mCredentials = credentials;
         mSmartContract = smartContract;
+        Log.i(TAG, "Smart Contract Helper Created. wallet address: " + mCredentials.getAddress());
     }
 
     public static AppSmartContractHelper getInstance(@NonNull Web3j web3j,
@@ -53,16 +57,19 @@ public class AppSmartContractHelper implements SmartContractHelper {
     @Override
     public CompletableFuture<TransactionReceipt> buyCoupon(@NonNull String uuid, @NonNull String price) {
         BigInteger buyPrice = new BigInteger(price);
+        Log.i(TAG, "buyCoupon function called with Address: " + mCredentials.getAddress());
         return mSmartContract.buyCoupon(uuid, buyPrice).sendAsync();
     }
 
     @Override
     public CompletableFuture<TransactionReceipt> resumeSaleCoupon(@NonNull String uuid) {
+        Log.i(TAG, "resumeSaleCoupon function called with Address: " + mCredentials.getAddress());
         return mSmartContract.resumeCouponSale(uuid).sendAsync();
     }
 
     @Override
     public CompletableFuture<TransactionReceipt> useCoupon(@NonNull String uuid) {
+        Log.i(TAG, "useCoupon function called with Address: " + mCredentials.getAddress());
         return mSmartContract.useCoupon(uuid).sendAsync();
     }
 
@@ -75,11 +82,13 @@ public class AppSmartContractHelper implements SmartContractHelper {
         BigInteger price = new BigInteger(coupon.getPrice());
         String barcode = coupon.getBarcode();
         String deadline = coupon.getDeadline().toString();
+        Log.i(TAG, "addCoupon function called with Address: " + mCredentials.getAddress());
         return mSmartContract.addCoupon(uuid, name, category, company, price, barcode, deadline).sendAsync();
     }
 
     @Override
     public CompletableFuture<TransactionReceipt> stopSaleCoupon(@NonNull String uuid) {
+        Log.i(TAG, "stopSaleCoupon function called with Address: " + mCredentials.getAddress());
         return mSmartContract.stopCouponSale(uuid).sendAsync();
     }
 }
