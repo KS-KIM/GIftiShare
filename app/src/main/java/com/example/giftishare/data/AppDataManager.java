@@ -76,7 +76,6 @@ public class AppDataManager implements DataManager {
         return mDbHelper.getAllCoupons();
     }
 
-
     @Override
     public void saveCoupon(@NonNull Coupon coupon) {
         mDbHelper.saveCoupon(coupon);

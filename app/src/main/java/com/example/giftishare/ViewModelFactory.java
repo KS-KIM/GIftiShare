@@ -46,8 +46,6 @@ import org.web3j.tx.gas.DefaultGasProvider;
 
 import java.io.IOException;
 
-import javax.crypto.Cipher;
-
 import static com.example.giftishare.data.remote.ethereum.AppSmartContractHelper.CONTRACT_ADDRESS;
 import static com.example.giftishare.data.remote.ethereum.AppSmartContractHelper.ROPSTEN_NETWORK_ADDRESS;
 
@@ -99,7 +97,7 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
                     }
                     GiftiShare smartContract = GiftiShare.load(CONTRACT_ADDRESS, web3j, credentials, contractGasProvider);
                     AppSmartContractHelper smartContractHelper = AppSmartContractHelper.getInstance(
-                            web3j, credentials, smartContract, appExecutors);
+                            web3j, credentials, smartContract);
 
                     // repository initialization
                     DataManager dataManager = AppDataManager.getInstance(dbHelper,
