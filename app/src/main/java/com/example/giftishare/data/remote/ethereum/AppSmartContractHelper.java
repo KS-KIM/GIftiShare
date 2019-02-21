@@ -91,4 +91,9 @@ public class AppSmartContractHelper implements SmartContractHelper {
         Log.i(TAG, "stopSaleCoupon function called with Address: " + mCredentials.getAddress());
         return mSmartContract.stopCouponSale(uuid).sendAsync();
     }
+
+    @Override
+    public String loadWalletAddress() {
+        return mCredentials.getAddress();
+    }
 }

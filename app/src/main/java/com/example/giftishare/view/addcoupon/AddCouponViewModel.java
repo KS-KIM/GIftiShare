@@ -56,22 +56,8 @@ public class AddCouponViewModel extends AndroidViewModel {
         mDeadline.setValue(deadline);
     }
 
-    private String loadWalletAddress() {
-        String walletAddress = null;
-        try {
-            String password = mDataManager.getWalletPassword();
-            String path = mDataManager.getWalletPath();
-            Credentials credential = WalletUtils.loadCredentials(password, path);
-            walletAddress = credential.getAddress();
-        } catch (IOException
-                | CipherException e) {
-            e.printStackTrace();
-        }
-        return walletAddress;
-    }
-
     public void createCoupon() {
-        String walletAddress = loadWalletAddress();
+        String walletAddress = mDataManager.loadWalletAddress();
         if (walletAddress != null) {
             Coupon coupon = new Coupon(
                     mCouponName.getValue(),

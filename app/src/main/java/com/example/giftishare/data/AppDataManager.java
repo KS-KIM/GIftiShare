@@ -150,4 +150,8 @@ public class AppDataManager implements DataManager {
     public CompletableFuture<TransactionReceipt> stopSaleCoupon(String uuid) {
         return mSmartContractHelper.stopSaleCoupon(uuid);
     }
+
+    public String loadWalletAddress() {
+        return mSmartContractHelper.loadWalletAddress();
+    }
 }

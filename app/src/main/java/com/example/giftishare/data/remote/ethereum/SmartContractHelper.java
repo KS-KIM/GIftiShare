@@ -21,4 +21,6 @@ public interface SmartContractHelper {
     CompletableFuture<TransactionReceipt> addCoupon(Coupon coupon);
 
     CompletableFuture<TransactionReceipt> stopSaleCoupon(String uuid);
+
+    String loadWalletAddress();
 }
