@@ -3,6 +3,7 @@ package com.example.giftishare.view.addcoupon;
 import android.app.DatePickerDialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
+import com.example.giftishare.Event;
 import com.example.giftishare.R;
 import com.example.giftishare.ViewModelFactory;
 import com.example.giftishare.databinding.ActivityAddCouponBinding;
@@ -19,6 +21,7 @@ import android.databinding.DataBindingUtil;
 import android.widget.ListPopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.lang.reflect.Field;
 import java.util.Calendar;
@@ -45,6 +48,9 @@ public class AddCouponActivity extends AppCompatActivity {
         setupCategorySpinner();
         setupDateButton();
         setupCreateCouponButton();
+
+        mAddCouponViewModel.getTransactionGasLackEvent().observe(this,
+                (@Nullable Event<Object> event) -> showGasLackMessage());
     }
 
     private AddCouponViewModel obtainViewModel(FragmentActivity activity) {
@@ -134,5 +140,9 @@ public class AddCouponActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void showGasLackMessage() {
+        Toast.makeText(getApplicationContext(), "이더가 부족합니다.", Toast.LENGTH_SHORT).show();
     }
 }

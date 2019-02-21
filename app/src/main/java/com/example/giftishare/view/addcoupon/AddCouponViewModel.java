@@ -3,7 +3,9 @@ package com.example.giftishare.view.addcoupon;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
+import android.util.Log;
 
+import com.example.giftishare.Event;
 import com.example.giftishare.data.DataManager;
 import com.example.giftishare.data.model.Coupon;
 import com.example.giftishare.utils.CategoryNameMapperUtils;
@@ -17,6 +19,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class AddCouponViewModel extends AndroidViewModel {
+
+    public final static String TAG = AddCouponViewModel.class.getSimpleName();
 
     public final MutableLiveData<String> mCouponName = new MutableLiveData<>();
 
@@ -32,9 +36,15 @@ public class AddCouponViewModel extends AndroidViewModel {
 
     private final DataManager mDataManager;
 
+    private final MutableLiveData<Event<Object>> mTransactionGasLackEvent = new MutableLiveData<>();
+
     public AddCouponViewModel(Application context, DataManager dataManager) {
         super(context);
         mDataManager = dataManager;
+    }
+
+    public MutableLiveData<Event<Object>> getTransactionGasLackEvent() {
+        return mTransactionGasLackEvent;
     }
 
     public boolean isEmptyField(String field) {
@@ -72,8 +82,14 @@ public class AddCouponViewModel extends AndroidViewModel {
                     mDeadline.getValue().getTime(),
                     walletAddress);
             mDataManager.addCoupon(coupon).thenAccept(transactionReceipt -> {
+                Log.d(TAG, "transaction accepted. check at https://blockscout.com/eth/ropsten/tx/" +
+                        transactionReceipt.getTransactionHash());
                 mDataManager.saveCoupon(coupon);
                 mDataManager.saveSaleCoupon(coupon);
+            }).exceptionally(transactionReceipt  -> {
+                Log.d(TAG, transactionReceipt.getMessage());
+                mTransactionGasLackEvent.setValue(new Event<>(new Object()));
+                return null;
             });
         }
     }
