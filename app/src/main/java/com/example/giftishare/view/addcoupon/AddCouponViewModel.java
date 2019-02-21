@@ -71,7 +71,10 @@ public class AddCouponViewModel extends AndroidViewModel {
                     mBarcode.getValue(),
                     mDeadline.getValue().getTime(),
                     walletAddress);
-            mDataManager.saveCoupon(coupon);
+            mDataManager.addCoupon(coupon).thenAccept(transactionReceipt -> {
+                mDataManager.saveCoupon(coupon);
+                mDataManager.saveSaleCoupon(coupon);
+            });
         }
     }
 }
