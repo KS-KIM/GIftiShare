@@ -39,24 +39,24 @@ public class AppDbHelper implements DbHelper {
     }
 
     @Override
-    public LiveData<List<Coupon>> getAllPurchasedCoupons() {
+    public LiveData<List<Coupon>> getAllCoupons() {
         return mCouponsDao.loadAll();
     }
 
     @Override
-    public void savePurchasedCoupon(@NonNull Coupon coupon) {
+    public void saveCoupon(@NonNull Coupon coupon) {
         Runnable runnable = () -> mCouponsDao.insert(coupon);
         mAppExecutors.diskIO().execute(runnable);
     }
 
     @Override
-    public void deleteAllPurchasedCoupons() {
+    public void deleteAllCoupons() {
         Runnable runnable = () -> mCouponsDao.deleteAllCoupons();
         mAppExecutors.diskIO().execute(runnable);
     }
 
     @Override
-    public void deletePurchasedCoupon(@NonNull Coupon coupon) {
+    public void deleteCoupon(@NonNull Coupon coupon) {
         Runnable runnable = () -> mCouponsDao.delete(coupon);
         mAppExecutors.diskIO().execute(runnable);
     }

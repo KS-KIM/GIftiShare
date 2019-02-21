@@ -31,7 +31,7 @@ public class AppFirebaseDbHelper implements FirebaseDbHelper {
 
     // POST /coupons/:categoryName/:couponId
     @Override
-    public void saveCoupon(Coupon coupon) {
+    public void saveSaleCoupon(Coupon coupon) {
         // String key = coupon.getId();
         String category = coupon.getCategory();
         String key = mDatabase.child(FIREBASE_CATEGORY_COUPONS).child(category).push().getKey();
