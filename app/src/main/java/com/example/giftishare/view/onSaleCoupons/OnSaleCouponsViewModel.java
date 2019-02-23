@@ -32,6 +32,10 @@ public class OnSaleCouponsViewModel extends AndroidViewModel {
 
     private final Context mContext;
 
+    public MutableLiveData<List<Coupon>> getCoupons() {
+        return mCoupons;
+    }
+
     public OnSaleCouponsViewModel(Application context, DataManager dataManager) {
         super(context);
         mContext = context.getApplicationContext();
