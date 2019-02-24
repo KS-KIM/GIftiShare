@@ -15,6 +15,7 @@ import com.example.giftishare.data.remote.ethereum.SmartContractHelper;
 import com.example.giftishare.data.remote.firebase.AppFirebaseDbHelper;
 import com.example.giftishare.data.remote.firebase.FirebaseDbHelper;
 
+import org.web3j.crypto.Credentials;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 
 import java.util.List;
@@ -131,27 +132,38 @@ public class AppDataManager implements DataManager {
         mPreferencesHelper.setWalletPath(walletPath);
     }
 
+    @Override
     public CompletableFuture<TransactionReceipt> buyCoupon(@NonNull String uuid, @NonNull String price) {
         return mSmartContractHelper.buyCoupon(uuid, price);
     }
 
+    @Override
     public CompletableFuture<TransactionReceipt> resumeSaleCoupon(@NonNull String uuid) {
         return mSmartContractHelper.resumeSaleCoupon(uuid);
     }
 
+    @Override
     public CompletableFuture<TransactionReceipt> useCoupon(@NonNull String uuid) {
         return mSmartContractHelper.useCoupon(uuid);
     }
 
+    @Override
     public CompletableFuture<TransactionReceipt> addCoupon(@NonNull Coupon coupon) {
         return mSmartContractHelper.addCoupon(coupon);
     }
 
+    @Override
     public CompletableFuture<TransactionReceipt> stopSaleCoupon(String uuid) {
         return mSmartContractHelper.stopSaleCoupon(uuid);
     }
 
-    public String loadWalletAddress() {
-        return mSmartContractHelper.loadWalletAddress();
+    @Override
+    public void loadCredentialsAndSmartContract(String password, String source) {
+        mSmartContractHelper.loadCredentialsAndSmartContract(password, source);
+    }
+
+    @Override
+    public Credentials getCredentials() {
+        return mSmartContractHelper.getCredentials();
     }
 }

@@ -1,15 +1,21 @@
 package com.example.giftishare.data.remote.ethereum;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.example.giftishare.data.model.Coupon;
 
+import org.web3j.crypto.CipherException;
 import org.web3j.crypto.Credentials;
+import org.web3j.crypto.WalletUtils;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
+import org.web3j.tx.gas.DefaultGasProvider;
 
+import java.io.IOException;
 import java.math.BigInteger;
+
 import java8.util.concurrent.CompletableFuture;
 
 /**
@@ -33,17 +39,16 @@ public class AppSmartContractHelper implements SmartContractHelper {
     private GiftiShare mSmartContract;
 
     private AppSmartContractHelper(@NonNull Web3j web3j,
-                                   @NonNull Credentials credentials,
-                                   @NonNull GiftiShare smartContract) {
+                                   @Nullable Credentials credentials,
+                                   @Nullable GiftiShare smartContract) {
         mWeb3j = web3j;
         mCredentials = credentials;
         mSmartContract = smartContract;
-        Log.i(TAG, "Smart Contract Helper Created. wallet address: " + mCredentials.getAddress());
     }
 
     public static AppSmartContractHelper getInstance(@NonNull Web3j web3j,
-                                                     @NonNull Credentials credentials,
-                                                     @NonNull GiftiShare smartContract) {
+                                                     @Nullable Credentials credentials,
+                                                     @Nullable GiftiShare smartContract) {
         if (INSTANCE == null) {
             synchronized (AppSmartContractHelper.class) {
                 if (INSTANCE == null) {
@@ -56,6 +61,9 @@ public class AppSmartContractHelper implements SmartContractHelper {
 
     @Override
     public CompletableFuture<TransactionReceipt> buyCoupon(@NonNull String uuid, @NonNull String price) {
+        if (mSmartContract == null) {
+            throw new NullPointerException();
+        }
         BigInteger buyPrice = new BigInteger(price);
         Log.i(TAG, "buyCoupon function called with Address: " + mCredentials.getAddress());
         return mSmartContract.buyCoupon(uuid, buyPrice).sendAsync();
@@ -63,18 +71,27 @@ public class AppSmartContractHelper implements SmartContractHelper {
 
     @Override
     public CompletableFuture<TransactionReceipt> resumeSaleCoupon(@NonNull String uuid) {
+        if (mSmartContract == null) {
+            throw new NullPointerException();
+        }
         Log.i(TAG, "resumeSaleCoupon function called with Address: " + mCredentials.getAddress());
         return mSmartContract.resumeCouponSale(uuid).sendAsync();
     }
 
     @Override
     public CompletableFuture<TransactionReceipt> useCoupon(@NonNull String uuid) {
+        if (mSmartContract == null) {
+            throw new NullPointerException();
+        }
         Log.i(TAG, "useCoupon function called with Address: " + mCredentials.getAddress());
         return mSmartContract.useCoupon(uuid).sendAsync();
     }
 
     @Override
     public CompletableFuture<TransactionReceipt> addCoupon(@NonNull Coupon coupon) {
+        if (mSmartContract == null) {
+            throw new NullPointerException();
+        }
         String uuid = coupon.getId();
         String name = coupon.getName();
         String category = coupon.getCategory();
@@ -93,7 +110,18 @@ public class AppSmartContractHelper implements SmartContractHelper {
     }
 
     @Override
-    public String loadWalletAddress() {
-        return mCredentials.getAddress();
+    public void loadCredentialsAndSmartContract(String password, String source) {
+        try {
+            mCredentials = WalletUtils.loadCredentials(password, source);
+            mSmartContract = GiftiShare.load(CONTRACT_ADDRESS, mWeb3j, mCredentials, new DefaultGasProvider());
+        } catch (IOException
+                | CipherException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public Credentials getCredentials() {
+        return mCredentials;
     }
 }
