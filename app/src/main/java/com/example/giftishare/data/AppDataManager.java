@@ -16,6 +16,7 @@ import com.example.giftishare.data.remote.firebase.AppFirebaseDbHelper;
 import com.example.giftishare.data.remote.firebase.FirebaseDbHelper;
 
 import org.web3j.crypto.Credentials;
+import org.web3j.protocol.core.methods.response.EthGetBalance;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 
 import java.util.List;
@@ -165,5 +166,10 @@ public class AppDataManager implements DataManager {
     @Override
     public Credentials getCredentials() {
         return mSmartContractHelper.getCredentials();
+    }
+
+    @Override
+    public CompletableFuture<EthGetBalance> getBalance() {
+        return mSmartContractHelper.getBalance();
     }
 }

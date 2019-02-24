@@ -10,6 +10,8 @@ import org.web3j.crypto.CipherException;
 import org.web3j.crypto.Credentials;
 import org.web3j.crypto.WalletUtils;
 import org.web3j.protocol.Web3j;
+import org.web3j.protocol.core.DefaultBlockParameterName;
+import org.web3j.protocol.core.methods.response.EthGetBalance;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.web3j.tx.gas.DefaultGasProvider;
 
@@ -123,5 +125,13 @@ public class AppSmartContractHelper implements SmartContractHelper {
     @Override
     public Credentials getCredentials() {
         return mCredentials;
+    }
+
+    @Override
+    public CompletableFuture<EthGetBalance> getBalance() {
+        if (mCredentials == null) {
+            throw new NullPointerException();
+        }
+        return mWeb3j.ethGetBalance(mCredentials.getAddress(), DefaultBlockParameterName.LATEST).sendAsync();
     }
 }
