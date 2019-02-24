@@ -10,11 +10,6 @@ import com.example.giftishare.data.DataManager;
 import com.example.giftishare.data.model.Coupon;
 import com.example.giftishare.utils.CategoryNameMapperUtils;
 
-import org.web3j.crypto.CipherException;
-import org.web3j.crypto.Credentials;
-import org.web3j.crypto.WalletUtils;
-
-import java.io.IOException;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -57,7 +52,7 @@ public class AddCouponViewModel extends AndroidViewModel {
     }
 
     public void createCoupon() {
-        String walletAddress = mDataManager.loadWalletAddress();
+        String walletAddress = mDataManager.getCredentials().getAddress();
         if (walletAddress != null) {
             Coupon coupon = new Coupon(
                     mCouponName.getValue(),
@@ -68,12 +63,13 @@ public class AddCouponViewModel extends AndroidViewModel {
                     mDeadline.getValue().getTime(),
                     walletAddress);
             mDataManager.addCoupon(coupon).thenAccept(transactionReceipt -> {
-                Log.d(TAG, "transaction accepted. check at https://blockscout.com/eth/ropsten/tx/" +
+                Log.i(TAG, "Transaction accepted. check at https://blockscout.com/eth/ropsten/tx/" +
                         transactionReceipt.getTransactionHash());
                 mDataManager.saveCoupon(coupon);
                 mDataManager.saveSaleCoupon(coupon);
             }).exceptionally(transactionReceipt  -> {
-                Log.d(TAG, transactionReceipt.getMessage());
+                Log.d(TAG, "Exeptional event occur in ethereum transaction with message \""
+                        + transactionReceipt.getMessage() + "\"");
                 mTransactionGasLackEvent.setValue(new Event<>(new Object()));
                 return null;
             });

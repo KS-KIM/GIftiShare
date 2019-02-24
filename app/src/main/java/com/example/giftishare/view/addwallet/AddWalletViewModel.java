@@ -50,10 +50,12 @@ public class AddWalletViewModel extends AndroidViewModel {
     }
 
     public void createWallet() {
-        String fileName = checkNotNull(mDataManager.createWallet(mWalletPassword.getValue()));
+        String password = mWalletPassword.getValue();
+        String source = checkNotNull(mDataManager.createWallet(password));
         mDataManager.setUserName(mUserName.getValue());
         mDataManager.setWalletPassword(mWalletPassword.getValue());
-        mDataManager.setWalletPath(fileName);
+        mDataManager.setWalletPath(source);
+        mDataManager.loadCredentialsAndSmartContract(password, source);
         mNewWalletEvent.setValue(new Event<>(new Object()));
     }
 }

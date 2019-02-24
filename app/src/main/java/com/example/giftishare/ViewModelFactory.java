@@ -87,17 +87,18 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
                     // smart contract initialization
                     Web3j web3j = Web3j.build(new HttpService(ROPSTEN_NETWORK_ADDRESS));
                     Credentials credentials = null;
-                    ContractGasProvider contractGasProvider = new DefaultGasProvider();
+                    GiftiShare smartContract = null;
                     try {
                         credentials = WalletUtils.loadCredentials(
                                 preferencesHelper.getWalletPassword(), preferencesHelper.getWalletPath());
+                        ContractGasProvider contractGasProvider = new DefaultGasProvider();
+                        smartContract = GiftiShare.load(CONTRACT_ADDRESS, web3j, credentials, contractGasProvider);
                     } catch (IOException |
+                            NullPointerException |
                             CipherException e) {
                         e.printStackTrace();
                     }
-                    GiftiShare smartContract = GiftiShare.load(CONTRACT_ADDRESS, web3j, credentials, contractGasProvider);
-                    AppSmartContractHelper smartContractHelper = AppSmartContractHelper.getInstance(
-                            web3j, credentials, smartContract);
+                    AppSmartContractHelper smartContractHelper = AppSmartContractHelper.getInstance(web3j, credentials, smartContract);
 
                     // repository initialization
                     DataManager dataManager = AppDataManager.getInstance(dbHelper,

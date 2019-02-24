@@ -51,6 +51,10 @@ public class AddCouponActivity extends AppCompatActivity {
 
         mAddCouponViewModel.getTransactionGasLackEvent().observe(this,
                 (@Nullable Event<Object> event) -> showGasLackMessage());
+        /* @TODO 결과 알리는 방식을 notification으로 변경하기
+         * viewmodel에서 호출한 트랜잭션은 dataManager에서 처리되는데,
+         * 이벤트가 끝난 시점에 액티비티를 벗어나므로 unsubscribe되고 알리지 못하게 됨
+         */
     }
 
     private AddCouponViewModel obtainViewModel(FragmentActivity activity) {

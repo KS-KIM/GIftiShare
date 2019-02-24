@@ -2,6 +2,7 @@ package com.example.giftishare.data.remote.ethereum;
 
 import com.example.giftishare.data.model.Coupon;
 
+import org.web3j.crypto.Credentials;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 
 import java8.util.concurrent.CompletableFuture;
@@ -22,5 +23,7 @@ public interface SmartContractHelper {
 
     CompletableFuture<TransactionReceipt> stopSaleCoupon(String uuid);
 
-    String loadWalletAddress();
+    void loadCredentialsAndSmartContract(String password, String source);
+
+    Credentials getCredentials();
 }
