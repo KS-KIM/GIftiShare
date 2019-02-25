@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.giftishare.ViewModelFactory;
 import com.example.giftishare.data.AppDataManager;
 import com.example.giftishare.utils.FileUtils;
+import com.example.giftishare.utils.PermissionUtils;
 import com.example.giftishare.view.addwallet.AddWalletActivity;
 import com.example.giftishare.view.main.MainActivity;
 
@@ -26,6 +28,7 @@ public class SplashActivity extends AppCompatActivity {
         AppDataManager dataManager = (AppDataManager) factory.getDataManager();
         Intent intent;
         String walletPath = dataManager.getWalletPath();
+
         if (walletPath == null || !FileUtils.isExistFile(walletPath)) {
             if (walletPath != null) {
                 Log.d(TAG, walletPath);
