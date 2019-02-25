@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:right="10dp"
+        android:width="20sp"
+        android:height="20sp">
+
+        <bitmap xmlns:android="http://schemas.android.com/apk/res/android"
+            android:gravity="fill_horizontal|fill_vertical"
+            android:src="@drawable/ethereum_wallet" />
+    </item>
+
+</layer-list>

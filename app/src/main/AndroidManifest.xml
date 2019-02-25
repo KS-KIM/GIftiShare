@@ -43,6 +43,11 @@
             android:label=""
             android:theme="@style/AppTheme.NoActionAndStatusBar" />
 
+        <activity
+            android:name=".view.buycoupon.BuyCouponActivity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionAndStatusBar" />
+
     </application>
 
 </manifest>

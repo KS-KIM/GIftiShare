@@ -33,6 +33,7 @@ import com.example.giftishare.data.remote.firebase.AppFirebaseDbHelper;
 import com.example.giftishare.utils.AppExecutors;
 import com.example.giftishare.view.addcoupon.AddCouponViewModel;
 import com.example.giftishare.view.addwallet.AddWalletViewModel;
+import com.example.giftishare.view.buycoupon.BuyCouponViewModel;
 import com.example.giftishare.view.main.MainViewModel;
 import com.example.giftishare.view.onSaleCoupons.OnSaleCouponsViewModel;
 
@@ -133,6 +134,8 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
             return (T) new MainViewModel(mApplication, mDataManager);
         } else if (modelClass.isAssignableFrom(AddCouponViewModel.class)) {
             return (T) new AddCouponViewModel(mApplication, mDataManager);
+        } else if (modelClass.isAssignableFrom(BuyCouponViewModel.class)) {
+            return (T) new BuyCouponViewModel(mApplication, mDataManager);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

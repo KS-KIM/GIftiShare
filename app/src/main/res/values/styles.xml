@@ -56,7 +56,61 @@
 
     <style name="TextStyle">
         <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/colorGray</item>
         <item name="android:fontFamily">@font/notosanskr_medium</item>
+    </style>
+
+    <style name="CategoryTextStyle">
+        <item name="android:textSize">22sp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/category_margin</item>
+        <item name="android:paddingBottom">4dp</item>
+    </style>
+
+    <style name="ContentTitleTextStyle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/category_margin</item>
+        <item name="android:paddingTop">2dp</item>
+    </style>
+
+    <style name="ContentTextStyle">
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/category_margin</item>
+        <item name="android:paddingTop">2dp</item>
+    </style>
+
+    <style name="CategoryImageStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/category_margin</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:paddingLeft">@dimen/category_padding</item>
+        <item name="android:paddingRight">@dimen/category_padding</item>
+        <item name="android:paddingTop">@dimen/category_padding</item>
+    </style>
+
+    <style name="CategoryItemStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="CardStyle" parent="CardView">
+        <item name="android:layout_marginTop">22dp</item>
+        <item name="android:layout_marginLeft">22dp</item>
+        <item name="android:layout_marginRight">22dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="cardCornerRadius">@dimen/corner_radius_cardview</item>
+        <item name="cardElevation">2dp</item>
+
     </style>
 </resources>

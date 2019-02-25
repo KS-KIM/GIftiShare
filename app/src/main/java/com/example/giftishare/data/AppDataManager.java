@@ -19,6 +19,7 @@ import org.web3j.crypto.Credentials;
 import org.web3j.protocol.core.methods.response.EthGetBalance;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import java8.util.concurrent.CompletableFuture;
@@ -171,5 +172,10 @@ public class AppDataManager implements DataManager {
     @Override
     public CompletableFuture<EthGetBalance> getBalance() {
         return mSmartContractHelper.getBalance();
+    }
+
+    @Override
+    public CompletableFuture<TransactionReceipt> sendEther(String toAddress, BigDecimal balance) {
+        return mSmartContractHelper.sendEther(toAddress, balance);
     }
 }

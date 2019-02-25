@@ -13,9 +13,13 @@ import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.DefaultBlockParameterName;
 import org.web3j.protocol.core.methods.response.EthGetBalance;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
+import org.web3j.protocol.exceptions.TransactionException;
+import org.web3j.tx.Transfer;
 import org.web3j.tx.gas.DefaultGasProvider;
+import org.web3j.utils.Convert;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 
 import java8.util.concurrent.CompletableFuture;
@@ -133,5 +137,17 @@ public class AppSmartContractHelper implements SmartContractHelper {
             throw new NullPointerException();
         }
         return mWeb3j.ethGetBalance(mCredentials.getAddress(), DefaultBlockParameterName.LATEST).sendAsync();
+    }
+
+    @Override
+    public CompletableFuture<TransactionReceipt> sendEther(String toAddress, BigDecimal balance) {
+        try {
+            return Transfer.sendFunds(mWeb3j, mCredentials, toAddress, balance, Convert.Unit.WEI).sendAsync();
+        } catch (InterruptedException
+                | IOException
+                | TransactionException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

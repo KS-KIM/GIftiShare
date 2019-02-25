@@ -6,6 +6,8 @@ import org.web3j.crypto.Credentials;
 import org.web3j.protocol.core.methods.response.EthGetBalance;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 
+import java.math.BigDecimal;
+
 import java8.util.concurrent.CompletableFuture;
 
 /**
@@ -29,4 +31,6 @@ public interface SmartContractHelper {
     Credentials getCredentials();
 
     CompletableFuture<EthGetBalance> getBalance();
+
+    CompletableFuture<TransactionReceipt> sendEther(String toAddress, BigDecimal balance);
 }

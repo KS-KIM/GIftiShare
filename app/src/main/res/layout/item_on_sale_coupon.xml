@@ -5,13 +5,18 @@
         <variable
             name="coupon"
             type="com.example.giftishare.data.model.Coupon" />
+
+        <variable
+            name="listener"
+            type="com.example.giftishare.view.onSaleCoupons.OnSaleCouponsActionsListener" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/category_margin"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:onClick="@{() -> listener.onCouponClicked(coupon)}">
 
         <ImageView
             android:id="@+id/iv_coupon"

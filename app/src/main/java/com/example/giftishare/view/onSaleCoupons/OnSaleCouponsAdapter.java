@@ -1,18 +1,22 @@
 package com.example.giftishare.view.onSaleCoupons;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.example.giftishare.BR;
 import com.example.giftishare.data.model.Coupon;
 import com.example.giftishare.databinding.ItemOnSaleCouponBinding;
+import com.example.giftishare.view.buycoupon.BuyCouponActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OnSaleCouponsAdapter extends RecyclerView.Adapter<OnSaleCouponsAdapter.CouponViewHolder> {
+
+    public static final String INTENT_BUY_COUPON = "INTENT_BUY_COUPON";
 
     private final OnSaleCouponsViewModel mOnSaleCouponsViewModel;
 
@@ -45,9 +49,10 @@ public class OnSaleCouponsAdapter extends RecyclerView.Adapter<OnSaleCouponsAdap
         notifyDataSetChanged();
     }
 
-    //    public void addItems(List<Coupon> coupons) {
-    //        mCoupons.add(coupons);
-    //    }
+    public void addItems(List<Coupon> coupons) {
+        mCoupons.addAll(coupons);
+        notifyDataSetChanged();
+    }
 
     @Override
     public int getItemCount() {
@@ -55,16 +60,23 @@ public class OnSaleCouponsAdapter extends RecyclerView.Adapter<OnSaleCouponsAdap
     }
 
     class CouponViewHolder extends RecyclerView.ViewHolder {
+
         ItemOnSaleCouponBinding binding;
 
-        CouponViewHolder(ItemOnSaleCouponBinding binding) {
+        public CouponViewHolder(ItemOnSaleCouponBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+            OnSaleCouponsActionsListener listener = (Coupon coupon) -> {
+                Context context = binding.getRoot().getContext();
+                Intent intent = new Intent(context, BuyCouponActivity.class);
+                intent.putExtra(INTENT_BUY_COUPON, coupon);
+                context.startActivity(intent);
+            };
+            binding.setListener(listener);
         }
 
         void bind(Coupon coupon) {
-            binding.setVariable(BR.coupon, coupon);
+            binding.setCoupon(coupon);
         }
     }
-
 }

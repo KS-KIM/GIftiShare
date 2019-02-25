@@ -8,6 +8,8 @@ import android.support.annotation.NonNull;
 
 import com.google.firebase.database.Exclude;
 
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -17,7 +19,7 @@ import java.util.UUID;
  */
 
 @Entity(tableName="coupons")
-public final class Coupon {
+public final class Coupon implements Serializable {
 
     @PrimaryKey
     @NonNull
@@ -82,7 +84,6 @@ public final class Coupon {
                 true, false);
     }
 
-    @NonNull
     public String getId() {
         return mId;
     }
@@ -161,6 +162,11 @@ public final class Coupon {
 
     public void setUsed(Boolean used) {
         this.mUsed = used;
+    }
+
+    public String getDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormat.format(mDeadline);
     }
 
     @Exclude
