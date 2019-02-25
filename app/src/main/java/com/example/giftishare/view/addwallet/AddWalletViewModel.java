@@ -29,12 +29,8 @@ public class AddWalletViewModel extends AndroidViewModel {
         mDataManager = dataManager;
     }
 
-    public boolean isUserNameVaild() {
-        return !TextUtils.isEmpty(mUserName.getValue());
-    }
-
-    public boolean isWalletPasswordVaild() {
-        return !TextUtils.isEmpty(mWalletPassword.getValue());
+    public boolean isEmptyField(String field) {
+        return field == null || field.replace(" ", "").equals("");
     }
 
     public MutableLiveData<String> getUserName() {

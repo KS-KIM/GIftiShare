@@ -3,7 +3,9 @@ package com.example.giftishare.view.addwallet;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
@@ -48,6 +50,8 @@ public class AddWalletActivity extends AppCompatActivity {
         setupToolbar();
         setupCreateWalletButton();
         setupBouncyCastle();
+
+        PermissionUtils.checkReadStoragePermission(this);
     }
 
     private AddWalletViewModel obtainViewModel(FragmentActivity activity) {
@@ -63,21 +67,17 @@ public class AddWalletActivity extends AppCompatActivity {
 
     private void setupCreateWalletButton() {
         mBinding.btnCreateWallet.setOnClickListener((View v) -> {
-            if (!PermissionUtils.checkReadStoragePermission(this)) {
-                showPermissionDeniedMessage();
-                return;
-            }
-            if (!mAddWalletViewModel.isUserNameVaild()) {
+            if (mAddWalletViewModel.isEmptyField(mBinding.etUserName.getText().toString())) {
                 mBinding.etUserName.setError("사용하실 이름을 입력하세요");
                 mBinding.etUserName.requestFocus();
-                return;
-            }
-            if (!mAddWalletViewModel.isWalletPasswordVaild()) {
+            } else if (mAddWalletViewModel.isEmptyField(mBinding.etWalletPassword.getText().toString())) {
                 mBinding.etWalletPassword.setError("사용하실 비밀번호를 입력하세요");
                 mBinding.etWalletPassword.requestFocus();
-                return;
+            } else if (!PermissionUtils.canReadStorage(this)) {
+                showPermissionDeniedMessageAndStartSetting();
+            } else {
+                mAddWalletViewModel.createWallet();
             }
-            mAddWalletViewModel.createWallet();
         });
 
         mAddWalletViewModel.getNewWalletEvent().observe(this,
@@ -110,7 +110,12 @@ public class AddWalletActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void showPermissionDeniedMessage() {
-        Toast.makeText(getApplicationContext(), "권한을 수락하셔야 합니다.", Toast.LENGTH_SHORT).show();
+    public void showPermissionDeniedMessageAndStartSetting() {
+        Toast.makeText(getApplicationContext(), "권한을 수락하셔야 합니다.\n\"애플리케이션 설정 - 권한\"에서 저장공간 권한을 수락해주세요.", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                .setData(Uri.parse("package:" + getPackageName()));
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }
