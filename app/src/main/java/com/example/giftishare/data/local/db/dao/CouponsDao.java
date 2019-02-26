@@ -23,9 +23,14 @@ public interface CouponsDao {
     @Query("SELECT * FROM coupons")
     LiveData<List<Coupon>> loadAll();
 
+    @Query("SELECT * FROM coupons WHERE onSale = :isSale ORDER BY deadline ASC")
+    LiveData<List<Coupon>> getCoupons(Boolean isSale);
+
     @Delete
     void delete(Coupon coupon);
 
     @Query("DELETE FROM coupons")
     void deleteAllCoupons();
+
+
 }
