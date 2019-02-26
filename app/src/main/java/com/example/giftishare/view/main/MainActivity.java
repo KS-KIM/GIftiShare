@@ -20,7 +20,9 @@ import com.example.giftishare.ViewModelFactory;
 import com.example.giftishare.data.model.CouponsCategoryType;
 import com.example.giftishare.utils.ActivityUtils;
 import com.example.giftishare.view.addcoupon.AddCouponActivity;
+import com.example.giftishare.view.buycoupons.BuyCouponsActivity;
 import com.example.giftishare.view.onSaleCoupons.OnSaleCouponsActivity;
+import com.example.giftishare.view.sellcoupons.SellCouponsActivity;
 
 // @TODO MVVM 패턴으로 변경
 public class MainActivity extends AppCompatActivity
@@ -99,10 +101,10 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_home:
                 break;
             case R.id.nav_buy_list:
-
+                openBuyCouponsActivity();
                 break;
             case R.id.nav_sell_list:
-
+                openSellCouponsActivity();
                 break;
             case R.id.nav_contact_us:
 
@@ -129,7 +131,7 @@ public class MainActivity extends AppCompatActivity
         switch(item.getItemId()) {
             case R.id.action_sell_coupon:
                 openAddCouponActivity();
-                return true;
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -144,4 +146,17 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(this, AddCouponActivity.class);
         startActivity(intent);
     }
+
+    public void openBuyCouponsActivity() {
+        Intent intent = new Intent(this, BuyCouponsActivity.class);
+        startActivity(intent);
+    }
+
+    public void openSellCouponsActivity() {
+        Intent intent = new Intent(this, SellCouponsActivity.class);
+        startActivity(intent);
+    }
+
+
+
 }

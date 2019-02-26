@@ -80,6 +80,11 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public LiveData<List<Coupon>> getCoupons(Boolean isSale) {
+        return mDbHelper.getCoupons(isSale);
+    }
+
+    @Override
     public void saveCoupon(@NonNull Coupon coupon) {
         mDbHelper.saveCoupon(coupon);
     }

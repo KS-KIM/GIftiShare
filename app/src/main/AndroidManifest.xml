@@ -38,6 +38,14 @@
             android:label=""
             android:theme="@style/AppTheme.NoActionAndStatusBar" />
 
+        <activity android:name=".view.sellcoupons.SellCouponsActivity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionAndStatusBar" />
+
+        <activity android:name=".view.buycoupons.BuyCouponsActivity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionAndStatusBar" />
+
         <activity
             android:name=".view.addcoupon.AddCouponActivity"
             android:label=""

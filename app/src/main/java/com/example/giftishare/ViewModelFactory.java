@@ -36,6 +36,7 @@ import com.example.giftishare.view.addwallet.AddWalletViewModel;
 import com.example.giftishare.view.buycoupon.BuyCouponViewModel;
 import com.example.giftishare.view.main.MainViewModel;
 import com.example.giftishare.view.onSaleCoupons.OnSaleCouponsViewModel;
+import com.example.giftishare.view.sellcoupons.SellCouponsViewModel;
 
 import org.web3j.crypto.CipherException;
 import org.web3j.crypto.Credentials;
@@ -88,18 +89,17 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
                     // smart contract initialization
                     Web3j web3j = Web3j.build(new HttpService(ROPSTEN_NETWORK_ADDRESS));
                     Credentials credentials = null;
-                    GiftiShare smartContract = null;
+                    ContractGasProvider contractGasProvider = new DefaultGasProvider();
                     try {
                         credentials = WalletUtils.loadCredentials(
                                 preferencesHelper.getWalletPassword(), preferencesHelper.getWalletPath());
-                        ContractGasProvider contractGasProvider = new DefaultGasProvider();
-                        smartContract = GiftiShare.load(CONTRACT_ADDRESS, web3j, credentials, contractGasProvider);
                     } catch (IOException |
-                            NullPointerException |
                             CipherException e) {
                         e.printStackTrace();
                     }
-                    AppSmartContractHelper smartContractHelper = AppSmartContractHelper.getInstance(web3j, credentials, smartContract);
+                    GiftiShare smartContract = GiftiShare.load(CONTRACT_ADDRESS, web3j, credentials, contractGasProvider);
+                    AppSmartContractHelper smartContractHelper = AppSmartContractHelper.getInstance(
+                            web3j, credentials, smartContract);
 
                     // repository initialization
                     DataManager dataManager = AppDataManager.getInstance(dbHelper,
@@ -134,6 +134,10 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
             return (T) new MainViewModel(mApplication, mDataManager);
         } else if (modelClass.isAssignableFrom(AddCouponViewModel.class)) {
             return (T) new AddCouponViewModel(mApplication, mDataManager);
+        } else if (modelClass.isAssignableFrom(SellCouponsViewModel.class)) {
+            return (T) new SellCouponsViewModel(mApplication, mDataManager);
+        } else if (modelClass.isAssignableFrom(BuyCouponsViewModel.class)) {
+            return (T) new BuyCouponsViewModel(mApplication, mDataManager);
         } else if (modelClass.isAssignableFrom(BuyCouponViewModel.class)) {
             return (T) new BuyCouponViewModel(mApplication, mDataManager);
         }
