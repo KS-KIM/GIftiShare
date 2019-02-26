@@ -29,7 +29,7 @@
 ## Contributor
 
 - Kim Kwang Soon: kwangsoonkim@outlook.com
-- Kang Young Hoon
+- Kang Yong Hoon
 - Koo Dong Lim
 
 ## Reference
