@@ -11,7 +11,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.example.giftishare.Event;
@@ -98,8 +97,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.nav_home:
-                break;
             case R.id.nav_buy_list:
                 openBuyCouponsActivity();
                 break;
@@ -109,13 +106,12 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_contact_us:
 
                 break;
-            case R.id.nav_manage:
+            case R.id.nav_opensource_lisence:
 
                 break;
             default:
                 break;
         }
-        item.setChecked(true);
         mDrawerLayout.closeDrawers();
         return true;
     }
@@ -156,7 +152,4 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(this, SellCouponsActivity.class);
         startActivity(intent);
     }
-
-
-
 }

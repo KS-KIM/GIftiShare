@@ -1,22 +1,35 @@
 package com.example.giftishare.view.main;
 
 import android.app.AlertDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.giftishare.databinding.FragmentMainBinding;
 
+import java.text.DecimalFormat;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import io.reactivex.annotations.Nullable;
 
+import static android.content.ClipDescription.MIMETYPE_TEXT_PLAIN;
+
 public class MainFragment extends Fragment {
+
+    public static final String TAG = MainFragment.class.getSimpleName();
 
     private FragmentMainBinding mFragmentMainBinding;
 
@@ -54,30 +67,11 @@ public class MainFragment extends Fragment {
         });
 
         mMainViewModel.getWalletBalance().observe(this,
-                walletBalance -> mFragmentMainBinding.walletBalance.setText(walletBalance));
+                walletBalance -> {
+                    mFragmentMainBinding.walletBalance.setText(walletBalance);
+                });
 
-        mMainViewModel.getSendEtherCompleteEvent().observe(this,
-                stringEvent -> showMessage(stringEvent.getContentIfNotHandled()));
-
-        mFragmentMainBinding.btnSendEther.setOnClickListener((view) -> {
-            final EditText address = new EditText(getContext());
-            final EditText sendValue = new EditText(getContext());
-            sendValue.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
-            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            builder.setTitle("받으실 분의 지갑 주소를 입력하세요")
-                    .setView(address)
-                    .setPositiveButton("확인", (DialogInterface dialog, int which) -> {
-                        builder.setTitle("보내실 금액을 입력하세요")
-                                .setView(sendValue)
-                                .setPositiveButton("확인",
-                                        (DialogInterface ethDialog, int ethWhich) -> mMainViewModel.sendEther(address.getText().toString(), sendValue.getText().toString()))
-                                .setNegativeButton("취소",
-                                        (DialogInterface ethDialog, int ethWhich) -> ethDialog.dismiss())
-                                .show();
-                    })
-                    .setNegativeButton("취소", (DialogInterface dialog, int which) -> dialog.dismiss())
-                    .show();
-        });
+        setupSendEtherButton();
     }
 
     @Override
@@ -86,7 +80,61 @@ public class MainFragment extends Fragment {
         mMainViewModel.start();
     }
 
-    public void showMessage(String message) {
-        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+    private void setupSendEtherButton() {
+        mFragmentMainBinding.btnSendEther.setOnClickListener((view) -> {
+            final EditText address = new EditText(getContext());
+            final EditText sendValue = new EditText(getContext());
+            final TextView clipAddress = new TextView(getContext());
+            sendValue.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+
+            boolean matchFlag = false;
+
+            // 클립보드 최상위 값으로부터 주소를 가져올 수 있으면 가져오기
+            ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+            if (clipboard.hasPrimaryClip() && clipboard.getPrimaryClipDescription().hasMimeType(MIMETYPE_TEXT_PLAIN)) {
+                Pattern addressMatch = Pattern.compile("0x[a-fA-F0-9]{40}");
+                String clipText = clipboard.getPrimaryClip().getItemAt(0).getText().toString();
+                Matcher matcher = addressMatch.matcher(clipText);
+                if (matcher.find()) {
+                    matchFlag = true;
+                    clipAddress.setText(clipText.substring(matcher.start(), matcher.end()));
+                }
+            }
+
+            // 금액 입력 다이얼로그 구성
+            AlertDialog etherInputDialog = new AlertDialog.Builder(getContext()).setTitle("보내실 금액을 입력하세요")
+                    .setView(sendValue)
+                    .setPositiveButton("확인", (DialogInterface ethDialog, int ethWhich) -> mMainViewModel.sendEther(address.getText().toString(), sendValue.getText().toString()))
+                    .setNegativeButton("취소", (DialogInterface ethDialog, int ethWhich) -> ethDialog.dismiss())
+                    .create();
+
+            // 주소 입력 다이얼로그 구성
+            AlertDialog addressInputDialog = new AlertDialog.Builder(getContext()).setTitle("받으실 분의 지갑 주소를 입력하세요")
+                    .setView(address)
+                    .setPositiveButton("확인", (DialogInterface dialog, int which) -> {
+                        if (Pattern.matches("^0x[a-fA-F0-9]{40}$", address.getText().toString())) {
+                            etherInputDialog.show();
+                        } else {
+                            Toast.makeText(getContext(), "잘못된 주소를 입력하셨습니다. 확인 후 다시 시도해주세요.", Toast.LENGTH_LONG).show();
+                        }
+                    })
+                    .setNegativeButton("취소", (DialogInterface dialog, int which) -> dialog.dismiss())
+                    .create();
+
+            // 클립보드 주소 사용여부 확인 다이얼로그
+            AlertDialog.Builder clipAddressDialog = new AlertDialog.Builder(getContext()).setTitle("클립보드에 복사된 주소를 사용하시겠습니까?")
+                    .setMessage(clipAddress.getText().toString())
+                    .setPositiveButton("확인", (DialogInterface ethDialog, int ethWhich) -> {
+                        address.setText(clipAddress.getText().toString());
+                        etherInputDialog.show();
+                    })
+                    .setNegativeButton("취소", (DialogInterface ethDialog, int ethWhich) -> addressInputDialog.show());
+
+            if (matchFlag == true) {
+                clipAddressDialog.show();
+            } else {
+                addressInputDialog.show();
+            }
+        });
     }
 }

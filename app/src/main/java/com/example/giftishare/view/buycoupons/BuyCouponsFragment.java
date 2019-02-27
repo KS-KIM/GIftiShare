@@ -37,11 +37,10 @@ public class BuyCouponsFragment extends Fragment {
         setupListAdapter();
         return mFragmentBuyCouponsBinding.getRoot();
     }
+
     private void setupListAdapter() {
         mBuyCouponsAdapter = new BuyCouponsAdapter(mBuyCouponsViewModel);
         mFragmentBuyCouponsBinding.couponsListRecyclerView.setAdapter(mBuyCouponsAdapter);
         mFragmentBuyCouponsBinding.couponsListRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
-
-        //mSellCouponsViewModel.start(getContext());
     }
 }

@@ -10,4 +10,5 @@
     <string name="firebase_category_coupons">coupons</string>
     <string name="btn_acc">등록하기</string>
     <string name="spinner_title">쿠폰메뉴선택</string>
+    <string name="transaction_channel_name">거래 알림</string>
 </resources>

@@ -10,11 +10,16 @@ import android.util.Log;
 import com.example.giftishare.Event;
 import com.example.giftishare.data.DataManager;
 import com.example.giftishare.data.model.CouponsCategoryType;
+import com.example.giftishare.utils.NotificationUtils;
 
 import org.web3j.crypto.WalletUtils;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class MainViewModel extends AndroidViewModel {
 
@@ -28,8 +33,6 @@ public class MainViewModel extends AndroidViewModel {
 
     private final MutableLiveData<Event<CouponsCategoryType>> mOpenOnSaleCouponsEvent = new MutableLiveData<>();
 
-    private final MutableLiveData<Event<String>> mSendEtherCompleteEvent = new MutableLiveData<>();
-
     private final Context mContext;
 
     public MainViewModel(Application context, DataManager dataManager) {
@@ -40,11 +43,6 @@ public class MainViewModel extends AndroidViewModel {
 
     public LiveData<String> getWalletBalance() {
         return mWalletBalance;
-    }
-
-    // @TODO Notification으로 변경 예정
-    public LiveData<Event<String>> getSendEtherCompleteEvent() {
-        return mSendEtherCompleteEvent;
     }
 
     /**
@@ -70,20 +68,32 @@ public class MainViewModel extends AndroidViewModel {
         BigDecimal balance = new BigDecimal(weiValue);
         mDataManager.sendEther(toAddress, balance).thenAccept(TransactionReceipt -> {
             Log.i(TAG, "send complete. blockHash: " + TransactionReceipt.getBlockHash());
-            mSendEtherCompleteEvent.postValue(new Event<>("송금을 완료했습니다."));
+            NotificationUtils.sendNotification(getApplication().getApplicationContext(),
+                    1,
+                    NotificationUtils.Channel.NOTICE,
+                    "이더 전송 결과",
+                    "이더 전송에 성공했습니다.",
+                    "결과 확인하기",
+                    "https://blockscout.com/eth/ropsten/tx/" + TransactionReceipt.getTransactionHash());
+
             getBalance();
         }).exceptionally(TransactionReceipt -> {
             Log.i(TAG, "send failed. Detail Message: " + TransactionReceipt.getMessage());
-            mSendEtherCompleteEvent.postValue(new Event<>("송금에 실패했습니다. 다시 시도해주세요."));
+            NotificationUtils.sendNotification(getApplication().getApplicationContext(),
+                    1,
+                    NotificationUtils.Channel.NOTICE,
+                    "이더 전송 결과",
+                    "이더 전송에 실패했습니다.",
+                    "네트워크 상태와 이더리움 지갑 잔액을 확인하세요.",
+                    null);
             return null;
         });
     }
 
     public void getBalance() {
         mDataManager.getBalance().thenAccept(balance -> {
-            String walletBalance = balance.getBalance().toString();
-            Log.i(TAG, "wallet balance loaded: " + walletBalance);
-            mWalletBalance.postValue(walletBalance + " wei");
+            Log.i(TAG, "wallet balance loaded: " + balance.getBalance());
+            mWalletBalance.postValue(NumberFormat.getNumberInstance(Locale.US).format(balance.getBalance()) + " Wei");
         }).exceptionally(transactionReceipt -> {
             Log.d(TAG, "failed to load balance. network not available" + transactionReceipt.getMessage());
             mWalletBalance.postValue("잔액을 불러올 수 없습니다. 네트워크 상태를 확인하세요.");

@@ -12,6 +12,7 @@ import com.example.giftishare.data.model.Coupon;
 import java.util.List;
 
 public class BuyCouponsViewModel extends AndroidViewModel {
+
     public final LiveData<List<Coupon>> mCoupons;
 
     private final DataManager mDataManager;

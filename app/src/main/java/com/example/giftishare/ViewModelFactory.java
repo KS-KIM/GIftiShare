@@ -34,6 +34,7 @@ import com.example.giftishare.utils.AppExecutors;
 import com.example.giftishare.view.addcoupon.AddCouponViewModel;
 import com.example.giftishare.view.addwallet.AddWalletViewModel;
 import com.example.giftishare.view.buycoupon.BuyCouponViewModel;
+import com.example.giftishare.view.buycoupons.BuyCouponsViewModel;
 import com.example.giftishare.view.main.MainViewModel;
 import com.example.giftishare.view.onSaleCoupons.OnSaleCouponsViewModel;
 import com.example.giftishare.view.sellcoupons.SellCouponsViewModel;
@@ -89,15 +90,17 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
                     // smart contract initialization
                     Web3j web3j = Web3j.build(new HttpService(ROPSTEN_NETWORK_ADDRESS));
                     Credentials credentials = null;
+                    GiftiShare smartContract = null;
                     ContractGasProvider contractGasProvider = new DefaultGasProvider();
                     try {
                         credentials = WalletUtils.loadCredentials(
                                 preferencesHelper.getWalletPassword(), preferencesHelper.getWalletPath());
-                    } catch (IOException |
-                            CipherException e) {
+                        smartContract = GiftiShare.load(CONTRACT_ADDRESS, web3j, credentials, contractGasProvider);
+                    } catch (NullPointerException
+                            | IOException
+                            | CipherException e) {
                         e.printStackTrace();
                     }
-                    GiftiShare smartContract = GiftiShare.load(CONTRACT_ADDRESS, web3j, credentials, contractGasProvider);
                     AppSmartContractHelper smartContractHelper = AppSmartContractHelper.getInstance(
                             web3j, credentials, smartContract);
 
