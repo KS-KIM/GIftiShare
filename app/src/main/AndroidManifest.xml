@@ -34,15 +34,11 @@
             android:label="@string/new_user_title"
             android:theme="@style/AppTheme.NoActionAndStatusBar" />
 
-        <activity android:name=".view.onSaleCoupons.OnSaleCouponsActivity"
+        <activity android:name=".view.onsalecoupons.OnSaleCouponsActivity"
             android:label=""
             android:theme="@style/AppTheme.NoActionAndStatusBar" />
 
-        <activity android:name=".view.sellcoupons.SellCouponsActivity"
-            android:label=""
-            android:theme="@style/AppTheme.NoActionAndStatusBar" />
-
-        <activity android:name=".view.buycoupons.BuyCouponsActivity"
+        <activity android:name=".view.buysellcoupons.BuySellCouponsActivity"
             android:label=""
             android:theme="@style/AppTheme.NoActionAndStatusBar" />
 

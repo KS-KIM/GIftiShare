@@ -36,10 +36,25 @@
                     android:padding="22dp"
                     android:orientation="vertical">
 
-                    <TextView
-                        style="@style/CategoryTextStyle"
-                        android:drawableLeft="@drawable/ic_wallet_left_image"
-                        android:text="내 지갑"/>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/CategoryTextStyle"
+                            android:drawableLeft="@drawable/ic_wallet_left_image"
+                            android:text="내 지갑"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_alignParentRight="true"
+                            android:onClick="@{() -> viewmodel.getBalance()}"
+                            android:src="@drawable/ic_update_black_24dp" />
+
+                    </RelativeLayout>
 
                     <TextView
                         android:text="주소"
@@ -59,16 +74,36 @@
                         android:text="@{viewmodel.mWalletBalance}"
                         style="@style/ContentTextStyle" />
 
-                    <Button
-                        android:id="@+id/btn_send_ether"
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_margin="8dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/button_gradient"
-                        android:elevation="0dp"
-                        android:text="송금하기"
-                        android:textColor="@android:color/white" />
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btn_transaction_log"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/button_gradient"
+                            android:elevation="0dp"
+                            android:text="거래기록보기"
+                            android:onClick="@{() -> viewmodel.getTransactionList()}"
+                            android:textColor="@android:color/white" />
+
+                        <Button
+                            android:id="@+id/btn_send_ether"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/button_gradient"
+                            android:elevation="0dp"
+                            android:text="송금하기"
+                            android:textColor="@android:color/white" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 

@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="BuyCouponsViewModel"
-            type="com.example.giftishare.view.buycoupons.BuyCouponsViewModel" />
+            name="BuySellCouponsViewModel"
+            type="com.example.giftishare.view.buysellcoupons.BuySellCouponsViewModel" />
     </data>
 
     <!-- @TODO ScrollChildSwipeRefreshLayout-->
@@ -16,6 +16,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layoutManager="LinearLayoutManager"
-        bind:buyitem="@{BuyCouponsViewModel.mCoupons}" />
+        bind:buyitem="@{BuySellCouponsViewModel.mCoupons}" />
 
 </layout>

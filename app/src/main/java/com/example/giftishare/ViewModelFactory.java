@@ -34,10 +34,9 @@ import com.example.giftishare.utils.AppExecutors;
 import com.example.giftishare.view.addcoupon.AddCouponViewModel;
 import com.example.giftishare.view.addwallet.AddWalletViewModel;
 import com.example.giftishare.view.buycoupon.BuyCouponViewModel;
-import com.example.giftishare.view.buycoupons.BuyCouponsViewModel;
+import com.example.giftishare.view.buysellcoupons.BuySellCouponsViewModel;
 import com.example.giftishare.view.main.MainViewModel;
-import com.example.giftishare.view.onSaleCoupons.OnSaleCouponsViewModel;
-import com.example.giftishare.view.sellcoupons.SellCouponsViewModel;
+import com.example.giftishare.view.onsalecoupons.OnSaleCouponsViewModel;
 
 import org.web3j.crypto.CipherException;
 import org.web3j.crypto.Credentials;
@@ -137,10 +136,8 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
             return (T) new MainViewModel(mApplication, mDataManager);
         } else if (modelClass.isAssignableFrom(AddCouponViewModel.class)) {
             return (T) new AddCouponViewModel(mApplication, mDataManager);
-        } else if (modelClass.isAssignableFrom(SellCouponsViewModel.class)) {
-            return (T) new SellCouponsViewModel(mApplication, mDataManager);
-        } else if (modelClass.isAssignableFrom(BuyCouponsViewModel.class)) {
-            return (T) new BuyCouponsViewModel(mApplication, mDataManager);
+        } else if (modelClass.isAssignableFrom(BuySellCouponsViewModel.class)) {
+            return (T) new BuySellCouponsViewModel(mApplication, mDataManager);
         } else if (modelClass.isAssignableFrom(BuyCouponViewModel.class)) {
             return (T) new BuyCouponViewModel(mApplication, mDataManager);
         }

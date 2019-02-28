@@ -1,4 +1,4 @@
-package com.example.giftishare.view.buycoupons;
+package com.example.giftishare.view.buysellcoupons;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
@@ -11,9 +11,9 @@ import com.example.giftishare.data.model.Coupon;
 
 import java.util.List;
 
-public class BuyCouponsViewModel extends AndroidViewModel {
+public class BuySellCouponsViewModel extends AndroidViewModel {
 
-    public final LiveData<List<Coupon>> mCoupons;
+    public LiveData<List<Coupon>> mCoupons;
 
     private final DataManager mDataManager;
 
@@ -23,14 +23,13 @@ public class BuyCouponsViewModel extends AndroidViewModel {
         return mCoupons;
     }
 
-    public BuyCouponsViewModel(@NonNull Application context, DataManager dataManager) {
+    public BuySellCouponsViewModel(@NonNull Application context, DataManager dataManager) {
         super(context);
         mContext = context.getApplicationContext();
         mDataManager = dataManager;
-        mCoupons = mDataManager.getCoupons(false);
     }
 
-    public void start(Context context) {
-
+    public void start(boolean isSale) {
+        mCoupons = mDataManager.getCoupons(isSale);
     }
 }

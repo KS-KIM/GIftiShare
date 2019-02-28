@@ -1,4 +1,4 @@
-package com.example.giftishare.view.sellcoupons;
+package com.example.giftishare.view.buysellcoupons;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -7,26 +7,26 @@ import android.view.ViewGroup;
 
 import com.example.giftishare.BR;
 import com.example.giftishare.data.model.Coupon;
-import com.example.giftishare.databinding.ItemSellCouponBinding;
+import com.example.giftishare.databinding.ItemBuySellCouponBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SellCouponsAdapter extends RecyclerView.Adapter<SellCouponsAdapter.CouponViewHolder> {
+public class BuySellCouponsAdapter extends RecyclerView.Adapter<BuySellCouponsAdapter.CouponViewHolder> {
 
-    private final SellCouponsViewModel mSellCouponsViewModel;
+    private final BuySellCouponsViewModel mBuyCouponsViewModel;
 
     private List<Coupon> mCoupons;
 
-    public SellCouponsAdapter(SellCouponsViewModel sellCouponsViewModel) {
+    public BuySellCouponsAdapter(BuySellCouponsViewModel buyCouponsViewModel) {
         this.mCoupons = new ArrayList<>();
-        this.mSellCouponsViewModel = sellCouponsViewModel;
+        this.mBuyCouponsViewModel = buyCouponsViewModel;
     }
 
     @NonNull
     @Override
     public CouponViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemSellCouponBinding binding = ItemSellCouponBinding.
+        ItemBuySellCouponBinding binding = ItemBuySellCouponBinding.
                 inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new CouponViewHolder(binding);
     }
@@ -52,9 +52,9 @@ public class SellCouponsAdapter extends RecyclerView.Adapter<SellCouponsAdapter.
     }
 
     public class CouponViewHolder extends RecyclerView.ViewHolder {
-        ItemSellCouponBinding binding;
+        ItemBuySellCouponBinding binding;
 
-        public CouponViewHolder(@NonNull ItemSellCouponBinding binding) {
+        public CouponViewHolder(@NonNull ItemBuySellCouponBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }

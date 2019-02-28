@@ -4,18 +4,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View" />
+
         <variable
             name="OnSaleCouponsViewModel"
-            type="com.example.giftishare.view.onSaleCoupons.OnSaleCouponsViewModel" />
+            type="com.example.giftishare.view.onsalecoupons.OnSaleCouponsViewModel" />
     </data>
 
-    <!-- @TODO ScrollChildSwipeRefreshLayout-->
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/coupons_list_recycler_view"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layoutManager="LinearLayoutManager"
-        bind:item="@{OnSaleCouponsViewModel.mCoupons}" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_centerInParent="true"
+            android:visibility="@{OnSaleCouponsViewModel.empty ? View.VISIBLE : View.GONE}"
+            android:text="등록된 쿠폰이 없습니다."/>
+
+        <!-- @TODO ScrollChildSwipeRefreshLayout-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/coupons_list_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="LinearLayoutManager"
+            android:visibility="@{OnSaleCouponsViewModel.empty ? View.GONE : View.VISIBLE}"
+            bind:item="@{OnSaleCouponsViewModel.coupons}" />
+
+    </RelativeLayout>
     
 </layout>

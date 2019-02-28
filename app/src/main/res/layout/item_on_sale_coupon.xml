@@ -8,7 +8,7 @@
 
         <variable
             name="listener"
-            type="com.example.giftishare.view.onSaleCoupons.OnSaleCouponsActionsListener" />
+            type="com.example.giftishare.view.onsalecoupons.OnSaleCouponsActionsListener" />
     </data>
 
     <LinearLayout
