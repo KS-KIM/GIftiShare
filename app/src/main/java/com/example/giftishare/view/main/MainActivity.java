@@ -11,7 +11,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.example.giftishare.Event;
@@ -21,6 +20,7 @@ import com.example.giftishare.data.model.CouponsCategoryType;
 import com.example.giftishare.utils.ActivityUtils;
 import com.example.giftishare.view.addcoupon.AddCouponActivity;
 import com.example.giftishare.view.buycoupons.BuyCouponsActivity;
+import com.example.giftishare.view.lisence.LisenceActivity;
 import com.example.giftishare.view.onSaleCoupons.OnSaleCouponsActivity;
 import com.example.giftishare.view.sellcoupons.SellCouponsActivity;
 
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity
 
                 break;
             case R.id.nav_manage:
-
+                loadUrlWebView();
                 break;
             default:
                 break;
@@ -157,6 +157,9 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
     }
 
-
+    public void loadUrlWebView() {
+        Intent intent = new Intent(this, LisenceActivity.class);
+        startActivity(intent);
+    }
 
 }
