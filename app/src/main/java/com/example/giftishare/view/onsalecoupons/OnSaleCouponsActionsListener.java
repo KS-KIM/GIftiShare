@@ -1,4 +1,4 @@
-package com.example.giftishare.view.onSaleCoupons;
+package com.example.giftishare.view.onsalecoupons;
 
 import com.example.giftishare.data.model.Coupon;
 

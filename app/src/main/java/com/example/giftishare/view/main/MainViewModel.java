@@ -33,6 +33,8 @@ public class MainViewModel extends AndroidViewModel {
 
     private final MutableLiveData<Event<CouponsCategoryType>> mOpenOnSaleCouponsEvent = new MutableLiveData<>();
 
+    private final MutableLiveData<Event<String>> mShowTransactionEvent = new MutableLiveData<>();
+
     private final Context mContext;
 
     public MainViewModel(Application context, DataManager dataManager) {
@@ -45,9 +47,10 @@ public class MainViewModel extends AndroidViewModel {
         return mWalletBalance;
     }
 
-    /**
-     * @apiNote 지갑 잔액 테스트용. 추후 지갑 관리 액티비티에서 호출
-     */
+    public LiveData<Event<String>> getShowTransactionEvent() {
+        return mShowTransactionEvent;
+    }
+
     public void start() {
         String walletAddress = mDataManager.getCredentials().getAddress();
         mWalletAddress.setValue(walletAddress);
@@ -71,9 +74,8 @@ public class MainViewModel extends AndroidViewModel {
             NotificationUtils.sendNotification(getApplication().getApplicationContext(),
                     1,
                     NotificationUtils.Channel.NOTICE,
-                    "이더 전송 결과",
-                    "이더 전송에 성공했습니다.",
-                    "결과 확인하기",
+                    "이더 전송 성공",
+                    "결과를 확인하시려면 눌러주세요",
                     "https://blockscout.com/eth/ropsten/tx/" + TransactionReceipt.getTransactionHash());
 
             getBalance();
@@ -91,13 +93,18 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public void getBalance() {
+        mWalletBalance.postValue("업데이트 중입니다...");
         mDataManager.getBalance().thenAccept(balance -> {
             Log.i(TAG, "wallet balance loaded: " + balance.getBalance());
-            mWalletBalance.postValue(NumberFormat.getNumberInstance(Locale.US).format(balance.getBalance()) + " Wei");
+            mWalletBalance.postValue(NumberFormat.getNumberInstance(Locale.US).format(balance.getBalance()) + " WEI");
         }).exceptionally(transactionReceipt -> {
             Log.d(TAG, "failed to load balance. network not available" + transactionReceipt.getMessage());
             mWalletBalance.postValue("잔액을 불러올 수 없습니다. 네트워크 상태를 확인하세요.");
             return null;
         });
+    }
+
+    public void getTransactionList() {
+        mShowTransactionEvent.postValue(new Event("https://blockscout.com/eth/ropsten/address/" + mWalletAddress.getValue()));
     }
 }

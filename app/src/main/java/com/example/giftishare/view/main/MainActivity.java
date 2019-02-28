@@ -19,9 +19,10 @@ import com.example.giftishare.ViewModelFactory;
 import com.example.giftishare.data.model.CouponsCategoryType;
 import com.example.giftishare.utils.ActivityUtils;
 import com.example.giftishare.view.addcoupon.AddCouponActivity;
-import com.example.giftishare.view.buycoupons.BuyCouponsActivity;
-import com.example.giftishare.view.onSaleCoupons.OnSaleCouponsActivity;
-import com.example.giftishare.view.sellcoupons.SellCouponsActivity;
+import com.example.giftishare.view.buysellcoupons.BuySellCouponsActivity;
+import com.example.giftishare.view.onsalecoupons.OnSaleCouponsActivity;
+
+import static com.example.giftishare.view.buysellcoupons.BuySellCouponsFragment.INTENT_IS_SALE;
 
 // @TODO MVVM 패턴으로 변경
 public class MainActivity extends AppCompatActivity
@@ -98,10 +99,10 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_buy_list:
-                openBuyCouponsActivity();
+                openBuySellCouponsActivity(BuySellCouponsActivity.class, false);
                 break;
             case R.id.nav_sell_list:
-                openSellCouponsActivity();
+                openBuySellCouponsActivity(BuySellCouponsActivity.class, true);
                 break;
             case R.id.nav_contact_us:
 
@@ -126,7 +127,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.action_sell_coupon:
-                openAddCouponActivity();
+                openActivity(AddCouponActivity.class);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -138,18 +139,14 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
     }
 
-    public void openAddCouponActivity() {
-        Intent intent = new Intent(this, AddCouponActivity.class);
+    public <T extends AppCompatActivity> void openActivity(Class<T> className) {
+        Intent intent = new Intent(this, className);
         startActivity(intent);
     }
 
-    public void openBuyCouponsActivity() {
-        Intent intent = new Intent(this, BuyCouponsActivity.class);
-        startActivity(intent);
-    }
-
-    public void openSellCouponsActivity() {
-        Intent intent = new Intent(this, SellCouponsActivity.class);
+    public  <T extends AppCompatActivity> void openBuySellCouponsActivity(Class<T> className, boolean isSale) {
+        Intent intent = new Intent(this, className);
+        intent.putExtra(INTENT_IS_SALE, isSale);
         startActivity(intent);
     }
 }

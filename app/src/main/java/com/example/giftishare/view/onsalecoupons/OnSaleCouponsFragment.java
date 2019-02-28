@@ -1,4 +1,4 @@
-package com.example.giftishare.view.onSaleCoupons;
+package com.example.giftishare.view.onsalecoupons;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,10 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.giftishare.data.model.Coupon;
 import com.example.giftishare.databinding.FragmentOnSaleCouponsBinding;
 import com.example.giftishare.data.model.CouponsCategoryType;
-import com.example.giftishare.view.buycoupon.BuyCouponActivity;
 
 import io.reactivex.annotations.Nullable;
 

@@ -1,4 +1,4 @@
-package com.example.giftishare.view.onSaleCoupons;
+package com.example.giftishare.view.onsalecoupons;
 
 import android.content.Context;
 import android.content.Intent;

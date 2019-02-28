@@ -1,8 +1,10 @@
-package com.example.giftishare.view.onSaleCoupons;
+package com.example.giftishare.view.onsalecoupons;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.Transformations;
 import android.content.Context;
 import android.util.Log;
 
@@ -24,7 +26,7 @@ public class OnSaleCouponsViewModel extends AndroidViewModel {
 
     private static final String TAG = OnSaleCouponsViewModel.class.getSimpleName();
 
-    public final MutableLiveData<List<Coupon>> mCoupons = new MutableLiveData<>();
+    private final MutableLiveData<List<Coupon>> mCoupons = new MutableLiveData<>();
 
     private final DataManager mDataManager;
 
@@ -32,9 +34,11 @@ public class OnSaleCouponsViewModel extends AndroidViewModel {
 
     private final Context mContext;
 
-    public MutableLiveData<List<Coupon>> getCoupons() {
+    public LiveData<List<Coupon>> getCoupons() {
         return mCoupons;
     }
+
+    public final LiveData<Boolean> empty = Transformations.map(mCoupons, input -> input.isEmpty());
 
     public OnSaleCouponsViewModel(Application context, DataManager dataManager) {
         super(context);
@@ -66,7 +70,7 @@ public class OnSaleCouponsViewModel extends AndroidViewModel {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                // setValue(new ArrayList<>());
+                mCoupons.setValue(new ArrayList<>());
             }
         });
     }

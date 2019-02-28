@@ -1,11 +1,10 @@
-package com.example.giftishare.view.onSaleCoupons;
+package com.example.giftishare.view.onsalecoupons;
 
 
 import android.databinding.BindingAdapter;
 import android.databinding.BindingConversion;
 import android.databinding.InverseBindingAdapter;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.EditText;
 
 import com.example.giftishare.data.model.Coupon;

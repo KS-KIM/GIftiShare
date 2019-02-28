@@ -1,4 +1,4 @@
-package com.example.giftishare.view.onSaleCoupons;
+package com.example.giftishare.view.onsalecoupons;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;

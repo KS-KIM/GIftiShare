@@ -1,15 +1,14 @@
 package com.example.giftishare.view.main;
 
 import android.app.AlertDialog;
-import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.giftishare.databinding.FragmentMainBinding;
+import com.example.giftishare.utils.CustomTabUtils;
 
-import java.text.DecimalFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -67,20 +66,27 @@ public class MainFragment extends Fragment {
         });
 
         mMainViewModel.getWalletBalance().observe(this,
-                walletBalance -> {
-                    mFragmentMainBinding.walletBalance.setText(walletBalance);
+                walletBalance -> mFragmentMainBinding.walletBalance.setText(walletBalance));
+
+        mMainViewModel.start();
+
+        mMainViewModel.getShowTransactionEvent().observe(this,
+                url -> {
+                    Intent customTabIntent = CustomTabUtils.createCustomTabIntent(getContext(),
+                            url.getContentIfNotHandled(), Color.parseColor("#11d3bc"));
+                    startActivity(customTabIntent);
                 });
 
-        setupSendEtherButton();
+        setupButton();
+        mMainViewModel.start();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mMainViewModel.start();
     }
 
-    private void setupSendEtherButton() {
+    private void setupButton() {
         mFragmentMainBinding.btnSendEther.setOnClickListener((view) -> {
             final EditText address = new EditText(getContext());
             final EditText sendValue = new EditText(getContext());
@@ -136,5 +142,10 @@ public class MainFragment extends Fragment {
                 addressInputDialog.show();
             }
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 }

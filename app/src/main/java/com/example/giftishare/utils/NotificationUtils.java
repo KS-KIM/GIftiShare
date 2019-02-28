@@ -64,6 +64,24 @@ public final class NotificationUtils {
         getManager(context).notify(id, notification);
     }
 
+    @TargetApi(Build.VERSION_CODES.O)
+    public static void sendNotification(@NonNull Context context, @NonNull int id,
+                                        @Channel String channel, @NonNull String title,
+                                        @NonNull String body, @Nullable String address) {
+        Notification.Builder builder = new Notification.Builder(context, channel)
+                .setContentTitle(title)
+                .setContentText(body)
+                .setSmallIcon(R.mipmap.ic_launcher_round)
+                .setAutoCancel(true);
+        if (address != null) {
+            Intent notificationIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(address));
+            PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
+            builder.setContentIntent(contentIntent);
+        }
+        Notification notification = builder.build();
+        getManager(context).notify(id, notification);
+    }
+
     @Retention(RetentionPolicy.SOURCE)
     @StringDef({ Channel.NOTICE })
     public @interface Channel {

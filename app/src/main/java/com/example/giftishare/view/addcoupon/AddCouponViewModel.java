@@ -48,39 +48,36 @@ public class AddCouponViewModel extends AndroidViewModel {
 
     public void createCoupon() {
         String walletAddress = mDataManager.getCredentials().getAddress();
-        if (walletAddress != null) {
-            Coupon coupon = new Coupon(
-                    mCouponName.getValue(),
-                    CategoryNameMapperUtils.toEngName(mCouponCategory.getValue()),
-                    mCompanyName.getValue(),
-                    mPrice.getValue(),
-                    mBarcode.getValue(),
-                    mDeadline.getValue().getTime(),
-                    walletAddress);
-            mDataManager.addCoupon(coupon).thenAccept(transactionReceipt -> {
-                Log.i(TAG, "Transaction accepted. check at https://blockscout.com/eth/ropsten/tx/" +
-                        transactionReceipt.getTransactionHash());
-                mDataManager.saveCoupon(coupon);
-                mDataManager.saveSaleCoupon(coupon);
-                NotificationUtils.sendNotification(getApplication().getApplicationContext(),
-                        1,
-                        NotificationUtils.Channel.NOTICE,
-                        "쿠폰 등록 성공",
-                        "쿠폰 판매등록이 완료 되었습니다.",
-                        "결과 확인하기",
-                        "https://blockscout.com/eth/ropsten/tx/" + transactionReceipt.getTransactionHash());
-            }).exceptionally(transactionReceipt  -> {
-                Log.d(TAG, "Exeptional event occur in ethereum transaction with message \""
-                        + transactionReceipt.getMessage() + "\"");
-                NotificationUtils.sendNotification(getApplication().getApplicationContext(),
-                        1,
-                        NotificationUtils.Channel.NOTICE,
-                        "쿠폰 등록 실패",
-                        "쿠폰 등록에 실패했습니다.",
-                        "네트워크 상태와 이더리움 지갑 잔액을 확인하세요.",
-                        null);
-                return null;
-            });
-        }
+        Coupon coupon = new Coupon(
+                mCouponName.getValue(),
+                CategoryNameMapperUtils.toEngName(mCouponCategory.getValue()),
+                mCompanyName.getValue(),
+                mPrice.getValue(),
+                mBarcode.getValue(),
+                mDeadline.getValue().getTime(),
+                walletAddress);
+        mDataManager.addCoupon(coupon).thenAccept(transactionReceipt -> {
+            Log.i(TAG, "Transaction accepted. check at https://blockscout.com/eth/ropsten/tx/" +
+                    transactionReceipt.getTransactionHash());
+            mDataManager.saveCoupon(coupon);
+            mDataManager.saveSaleCoupon(coupon);
+            NotificationUtils.sendNotification(getApplication().getApplicationContext(),
+                    1,
+                    NotificationUtils.Channel.NOTICE,
+                    "쿠폰 등록 성공",
+                    "결과를 확인하시려면 눌러주세요",
+                    "https://blockscout.com/eth/ropsten/tx/" + transactionReceipt.getTransactionHash());
+        }).exceptionally(transactionReceipt -> {
+            Log.d(TAG, "Exeptional event occur in ethereum transaction with message \""
+                    + transactionReceipt.getMessage() + "\"");
+            NotificationUtils.sendNotification(getApplication().getApplicationContext(),
+                    1,
+                    NotificationUtils.Channel.NOTICE,
+                    "쿠폰 등록 실패",
+                    "쿠폰 등록에 실패했습니다.",
+                    "네트워크 상태와 이더리움 지갑 잔액을 확인하세요.",
+                    null);
+            return null;
+        });
     }
 }
