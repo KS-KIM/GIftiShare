@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.example.giftishare.utils.CategoryNameMapperUtils" />
+
+        <variable
+            name="buyCouponViewModel"
+            type="com.example.giftishare.view.buycoupon.BuyCouponViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/category_padding">
+
+            <TextView
+                android:id="@+id/title_coupon"
+                style="@style/TextStyle_Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/app_bar"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="해당 기프티콘을 구매하시겠습니까?" />
+
+            <TextView
+                android:id="@+id/tv_coupon_name"
+                style="@style/TextStyle_Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{buyCouponViewModel.coupon.getValue().getName()}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_coupon"/>
+
+            <ImageView
+                android:id="@+id/iv_coupon_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_category_gift_coupon"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_coupon_name" />
+
+            <TextView
+                android:id="@+id/title_coupon_company"
+                style="@style/TextStyle_Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="교환처"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_coupon_image" />
+
+            <TextView
+                android:id="@+id/tv_coupon_company"
+                style="@style/TextStyle_Content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{buyCouponViewModel.coupon.getValue().getCompany()}"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_coupon_image" />
+
+            <TextView
+                android:id="@+id/title_deadline"
+                style="@style/TextStyle_Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="유효기간"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_coupon_company" />
+
+            <TextView
+                android:id="@+id/tv_coupon_deadline"
+                style="@style/TextStyle_Content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{buyCouponViewModel.coupon.getValue().getDate()}"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_coupon_company" />
+
+            <TextView
+                android:id="@+id/title_coupon_price"
+                style="@style/TextStyle_Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="가격"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_deadline" />
+
+            <TextView
+                android:id="@+id/tv_coupon_price"
+                style="@style/TextStyle_Content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{buyCouponViewModel.coupon.getValue().getPrice()}"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_coupon_deadline" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>

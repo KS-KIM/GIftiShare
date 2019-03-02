@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.example.giftishare.data.model.CouponsCategoryType" />
+
+        <variable
+            name="viewmodel"
+            type="com.example.giftishare.view.main.MainViewModel" />
+    </data>
+
+    <android.support.v7.widget.CardView style="@style/CardStyle">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="22dp">
+
+            <TextView
+                android:id="@+id/my_wallet_title"
+                style="@style/CategoryTextStyle"
+                android:drawableLeft="@drawable/ic_wallet_left_image"
+                android:text="내 지갑"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> viewmodel.getBalance()}"
+                android:padding="5dp"
+                android:src="@drawable/ic_update_black_24dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/address_title"
+                style="@style/ContentTitleTextStyle"
+                android:text="주소"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/my_wallet_title" />
+
+            <TextView
+                android:id="@+id/wallet_address"
+                style="@style/ContentTextStyle"
+                android:text="@{viewmodel.mWalletAddress}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/address_title" />
+
+            <TextView
+                android:id="@+id/balance_title"
+                style="@style/ContentTitleTextStyle"
+                android:text="잔액"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/wallet_address" />
+
+            <TextView
+                android:id="@+id/wallet_balance"
+                style="@style/ContentTextStyle"
+                android:text="@{viewmodel.mWalletBalance}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/balance_title" />
+
+            <Button
+                android:id="@+id/btn_transaction_log"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/button_gradient"
+                android:elevation="0dp"
+                android:onClick="@{() -> viewmodel.getTransactionList()}"
+                android:text="거래기록보기"
+                android:textColor="@android:color/white"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="@id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/wallet_balance" />
+
+            <Button
+                android:id="@+id/btn_send_ether"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/button_gradient"
+                android:elevation="0dp"
+                android:text="송금하기"
+                android:textColor="@android:color/white"
+                app:layout_constraintLeft_toLeftOf="@id/guideline"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/wallet_balance" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
+
+</layout>

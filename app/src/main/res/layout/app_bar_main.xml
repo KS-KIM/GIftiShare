@@ -15,8 +15,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:elevation="0dp"
-            android:background="?attr/colorPrimary">
+            android:background="?attr/colorPrimary"
+            android:elevation="0dp">
 
             <ImageView
                 android:id="@+id/app_logo"
@@ -28,15 +28,6 @@
                 android:src="@drawable/logo_transparent" />
 
         </android.support.v7.widget.Toolbar>
-
-        <!--ImageView
-            android:id="@+id/app_logo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="64dp"
-            android:scaleType="fitXY"
-            android:adjustViewBounds="true"
-            android:src="@drawable/logo_transparent"/-->
 
     </android.support.design.widget.AppBarLayout>
 

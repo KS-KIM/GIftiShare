@@ -36,29 +36,30 @@
 
     <!--TextStyle.-->
     <style name="TextStyle_Title">
-        <item name="android:textSize">21sp</item>
+        <item name="android:textSize">19sp</item>
         <item name="android:textColor">@color/logoGray</item>
-        <item name="android:fontFamily">@font/notosanskr_medium</item>
+    </style>
+
+    <style name="TextStyle_Content">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/logoGray</item>
     </style>
 
     <style name="TextStyle_Button">
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">#ffffff</item>
         <item name="android:gravity">center_horizontal</item>
-        <item name="android:fontFamily">@font/notosanskr_medium</item>
     </style>
 
     <style name="TextStyle_tag">
         <item name="android:textSize">13sp</item>
         <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:fontFamily">@font/notosanskr_medium</item>
     </style>
 
     <style name="TextStyle">
         <item name="android:textSize">15sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/colorGray</item>
-        <item name="android:fontFamily">@font/notosanskr_medium</item>
     </style>
 
     <style name="CategoryTextStyle">

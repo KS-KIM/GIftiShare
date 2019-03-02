@@ -2,6 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
         <variable
             name="coupon"
             type="com.example.giftishare.data.model.Coupon" />
@@ -17,8 +18,8 @@
             android:id="@+id/iv_coupon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher_round"
-            android:layout_margin="@dimen/content_margin"/>
+            android:layout_margin="@dimen/content_margin"
+            android:src="@mipmap/ic_launcher_round" />
 
         <LinearLayout
             android:id="@+id/coupon_info"
@@ -31,25 +32,25 @@
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{coupon.mName}"/>
+                android:text="@{coupon.mName}" />
 
             <TextView
                 android:id="@+id/tv_company"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{coupon.mCompany}"/>
+                android:text="@{coupon.mCompany}" />
 
             <TextView
                 android:id="@+id/tv_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{coupon.mPrice}"/>
+                android:text="@{coupon.mPrice}" />
 
             <TextView
                 android:id="@+id/tv_deadline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{coupon.mDeadline}"/>
+                android:text="@{coupon.mDeadline}" />
 
         </LinearLayout>
 

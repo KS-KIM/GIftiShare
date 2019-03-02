@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="AddWalletViewModel"
             type="com.example.giftishare.view.addwallet.AddWalletViewModel" />
@@ -14,15 +15,15 @@
         android:layout_height="match_parent">
 
         <android.support.design.widget.CoordinatorLayout
-            android:layout_height="match_parent"
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <android.support.design.widget.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:elevation="0dp"
-                android:theme="@style/AppTheme">
+                android:theme="@style/AppTheme"
+                app:elevation="0dp">
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
@@ -83,14 +84,14 @@
                     android:id="@+id/btn_create_wallet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Create Wallet"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="32dp"
-                    android:elevation="0dp"
-                    android:textSize="18sp"
-                    android:textColor="@android:color/white"
                     android:background="@drawable/button_gradient"
+                    android:elevation="0dp"
+                    android:text="Create Wallet"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_wallet_password" />

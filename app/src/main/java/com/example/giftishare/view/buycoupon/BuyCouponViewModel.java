@@ -15,7 +15,7 @@ public class BuyCouponViewModel extends AndroidViewModel {
 
     private final MutableLiveData<Coupon> mCoupon = new MutableLiveData<>();
 
-    private final MutableLiveData<Event<Object>> mBuyCouponEvent = new MutableLiveData<>();
+    private final MutableLiveData<Event<String>> mBuyCouponEvent = new MutableLiveData<>();
 
     private final DataManager mDataManager;
 
@@ -32,16 +32,18 @@ public class BuyCouponViewModel extends AndroidViewModel {
         return mCoupon;
     }
 
-    public LiveData<Event<Object>> getBuyCouponEvent() {
+    public LiveData<Event<String>> getBuyCouponEvent() {
         return mBuyCouponEvent;
     }
 
-    public void buyCoupon() {
-        String id = mCoupon.getValue().mId;
-        String price = mCoupon.getValue().mPrice;
-        mDataManager.buyCoupon(id, price).thenAccept(transactionReceipt -> {
+    public void buyCoupon(Coupon coupon) {
+        if (coupon.getOwner().equals(mDataManager.getCredentials().getAddress())) {
+            mBuyCouponEvent.postValue(new Event<>("본인의 쿠폰은 구매할 수 없습니다."));
+            return;
+        }
+
+        mDataManager.buyCoupon(coupon.getId(), coupon.getPrice()).thenAccept(transactionReceipt -> {
             String walletAddress = mDataManager.getCredentials().getAddress();
-            Coupon coupon = mCoupon.getValue();
             coupon.setOnSale(false);
             coupon.setOwner(walletAddress);
             mDataManager.saveCoupon(coupon);
@@ -61,6 +63,6 @@ public class BuyCouponViewModel extends AndroidViewModel {
                     null);
             return null;
         });
-        mBuyCouponEvent.postValue(new Event<>(new Object()));
+        mBuyCouponEvent.postValue(new Event<>("구매 요청을 완료했습니다. 알림을 통해 결과를 알려드립니다."));
     }
 }

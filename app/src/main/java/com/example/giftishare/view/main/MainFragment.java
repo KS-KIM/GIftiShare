@@ -57,25 +57,18 @@ public class MainFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mFragmentMainBinding.walletAddress.setOnClickListener((view) -> {
+        mFragmentMainBinding.wallet.walletAddress.setOnClickListener((view) -> {
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("text/plain");
-            intent.putExtra(Intent.EXTRA_TEXT, mFragmentMainBinding.walletAddress.getText());
+            intent.putExtra(Intent.EXTRA_TEXT, mFragmentMainBinding.wallet.walletAddress.getText());
             Intent chooser = Intent.createChooser(intent, "지갑 주소 공유하기");
             startActivity(chooser);
         });
 
         mMainViewModel.getWalletBalance().observe(this,
-                walletBalance -> mFragmentMainBinding.walletBalance.setText(walletBalance));
+                walletBalance -> mFragmentMainBinding.wallet.walletBalance.setText(walletBalance));
 
         mMainViewModel.start();
-
-        mMainViewModel.getShowTransactionEvent().observe(this,
-                url -> {
-                    Intent customTabIntent = CustomTabUtils.createCustomTabIntent(getContext(),
-                            url.getContentIfNotHandled(), Color.parseColor("#11d3bc"));
-                    startActivity(customTabIntent);
-                });
 
         setupButton();
         mMainViewModel.start();
@@ -87,7 +80,14 @@ public class MainFragment extends Fragment {
     }
 
     private void setupButton() {
-        mFragmentMainBinding.btnSendEther.setOnClickListener((view) -> {
+        mMainViewModel.getShowTransactionEvent().observe(this,
+                url -> {
+                    Intent customTabIntent = CustomTabUtils.createCustomTabIntent(getContext(),
+                            url.getContentIfNotHandled(), Color.parseColor("#11d3bc"));
+                    startActivity(customTabIntent);
+                });
+
+        mFragmentMainBinding.wallet.btnSendEther.setOnClickListener((view) -> {
             final EditText address = new EditText(getContext());
             final EditText sendValue = new EditText(getContext());
             final TextView clipAddress = new TextView(getContext());

@@ -39,14 +39,14 @@ public class BuyCouponActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Coupon coupon = (Coupon) intent.getSerializableExtra(INTENT_BUY_COUPON);
-        mBinding.ivCouponImage.setImageResource(CategoryNameMapperUtils.toImageDrawable(coupon.getCategory()));
+        mBinding.cardInfo.ivCouponImage.setImageResource(CategoryNameMapperUtils.toImageDrawable(coupon.getCategory()));
         mBuyCouponViewModel.start(coupon);
 
         mBinding.btnDecline.setOnClickListener((View view) -> onBackPressed());
 
         mBuyCouponViewModel.getBuyCouponEvent().observe(this,
-                (Event<Object> event) -> {
-                    Toast.makeText(getApplicationContext(), "구매 요청을 완료했습니다. 알림을 통해 결과를 알려드립니다.", Toast.LENGTH_LONG).show();
+                (Event<String> event) -> {
+                    Toast.makeText(getApplicationContext(), event.getContentIfNotHandled(), Toast.LENGTH_LONG).show();
                     finish();
                 });
     }
