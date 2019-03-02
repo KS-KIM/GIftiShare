@@ -3,6 +3,7 @@ package com.example.giftishare.data.remote.firebase;
 import com.example.giftishare.data.model.Coupon;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Map;
 
@@ -42,12 +43,9 @@ public class AppFirebaseDbHelper implements FirebaseDbHelper {
                 .updateChildren(couponValues);
     }
 
-    /*
+
     @Override
-    public FirebaseQueryLiveData getCoupons(String category) {
-        // @TODO enum 타입으로 카테고리 분류 가능 (1: 카페, 2: 편의점 ...)
-        FirebaseQueryLiveData coupons = new FirebaseQueryLiveData(mDatabase.child(category));
-        return coupons;
+    public void getSaleCoupons(String category, ValueEventListener listener) {
+        mDatabase.child(FIREBASE_CATEGORY_COUPONS).child(category).addListenerForSingleValueEvent(listener);
     }
-    */
 }

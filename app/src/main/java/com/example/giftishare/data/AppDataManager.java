@@ -14,6 +14,7 @@ import com.example.giftishare.data.remote.ethereum.AppSmartContractHelper;
 import com.example.giftishare.data.remote.ethereum.SmartContractHelper;
 import com.example.giftishare.data.remote.firebase.AppFirebaseDbHelper;
 import com.example.giftishare.data.remote.firebase.FirebaseDbHelper;
+import com.google.firebase.database.ValueEventListener;
 
 import org.web3j.crypto.Credentials;
 import org.web3j.protocol.core.methods.response.EthGetBalance;
@@ -74,6 +75,7 @@ public class AppDataManager implements DataManager {
         INSTANCE = null;
     }
 
+    /* Room database */
     @Override
     public LiveData<List<Coupon>> getAllCoupons() {
         return mDbHelper.getAllCoupons();
@@ -99,16 +101,24 @@ public class AppDataManager implements DataManager {
         mDbHelper.deleteCoupon(coupon);
     }
 
+    /* Firebase */
     @Override
     public void saveSaleCoupon(@NonNull Coupon coupon) {
         mFirebaseDbHelper.saveSaleCoupon(coupon);
     }
 
     @Override
+    public void getSaleCoupons(String category, ValueEventListener listener) {
+        mFirebaseDbHelper.getSaleCoupons(category, listener);
+    }
+
+    /* ethereum wallet */
+    @Override
     public String createWallet(@NonNull String password) {
         return mKeystoreGenerationHelper.createWallet(password);
     }
 
+    /* Preferences */
     @Override
     public String getUserName() {
         return mPreferencesHelper.getUserName();
@@ -139,6 +149,7 @@ public class AppDataManager implements DataManager {
         mPreferencesHelper.setWalletPath(walletPath);
     }
 
+    /* ethereum transaction */
     @Override
     public CompletableFuture<TransactionReceipt> buyCoupon(@NonNull String uuid, @NonNull String price) {
         return mSmartContractHelper.buyCoupon(uuid, price);

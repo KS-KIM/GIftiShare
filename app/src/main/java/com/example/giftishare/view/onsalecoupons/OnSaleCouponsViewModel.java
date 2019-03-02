@@ -10,17 +10,12 @@ import android.util.Log;
 
 import com.example.giftishare.data.DataManager;
 import com.example.giftishare.data.model.Coupon;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.example.giftishare.data.remote.firebase.AppFirebaseDbHelper.FIREBASE_CATEGORY_COUPONS;
 
 public class OnSaleCouponsViewModel extends AndroidViewModel {
 
@@ -29,8 +24,6 @@ public class OnSaleCouponsViewModel extends AndroidViewModel {
     private final MutableLiveData<List<Coupon>> mCoupons = new MutableLiveData<>();
 
     private final DataManager mDataManager;
-
-    private DatabaseReference mDatabaseReference;
 
     private final Context mContext;
 
@@ -47,15 +40,11 @@ public class OnSaleCouponsViewModel extends AndroidViewModel {
     }
 
     public void start(String category) {
-        FirebaseApp.initializeApp(mContext);
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        mDatabaseReference = firebaseDatabase
-                .getReference().child(FIREBASE_CATEGORY_COUPONS).child(category);
-        loadCoupons();
+        loadCoupons(category);
     }
 
-    public void loadCoupons() {
-        mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+    public void loadCoupons(String category) {
+        mDataManager.getSaleCoupons(category, new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 List<Coupon> coupons = new ArrayList<>();
