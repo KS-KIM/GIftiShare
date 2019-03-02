@@ -52,6 +52,11 @@
             android:label=""
             android:theme="@style/AppTheme.NoActionAndStatusBar" />
 
+        <activity
+            android:name=".view.lisence.LisenceActivity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionAndStatusBar" />
+
     </application>
 
 </manifest>
