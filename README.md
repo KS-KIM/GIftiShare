@@ -8,6 +8,7 @@
 - [Android Support Library](https://developer.android.com/topic/libraries/support-library)
   - [AppCompat-v7](https://developer.android.com/topic/libraries/support-library/packages#v7-appcompat)
   - [CardView-v7](https://developer.android.com/topic/libraries/support-library/packages#v7-cardview)
+  - [CustomTabs](https://developer.android.com/topic/libraries/support-library/features#custom-tabs)
   - [Design Support](https://developer.android.com/topic/libraries/support-library/packages#design)
   - [RecyclerView-v7](https://developer.android.com/topic/libraries/support-library/packages#v7-recyclerview)
   - [Support-v4](https://developer.android.com/topic/libraries/support-library/packages#v4)
