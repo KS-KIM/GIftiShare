@@ -13,6 +13,8 @@ import com.example.giftishare.ViewModelFactory;
 import com.example.giftishare.databinding.ActivityBuySellCouponsBinding;
 import com.example.giftishare.utils.ActivityUtils;
 
+import static com.example.giftishare.view.buysellcoupons.BuySellCouponsFragment.INTENT_IS_SALE;
+
 public class BuySellCouponsActivity extends AppCompatActivity {
 
     private ActivityBuySellCouponsBinding mBinding;
@@ -32,8 +34,11 @@ public class BuySellCouponsActivity extends AppCompatActivity {
 
         mBuyCouponsViewModel = obtainViewModel(this);
     }
+
     private void setupToolBar() {
-        mBinding.title.setText("구매목록");
+        getIntent();
+        boolean isSale = getIntent().getBooleanExtra(INTENT_IS_SALE, false);
+        mBinding.title.setText(isSale ? "판매 목록" : "구매 목록");
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mBinding.btnBack.setOnClickListener((View v) -> onBackPressed());

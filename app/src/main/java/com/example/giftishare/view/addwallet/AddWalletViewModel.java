@@ -3,7 +3,6 @@ package com.example.giftishare.view.addwallet;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
-import android.text.TextUtils;
 
 import com.example.giftishare.Event;
 import com.example.giftishare.data.DataManager;

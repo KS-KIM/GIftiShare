@@ -44,6 +44,7 @@ public class OnSaleCouponsActivity extends AppCompatActivity {
 
         setupTitle();
     }
+
     private void setupTitle() {
         Intent intent = getIntent();
         CouponsCategoryType category = (CouponsCategoryType) intent.getSerializableExtra(CATEGORY_COUPONS);

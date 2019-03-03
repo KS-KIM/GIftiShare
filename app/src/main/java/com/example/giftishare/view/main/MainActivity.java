@@ -11,7 +11,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.example.giftishare.Event;
@@ -26,8 +25,6 @@ import com.example.giftishare.view.onsalecoupons.OnSaleCouponsActivity;
 
 import static com.example.giftishare.view.buysellcoupons.BuySellCouponsFragment.INTENT_IS_SALE;
 
-
-// @TODO MVVM 패턴으로 변경
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -50,11 +47,11 @@ public class MainActivity extends AppCompatActivity
 
         mViewModel.getOpenOnSaleCouponsEvent().observe(this,
                 (Event<CouponsCategoryType> CouponIdEvent) -> {
-            CouponsCategoryType category = CouponIdEvent.getContentIfNotHandled();
-            if (category != null) {
-                openOnSaleActivity(category);
-            }
-        });
+                    CouponsCategoryType category = CouponIdEvent.getContentIfNotHandled();
+                    if (category != null) {
+                        openOnSaleActivity(category);
+                    }
+                });
     }
 
     private void setupToolbar() {
@@ -107,16 +104,12 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_sell_list:
                 openBuySellCouponsActivity(BuySellCouponsActivity.class, true);
                 break;
-            case R.id.nav_contact_us:
-
-                break;
             case R.id.nav_opensource_lisence:
                 openActivity(LisenceActivity.class);
                 break;
             default:
                 break;
         }
-        item.setChecked(true);
         mDrawerLayout.closeDrawers();
         return true;
     }
@@ -129,10 +122,10 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.action_sell_coupon:
                 openActivity(AddCouponActivity.class);
-            return true;
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -148,7 +141,7 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
     }
 
-    public  <T extends AppCompatActivity> void openBuySellCouponsActivity(Class<T> className, boolean isSale) {
+    public <T extends AppCompatActivity> void openBuySellCouponsActivity(Class<T> className, boolean isSale) {
         Intent intent = new Intent(this, className);
         intent.putExtra(INTENT_IS_SALE, isSale);
         startActivity(intent);

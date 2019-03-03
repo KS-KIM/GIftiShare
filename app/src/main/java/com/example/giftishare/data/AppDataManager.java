@@ -112,6 +112,15 @@ public class AppDataManager implements DataManager {
         mFirebaseDbHelper.getSaleCoupons(category, listener);
     }
 
+    @Override
+    public void deleteCoupon(String category, String id) {
+        mFirebaseDbHelper.deleteCoupon(category, id);
+    }
+
+    public void deleteSaleCoupon(Coupon coupon) {
+        deleteCoupon(coupon.getCategory(), coupon.getId());
+    }
+
     /* ethereum wallet */
     @Override
     public String createWallet(@NonNull String password) {

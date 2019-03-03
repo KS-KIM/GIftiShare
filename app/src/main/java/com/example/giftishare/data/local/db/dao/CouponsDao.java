@@ -31,6 +31,4 @@ public interface CouponsDao {
 
     @Query("DELETE FROM coupons")
     void deleteAllCoupons();
-
-
 }

@@ -4,13 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.giftishare.ViewModelFactory;
 import com.example.giftishare.data.AppDataManager;
 import com.example.giftishare.utils.FileUtils;
 import com.example.giftishare.utils.NotificationUtils;
-import com.example.giftishare.utils.PermissionUtils;
 import com.example.giftishare.view.addwallet.AddWalletActivity;
 import com.example.giftishare.view.main.MainActivity;
 

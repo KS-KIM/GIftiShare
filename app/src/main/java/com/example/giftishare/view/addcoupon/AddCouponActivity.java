@@ -3,16 +3,13 @@ package com.example.giftishare.view.addcoupon;
 import android.app.DatePickerDialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
-import com.example.giftishare.Event;
 import com.example.giftishare.R;
 import com.example.giftishare.ViewModelFactory;
 import com.example.giftishare.databinding.ActivityAddCouponBinding;

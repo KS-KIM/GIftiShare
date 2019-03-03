@@ -1,6 +1,10 @@
 package com.example.giftishare.data.remote.firebase;
 
+import android.util.Log;
+
 import com.example.giftishare.data.model.Coupon;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
@@ -8,6 +12,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Map;
 
 public class AppFirebaseDbHelper implements FirebaseDbHelper {
+
+    public static final String TAG = AppFirebaseDbHelper.class.getSimpleName();
 
     public final static String FIREBASE_CATEGORY_COUPONS = "coupons";
 
@@ -47,5 +53,24 @@ public class AppFirebaseDbHelper implements FirebaseDbHelper {
     @Override
     public void getSaleCoupons(String category, ValueEventListener listener) {
         mDatabase.child(FIREBASE_CATEGORY_COUPONS).child(category).addListenerForSingleValueEvent(listener);
+    }
+
+    @Override
+    public void deleteCoupon(String category, String id) {
+        mDatabase.child(FIREBASE_CATEGORY_COUPONS)
+                .child(category)
+                .orderByChild("id")
+                .equalTo(id)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        dataSnapshot.getRef().removeValue();
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.e(TAG, "onCancelled", databaseError.toException());
+                    }
+                });
     }
 }

@@ -71,9 +71,7 @@ public final class CustomTabUtils {
 
     public static Intent createCustomTabIntent(Context context, String urlToLoad, int toolbarColor) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlToLoad));
-
         String packageName = CustomTabUtils.getPackageNameToUse(context, urlToLoad);
-
         // If custom tab support, otherwise should fallback to simply opening in the browser
         if (packageName != null) {
             intent.setPackage(packageName);
@@ -82,7 +80,6 @@ public final class CustomTabUtils {
             extras.putBinder(CUSTOM_TABS_EXTRA_SESSION, null);
             extras.putParcelable(Intent.EXTRA_REFERRER, Uri.parse(Intent.URI_ANDROID_APP_SCHEME + "//" + context.getPackageName()));
             intent.putExtras(extras);
-
         }
         return intent;
     }

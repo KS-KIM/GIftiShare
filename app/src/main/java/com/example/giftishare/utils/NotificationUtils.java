@@ -83,7 +83,7 @@ public final class NotificationUtils {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    @StringDef({ Channel.NOTICE })
+    @StringDef({Channel.NOTICE})
     public @interface Channel {
         String NOTICE = "notice";
     }

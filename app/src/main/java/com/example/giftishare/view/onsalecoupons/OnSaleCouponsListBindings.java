@@ -1,6 +1,5 @@
 package com.example.giftishare.view.onsalecoupons;
 
-
 import android.databinding.BindingAdapter;
 import android.databinding.BindingConversion;
 import android.databinding.InverseBindingAdapter;
@@ -41,7 +40,7 @@ public class OnSaleCouponsListBindings {
         return view;
     }
 
-    @InverseBindingAdapter(attribute="android:text", event="android:textAttrChanged")
+    @InverseBindingAdapter(attribute = "android:text", event = "android:textAttrChanged")
     public static Long captureLongValue(EditText view) {
         long value = 0;
         try {

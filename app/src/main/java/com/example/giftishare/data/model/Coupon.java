@@ -18,40 +18,40 @@ import java.util.UUID;
  * Created by KS-KIM on 19/02/04.
  */
 
-@Entity(tableName="coupons")
+@Entity(tableName = "coupons")
 public final class Coupon implements Serializable {
 
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name="id")
+    @ColumnInfo(name = "id")
     public String mId;
 
-    @ColumnInfo(name="name")
+    @ColumnInfo(name = "name")
     public String mName;
 
-    @ColumnInfo(name="category")
+    @ColumnInfo(name = "category")
     public String mCategory;
 
-    @ColumnInfo(name="company")
+    @ColumnInfo(name = "company")
     public String mCompany;
 
-    @ColumnInfo(name="price")
+    @ColumnInfo(name = "price")
     public String mPrice;
 
-    @ColumnInfo(name="barcode")
+    @ColumnInfo(name = "barcode")
     public String mBarcode;
 
     // Date is stored as a timestamp
     @ColumnInfo(name = "deadline")
     public Long mDeadline;
 
-    @ColumnInfo(name="owner")
+    @ColumnInfo(name = "owner")
     public String mOwner;
 
-    @ColumnInfo(name="onSale")
+    @ColumnInfo(name = "onSale")
     public Boolean mOnSale;
 
-    @ColumnInfo(name="used")
+    @ColumnInfo(name = "used")
     public Boolean mUsed;
 
     public Coupon() {

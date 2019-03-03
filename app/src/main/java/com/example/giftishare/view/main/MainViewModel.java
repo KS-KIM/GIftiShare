@@ -12,12 +12,7 @@ import com.example.giftishare.data.DataManager;
 import com.example.giftishare.data.model.CouponsCategoryType;
 import com.example.giftishare.utils.NotificationUtils;
 
-import org.web3j.crypto.WalletUtils;
-import org.web3j.protocol.core.methods.response.TransactionReceipt;
-
 import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
 

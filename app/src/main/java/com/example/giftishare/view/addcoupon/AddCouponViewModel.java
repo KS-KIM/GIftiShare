@@ -5,7 +5,6 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.util.Log;
 
-import com.example.giftishare.Event;
 import com.example.giftishare.data.DataManager;
 import com.example.giftishare.data.model.Coupon;
 import com.example.giftishare.utils.CategoryNameMapperUtils;

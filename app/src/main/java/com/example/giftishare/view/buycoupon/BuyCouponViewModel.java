@@ -8,7 +8,6 @@ import android.arch.lifecycle.MutableLiveData;
 import com.example.giftishare.Event;
 import com.example.giftishare.data.DataManager;
 import com.example.giftishare.data.model.Coupon;
-import com.example.giftishare.utils.CategoryNameMapperUtils;
 import com.example.giftishare.utils.NotificationUtils;
 
 public class BuyCouponViewModel extends AndroidViewModel {
@@ -47,6 +46,7 @@ public class BuyCouponViewModel extends AndroidViewModel {
             coupon.setOnSale(false);
             coupon.setOwner(walletAddress);
             mDataManager.saveCoupon(coupon);
+            mDataManager.deleteSaleCoupon(coupon);
             NotificationUtils.sendNotification(getApplication().getApplicationContext(),
                     1,
                     NotificationUtils.Channel.NOTICE,

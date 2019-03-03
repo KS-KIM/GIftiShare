@@ -4,26 +4,25 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
+
         <item
             android:id="@+id/nav_buy_list"
             android:checkable="false"
             android:icon="@drawable/ic_shopping_cart_black_24dp"
             android:title="구매 목록" />
+
         <item
             android:id="@+id/nav_sell_list"
             android:checkable="false"
             android:icon="@drawable/ic_attach_money_black_24dp"
             android:title="판매 목록" />
-        <item
-            android:id="@+id/nav_contact_us"
-            android:checkable="false"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="문의하기" />
+
         <item
             android:id="@+id/nav_opensource_lisence"
             android:checkable="false"
             android:icon="@drawable/ic_info_outline_black_24dp"
             android:title="오픈소스 라이선스" />
+
     </group>
 
 </menu>

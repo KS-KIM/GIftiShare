@@ -9,4 +9,5 @@ public interface FirebaseDbHelper {
 
     void getSaleCoupons(String category, ValueEventListener listener);
 
+    void deleteCoupon(String category, String id);
 }

@@ -44,7 +44,9 @@ public class AppDbHelper implements DbHelper {
     }
 
     @Override
-    public LiveData<List<Coupon>> getCoupons(Boolean isSale){return mCouponsDao.getCoupons(isSale);}
+    public LiveData<List<Coupon>> getCoupons(Boolean isSale) {
+        return mCouponsDao.getCoupons(isSale);
+    }
 
     @Override
     public void saveCoupon(@NonNull Coupon coupon) {
