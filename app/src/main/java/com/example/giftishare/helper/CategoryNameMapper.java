@@ -1,11 +1,11 @@
-package com.example.giftishare.utils;
+package com.example.giftishare.helper;
 
 import com.example.giftishare.R;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public final class CategoryNameMapperUtils {
+public final class CategoryNameMapper {
 
     private static Map<String, String> map = new HashMap<String, String>() {
         {

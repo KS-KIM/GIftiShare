@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.giftishare.databinding.FragmentMainBinding;
-import com.example.giftishare.utils.CustomTabUtils;
+import com.example.giftishare.helper.CustomTabHelper;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -71,7 +71,6 @@ public class MainFragment extends Fragment {
         mMainViewModel.start();
 
         setupButton();
-        mMainViewModel.start();
     }
 
     @Override
@@ -82,7 +81,7 @@ public class MainFragment extends Fragment {
     private void setupButton() {
         mMainViewModel.getShowTransactionEvent().observe(this,
                 url -> {
-                    Intent customTabIntent = CustomTabUtils.createCustomTabIntent(getContext(),
+                    Intent customTabIntent = CustomTabHelper.createCustomTabIntent(getContext(),
                             url.getContentIfNotHandled(), Color.parseColor("#11d3bc"));
                     startActivity(customTabIntent);
                 });
@@ -110,7 +109,13 @@ public class MainFragment extends Fragment {
             // 금액 입력 다이얼로그 구성
             AlertDialog etherInputDialog = new AlertDialog.Builder(getContext()).setTitle("보내실 금액을 입력하세요")
                     .setView(sendValue)
-                    .setPositiveButton("확인", (DialogInterface ethDialog, int ethWhich) -> mMainViewModel.sendEther(address.getText().toString(), sendValue.getText().toString()))
+                    .setPositiveButton("확인", (DialogInterface ethDialog, int ethWhich) -> {
+                        if (!sendValue.getText().toString().equals("")) {
+                            mMainViewModel.sendEther(address.getText().toString(), sendValue.getText().toString());
+                        } else {
+                            Toast.makeText(getContext(), "금액을 입력하세요.", Toast.LENGTH_LONG).show();
+                        }
+                    })
                     .setNegativeButton("취소", (DialogInterface ethDialog, int ethWhich) -> ethDialog.dismiss())
                     .create();
 

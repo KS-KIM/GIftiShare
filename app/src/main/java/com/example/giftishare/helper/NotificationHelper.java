@@ -1,4 +1,4 @@
-package com.example.giftishare.utils;
+package com.example.giftishare.helper;
 
 import android.annotation.TargetApi;
 import android.app.Notification;
@@ -19,9 +19,9 @@ import com.example.giftishare.R;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-public final class NotificationUtils {
+public final class NotificationHelper {
 
-    public static final String TAG = NotificationUtils.class.getSimpleName();
+    public static final String TAG = NotificationHelper.class.getSimpleName();
 
     private static NotificationManager getManager(Context context) {
         return (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -53,7 +53,7 @@ public final class NotificationUtils {
         Notification.Builder builder = new Notification.Builder(context, channel)
                 .setContentTitle(title)
                 .setStyle(new Notification.BigTextStyle().bigText(details).setSummaryText(body))
-                .setSmallIcon(R.mipmap.ic_launcher_round)
+                .setSmallIcon(getSmallIcon())
                 .setAutoCancel(true);
         if (address != null) {
             Intent notificationIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(address));
@@ -80,6 +80,10 @@ public final class NotificationUtils {
         }
         Notification notification = builder.build();
         getManager(context).notify(id, notification);
+    }
+
+    private static int getSmallIcon() {
+        return R.mipmap.ic_launcher_round;
     }
 
     @Retention(RetentionPolicy.SOURCE)

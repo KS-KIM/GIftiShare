@@ -15,7 +15,7 @@ import com.example.giftishare.R;
 import com.example.giftishare.ViewModelFactory;
 import com.example.giftishare.data.model.Coupon;
 import com.example.giftishare.databinding.ActivityBuyCouponBinding;
-import com.example.giftishare.utils.CategoryNameMapperUtils;
+import com.example.giftishare.helper.CategoryNameMapper;
 
 import static com.example.giftishare.view.onsalecoupons.OnSaleCouponsAdapter.INTENT_BUY_COUPON;
 
@@ -39,7 +39,7 @@ public class BuyCouponActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Coupon coupon = (Coupon) intent.getSerializableExtra(INTENT_BUY_COUPON);
-        mBinding.cardInfo.ivCouponImage.setImageResource(CategoryNameMapperUtils.toImageDrawable(coupon.getCategory()));
+        mBinding.cardInfo.ivCouponImage.setImageResource(CategoryNameMapper.toImageDrawable(coupon.getCategory()));
         mBuyCouponViewModel.start(coupon);
 
         mBinding.btnDecline.setOnClickListener((View view) -> onBackPressed());

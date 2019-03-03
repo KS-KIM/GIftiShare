@@ -10,7 +10,7 @@ import android.util.Log;
 import com.example.giftishare.Event;
 import com.example.giftishare.data.DataManager;
 import com.example.giftishare.data.model.CouponsCategoryType;
-import com.example.giftishare.utils.NotificationUtils;
+import com.example.giftishare.helper.NotificationHelper;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
@@ -66,9 +66,9 @@ public class MainViewModel extends AndroidViewModel {
         BigDecimal balance = new BigDecimal(weiValue);
         mDataManager.sendEther(toAddress, balance).thenAccept(TransactionReceipt -> {
             Log.i(TAG, "send complete. blockHash: " + TransactionReceipt.getBlockHash());
-            NotificationUtils.sendNotification(getApplication().getApplicationContext(),
+            NotificationHelper.sendNotification(getApplication().getApplicationContext(),
                     1,
-                    NotificationUtils.Channel.NOTICE,
+                    NotificationHelper.Channel.NOTICE,
                     "이더 전송 성공",
                     "결과를 확인하시려면 눌러주세요",
                     "https://blockscout.com/eth/ropsten/tx/" + TransactionReceipt.getTransactionHash());
@@ -76,9 +76,9 @@ public class MainViewModel extends AndroidViewModel {
             getBalance();
         }).exceptionally(TransactionReceipt -> {
             Log.i(TAG, "send failed. Detail Message: " + TransactionReceipt.getMessage());
-            NotificationUtils.sendNotification(getApplication().getApplicationContext(),
+            NotificationHelper.sendNotification(getApplication().getApplicationContext(),
                     1,
-                    NotificationUtils.Channel.NOTICE,
+                    NotificationHelper.Channel.NOTICE,
                     "이더 전송 결과",
                     "이더 전송에 실패했습니다.",
                     "네트워크 상태와 이더리움 지갑 잔액을 확인하세요.",

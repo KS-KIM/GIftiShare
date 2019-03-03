@@ -8,7 +8,7 @@ import android.arch.lifecycle.MutableLiveData;
 import com.example.giftishare.Event;
 import com.example.giftishare.data.DataManager;
 import com.example.giftishare.data.model.Coupon;
-import com.example.giftishare.utils.NotificationUtils;
+import com.example.giftishare.helper.NotificationHelper;
 
 public class BuyCouponViewModel extends AndroidViewModel {
 
@@ -47,16 +47,16 @@ public class BuyCouponViewModel extends AndroidViewModel {
             coupon.setOwner(walletAddress);
             mDataManager.saveCoupon(coupon);
             mDataManager.deleteSaleCoupon(coupon);
-            NotificationUtils.sendNotification(getApplication().getApplicationContext(),
+            NotificationHelper.sendNotification(getApplication().getApplicationContext(),
                     1,
-                    NotificationUtils.Channel.NOTICE,
+                    NotificationHelper.Channel.NOTICE,
                     "쿠폰 구매 성공",
                     "결과를 확인하시려면 눌러주세요",
                     "https://blockscout.com/eth/ropsten/tx/" + transactionReceipt.getTransactionHash());
         }).exceptionally(transactionReceipt -> {
-            NotificationUtils.sendNotification(getApplication().getApplicationContext(),
+            NotificationHelper.sendNotification(getApplication().getApplicationContext(),
                     1,
-                    NotificationUtils.Channel.NOTICE,
+                    NotificationHelper.Channel.NOTICE,
                     "쿠폰 구매 실패",
                     "쿠폰 구매에 실패했습니다.",
                     "네트워크 상태와 이더리움 지갑 잔액을 확인하세요.",

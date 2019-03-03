@@ -7,8 +7,8 @@ import android.util.Log;
 
 import com.example.giftishare.data.DataManager;
 import com.example.giftishare.data.model.Coupon;
-import com.example.giftishare.utils.CategoryNameMapperUtils;
-import com.example.giftishare.utils.NotificationUtils;
+import com.example.giftishare.helper.CategoryNameMapper;
+import com.example.giftishare.helper.NotificationHelper;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -49,7 +49,7 @@ public class AddCouponViewModel extends AndroidViewModel {
         String walletAddress = mDataManager.getCredentials().getAddress();
         Coupon coupon = new Coupon(
                 mCouponName.getValue(),
-                CategoryNameMapperUtils.toEngName(mCouponCategory.getValue()),
+                CategoryNameMapper.toEngName(mCouponCategory.getValue()),
                 mCompanyName.getValue(),
                 mPrice.getValue(),
                 mBarcode.getValue(),
@@ -60,18 +60,18 @@ public class AddCouponViewModel extends AndroidViewModel {
                     transactionReceipt.getTransactionHash());
             mDataManager.saveCoupon(coupon);
             mDataManager.saveSaleCoupon(coupon);
-            NotificationUtils.sendNotification(getApplication().getApplicationContext(),
+            NotificationHelper.sendNotification(getApplication().getApplicationContext(),
                     1,
-                    NotificationUtils.Channel.NOTICE,
+                    NotificationHelper.Channel.NOTICE,
                     "쿠폰 등록 성공",
                     "결과를 확인하시려면 눌러주세요",
                     "https://blockscout.com/eth/ropsten/tx/" + transactionReceipt.getTransactionHash());
         }).exceptionally(transactionReceipt -> {
             Log.d(TAG, "Exeptional event occur in ethereum transaction with message \""
                     + transactionReceipt.getMessage() + "\"");
-            NotificationUtils.sendNotification(getApplication().getApplicationContext(),
+            NotificationHelper.sendNotification(getApplication().getApplicationContext(),
                     1,
-                    NotificationUtils.Channel.NOTICE,
+                    NotificationHelper.Channel.NOTICE,
                     "쿠폰 등록 실패",
                     "쿠폰 등록에 실패했습니다.",
                     "네트워크 상태와 이더리움 지갑 잔액을 확인하세요.",

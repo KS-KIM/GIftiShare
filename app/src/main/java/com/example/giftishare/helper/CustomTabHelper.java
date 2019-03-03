@@ -1,4 +1,4 @@
-package com.example.giftishare.utils;
+package com.example.giftishare.helper;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,7 +18,7 @@ import static android.support.customtabs.CustomTabsService.ACTION_CUSTOM_TABS_CO
  * https://github.com/GoogleChrome/custom-tabs-client
  * Copyright Google Inc. Licence: http://www.apache.org/licenses/LICENSE-2.0
  */
-public final class CustomTabUtils {
+public final class CustomTabHelper {
 
     private static final String CUSTOM_TABS_EXTRA_SESSION =
             "android.support.customtabs.extra.SESSION";
@@ -71,7 +71,7 @@ public final class CustomTabUtils {
 
     public static Intent createCustomTabIntent(Context context, String urlToLoad, int toolbarColor) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlToLoad));
-        String packageName = CustomTabUtils.getPackageNameToUse(context, urlToLoad);
+        String packageName = CustomTabHelper.getPackageNameToUse(context, urlToLoad);
         // If custom tab support, otherwise should fallback to simply opening in the browser
         if (packageName != null) {
             intent.setPackage(packageName);

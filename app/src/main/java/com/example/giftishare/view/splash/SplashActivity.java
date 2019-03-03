@@ -8,7 +8,7 @@ import android.util.Log;
 import com.example.giftishare.ViewModelFactory;
 import com.example.giftishare.data.AppDataManager;
 import com.example.giftishare.utils.FileUtils;
-import com.example.giftishare.utils.NotificationUtils;
+import com.example.giftishare.helper.NotificationHelper;
 import com.example.giftishare.view.addwallet.AddWalletActivity;
 import com.example.giftishare.view.main.MainActivity;
 
@@ -36,7 +36,7 @@ public class SplashActivity extends AppCompatActivity {
         } else {
             intent = new Intent(this, MainActivity.class);
         }
-        NotificationUtils.createChannel(getApplicationContext());
+        NotificationHelper.createChannel(getApplicationContext());
         startActivity(intent);
         finish();
     }
