@@ -9,7 +9,7 @@
             type="com.example.giftishare.view.buycoupon.BuyCouponViewModel" />
     </data>
 
-    <RelativeLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -17,7 +17,8 @@
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay">
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:layout_constraintTop_toTopOf="parent">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -50,43 +51,44 @@
             android:id="@+id/card_info"
             layout="@layout/coupon_information"
             android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            android:paddingTop="16dp"
+            app:buyCouponViewModel="@{buyCouponViewModel}"
+            app:layout_constraintBottom_toTopOf="@+id/btn_accept"
+            app:layout_constraintTop_toBottomOf="@+id/app_bar" />
+
+        <android.support.design.button.MaterialButton
+            android:id="@+id/btn_accept"
+            style="@style/AppTheme.Button"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:onClick="@{() -> buyCouponViewModel.buyCoupon(buyCouponViewModel.coupon.getValue())}"
+            android:text="구매"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@id/guideline" />
+
+        <android.support.design.button.MaterialButton
+            android:id="@+id/btn_decline"
+            style="@style/AppTheme.Button"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="취소"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/guideline"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@id/buttons"
-            android:layout_below="@id/app_bar"
-            app:buyCouponViewModel="@{buyCouponViewModel}" />
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
 
-        <LinearLayout
-            android:id="@+id/buttons"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btn_accept"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
-                android:background="@drawable/button_gradient"
-                android:elevation="0dp"
-                android:onClick="@{() -> buyCouponViewModel.buyCoupon(buyCouponViewModel.coupon.getValue())}"
-                android:text="구매"
-                android:textColor="@android:color/white" />
-
-            <Button
-                android:id="@+id/btn_decline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
-                android:background="@drawable/button_gradient"
-                android:elevation="0dp"
-                android:text="취소"
-                android:textColor="@android:color/white" />
-
-        </LinearLayout>
-
-    </RelativeLayout>
+    </android.support.constraint.ConstraintLayout>
 
 </layout>

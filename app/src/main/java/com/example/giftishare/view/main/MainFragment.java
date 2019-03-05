@@ -47,10 +47,14 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mFragmentMainBinding = FragmentMainBinding.inflate(inflater, container, false);
+
         mMainViewModel = MainActivity.obtainViewModel(getActivity());
+
         mFragmentMainBinding.setViewmodel(mMainViewModel);
         mFragmentMainBinding.setLifecycleOwner(getActivity());
+
         setHasOptionsMenu(true);
+
         return mFragmentMainBinding.getRoot();
     }
 
@@ -78,6 +82,7 @@ public class MainFragment extends Fragment {
         super.onResume();
     }
 
+    /* @TODO 코드 분리 및 개선 필요 */
     private void setupButton() {
         mMainViewModel.getShowTransactionEvent().observe(this,
                 url -> {
@@ -141,6 +146,7 @@ public class MainFragment extends Fragment {
                     })
                     .setNegativeButton("취소", (DialogInterface ethDialog, int ethWhich) -> addressInputDialog.show());
 
+            // 클립보드로부터 가져온 주소가 일치하는 경우와 아닌 경우를 나누어 출력하는 다이얼로그 변경
             if (matchFlag == true) {
                 clipAddressDialog.show();
             } else {

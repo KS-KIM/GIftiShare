@@ -10,7 +10,7 @@
             type="com.example.giftishare.view.main.MainViewModel" />
     </data>
 
-    <android.support.v7.widget.CardView
+    <android.support.design.card.MaterialCardView
         style="@style/CardStyle"
         android:layout_marginBottom="22dp">
 
@@ -260,6 +260,6 @@
 
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    </android.support.design.card.MaterialCardView>
 
 </layout>

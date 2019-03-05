@@ -19,7 +19,6 @@ package com.example.giftishare;
 /**
  * Used as a wrapper for data that is exposed via a LiveData that represents an event.
  */
-/* @TODO SingleLiveEvent에 관해서 확실히 이해한 후 변경 고려해보기 */
 public class Event<T> {
 
     private T mContent;

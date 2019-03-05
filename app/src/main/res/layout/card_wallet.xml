@@ -11,7 +11,7 @@
             type="com.example.giftishare.view.main.MainViewModel" />
     </data>
 
-    <android.support.v7.widget.CardView style="@style/CardStyle">
+    <android.support.design.card.MaterialCardView style="@style/CardStyle">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -65,29 +65,23 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/balance_title" />
 
-            <Button
+            <android.support.design.button.MaterialButton
                 android:id="@+id/btn_transaction_log"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:background="@drawable/button_gradient"
-                android:elevation="0dp"
+                style="@style/AppTheme.Button"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
                 android:onClick="@{() -> viewmodel.getTransactionList()}"
                 android:text="거래기록보기"
-                android:textColor="@android:color/white"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="@id/guideline"
                 app:layout_constraintTop_toBottomOf="@id/wallet_balance" />
 
-            <Button
+            <android.support.design.button.MaterialButton
                 android:id="@+id/btn_send_ether"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:background="@drawable/button_gradient"
-                android:elevation="0dp"
+                style="@style/AppTheme.Button"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:text="송금하기"
-                android:textColor="@android:color/white"
                 app:layout_constraintLeft_toLeftOf="@id/guideline"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/wallet_balance" />
@@ -101,6 +95,6 @@
 
         </android.support.constraint.ConstraintLayout>
 
-    </android.support.v7.widget.CardView>
+    </android.support.design.card.MaterialCardView>
 
 </layout>

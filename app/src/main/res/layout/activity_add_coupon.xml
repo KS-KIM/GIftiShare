@@ -8,7 +8,6 @@
         <variable
             name="AddCouponViewModel"
             type="com.example.giftishare.view.addcoupon.AddCouponViewModel" />
-
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -83,16 +82,15 @@
 
                 </android.support.design.widget.TextInputLayout>
 
-                <Spinner
+                <android.support.v7.widget.AppCompatSpinner
                     android:id="@+id/coupon_category"
-                    style="@style/TextStyle"
+                    style="@style/Widget.AppCompat.Spinner.Underlined"
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@drawable/text_field_line"
                     android:overlapAnchor="false"
                     android:prompt="@string/spinner_title"
+                    android:spinnerMode="dialog"
                     app:layout_constraintLeft_toRightOf="@+id/guideline_left"
                     app:layout_constraintRight_toLeftOf="@+id/guideline_right"
                     app:layout_constraintTop_toBottomOf="@+id/input_layout_name" />
@@ -101,7 +99,7 @@
                     android:id="@+id/input_layout_company_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="5dp"
                     app:layout_constraintLeft_toLeftOf="@+id/guideline_left"
                     app:layout_constraintRight_toLeftOf="@+id/guideline_right"
                     app:layout_constraintTop_toBottomOf="@+id/coupon_category">
@@ -121,7 +119,7 @@
                     android:id="@+id/input_layout_price"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="5dp"
                     app:layout_constraintLeft_toLeftOf="@+id/guideline_left"
                     app:layout_constraintRight_toLeftOf="@+id/guideline_right"
                     app:layout_constraintTop_toBottomOf="@+id/input_layout_company_name">
@@ -140,7 +138,7 @@
                     android:id="@+id/input_layout_barcode"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="5dp"
                     app:layout_constraintLeft_toLeftOf="@+id/guideline_left"
                     app:layout_constraintRight_toLeftOf="@+id/guideline_right"
                     app:layout_constraintTop_toBottomOf="@+id/input_layout_price">
@@ -149,25 +147,27 @@
                         android:id="@+id/et_barcode"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="일련 번호*"
+                        android:hint="일련번호*"
                         android:inputType="numberDecimal"
                         android:text="@={AddCouponViewModel.mBarcode}" />
 
                 </android.support.design.widget.TextInputLayout>
 
-                <Button
+                <android.support.design.button.MaterialButton
                     android:id="@+id/btn_deadline"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    android:background="@drawable/text_field_line"
                     android:gravity="center_vertical"
-                    android:text="  유효기간"
-                    android:textSize="15sp"
+                    android:text="유효기간"
+                    app:backgroundTint="@android:color/transparent"
                     app:layout_constraintLeft_toRightOf="@+id/guideline_left"
                     app:layout_constraintRight_toLeftOf="@+id/guideline_right"
-                    app:layout_constraintTop_toBottomOf="@+id/input_layout_barcode" />
+                    app:layout_constraintTop_toBottomOf="@+id/input_layout_barcode"
+                    app:rippleColor="@color/colorPrimaryDark"
+                    app:strokeColor="@android:color/black"
+                    app:strokeWidth="1dp" />
 
                 <android.support.constraint.Guideline
                     android:id="@+id/guideline_left"
@@ -187,17 +187,13 @@
 
         </android.support.v4.widget.NestedScrollView>
 
-        <Button
+        <android.support.design.button.MaterialButton
             android:id="@+id/btn_create_wallet"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:layout_marginTop="7dp"
-            android:layout_marginBottom="3dp"
-            android:background="@drawable/button_gradient"
-            android:elevation="0dp"
+            style="@style/AppTheme.Button"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
             android:text="등록하기"
-            android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

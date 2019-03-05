@@ -27,7 +27,11 @@
 
     <!-- Button theme. -->
     <style name="AppTheme.Button" parent="@style/Widget.AppCompat.Button.Borderless">
-
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="rippleColor">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="backgroundTint">@color/colorPrimary</item>
     </style>
 
     <style name="AppTheme.NoActionAndStatusBar" parent="AppTheme.NoActionBar">
@@ -112,6 +116,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="cardCornerRadius">@dimen/corner_radius_cardview</item>
         <item name="cardElevation">2dp</item>
-
     </style>
+
+
 </resources>

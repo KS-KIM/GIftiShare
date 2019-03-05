@@ -20,7 +20,7 @@ import com.example.giftishare.data.model.CouponsCategoryType;
 import com.example.giftishare.utils.ActivityUtils;
 import com.example.giftishare.view.buysellcoupons.BuySellCouponsActivity;
 import com.example.giftishare.view.addcoupon.AddCouponActivity;
-import com.example.giftishare.view.lisence.LisenceActivity;
+import com.example.giftishare.view.license.LicenseActivity;
 import com.example.giftishare.view.onsalecoupons.OnSaleCouponsActivity;
 
 import static com.example.giftishare.view.buysellcoupons.BuySellCouponsFragment.INTENT_IS_SALE;
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity
                 openBuySellCouponsActivity(BuySellCouponsActivity.class, true);
                 break;
             case R.id.nav_opensource_lisence:
-                openActivity(LisenceActivity.class);
+                openActivity(LicenseActivity.class);
                 break;
             default:
                 break;

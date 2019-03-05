@@ -15,12 +15,9 @@ import com.example.giftishare.ViewModelFactory;
 import com.example.giftishare.databinding.ActivityAddCouponBinding;
 
 import android.databinding.DataBindingUtil;
-import android.widget.ListPopupWindow;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Field;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -66,15 +63,6 @@ public class AddCouponActivity extends AppCompatActivity {
     }
 
     private void setupCategorySpinner() {
-        try {
-            Field popup = Spinner.class.getDeclaredField("mPopup");
-            popup.setAccessible(true);
-            ListPopupWindow window = (ListPopupWindow) popup.get(mBinding.couponCategory);
-            window.setHeight(1000);
-        } catch (NoSuchFieldException |
-                IllegalAccessException e) {
-            e.printStackTrace();
-        }
         final ArrayAdapter<CharSequence> spinAdapter = ArrayAdapter.createFromResource(this, R.array.category_name, android.R.layout.simple_spinner_item);
         spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mBinding.couponCategory.setAdapter(spinAdapter);
@@ -117,6 +105,7 @@ public class AddCouponActivity extends AppCompatActivity {
             } else if (mAddCouponViewModel.isEmptyField(mAddCouponViewModel.mCompanyName.getValue())) {
                 mBinding.etCompanyName.requestFocus();
                 mBinding.etCompanyName.setError("상호명을 입력해주세요");
+                showMessage("상호명을 입력해주세요");
             } else if (mAddCouponViewModel.isEmptyField(mAddCouponViewModel.mPrice.getValue())) {
                 mBinding.etPrice.requestFocus();
                 mBinding.etPrice.setError("판매하실 가격을 입력해주세요");
@@ -126,9 +115,10 @@ public class AddCouponActivity extends AppCompatActivity {
             } else if (mAddCouponViewModel.mDeadline.getValue() == null) {
                 mBinding.btnDeadline.requestFocus();
                 mBinding.btnDeadline.setError("유효기간을 입력해주세요");
-            } else if (mAddCouponViewModel.isEmptyField(mAddCouponViewModel.mCouponCategory.getValue())) {
+            } else if (mAddCouponViewModel.mCouponCategory.getValue().equals("쿠폰 종류")) {
                 TextView spinnerTextView = (TextView) mBinding.couponCategory.getSelectedView();
                 spinnerTextView.setError("쿠폰 타입을 선택해주세요");
+                showMessage("쿠폰 타입을 선택해주세요");
             } else {
                 mAddCouponViewModel.createCoupon();
                 finish();
@@ -136,7 +126,7 @@ public class AddCouponActivity extends AppCompatActivity {
         });
     }
 
-    private void showGasLackMessage() {
-        Toast.makeText(getApplicationContext(), "이더가 부족합니다.", Toast.LENGTH_SHORT).show();
+    private void showMessage(String message) {
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 }
