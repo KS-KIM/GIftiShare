@@ -17,23 +17,47 @@ public class AddCouponViewModel extends AndroidViewModel {
 
     public final static String TAG = AddCouponViewModel.class.getSimpleName();
 
-    public final MutableLiveData<String> mCouponName = new MutableLiveData<>();
+    private final MutableLiveData<String> mCouponName = new MutableLiveData<>();
 
-    public final MutableLiveData<String> mCompanyName = new MutableLiveData<>();
+    private final MutableLiveData<String> mCompanyName = new MutableLiveData<>();
 
-    public final MutableLiveData<String> mPrice = new MutableLiveData<>();
+    private final MutableLiveData<String> mPrice = new MutableLiveData<>();
 
-    public final MutableLiveData<String> mBarcode = new MutableLiveData<>();
+    private final MutableLiveData<String> mBarcode = new MutableLiveData<>();
 
-    public final MutableLiveData<Date> mDeadline = new MutableLiveData<>();
+    private final MutableLiveData<Date> mDeadline = new MutableLiveData<>();
 
-    public final MutableLiveData<String> mCouponCategory = new MutableLiveData<>();
+    private final MutableLiveData<String> mCouponCategory = new MutableLiveData<>();
 
     private final DataManager mDataManager;
 
     public AddCouponViewModel(Application context, DataManager dataManager) {
         super(context);
         mDataManager = dataManager;
+    }
+
+    public MutableLiveData<String> getCouponName() {
+        return mCouponName;
+    }
+
+    public MutableLiveData<String> getCompanyName() {
+        return mCompanyName;
+    }
+
+    public MutableLiveData<String> getPrice() {
+        return mPrice;
+    }
+
+    public MutableLiveData<String> getBarcode() {
+        return mBarcode;
+    }
+
+    public MutableLiveData<Date> getDeadline() {
+        return mDeadline;
+    }
+
+    public MutableLiveData<String> getCouponCategory() {
+        return mCouponCategory;
     }
 
     public boolean isEmptyField(String field) {
