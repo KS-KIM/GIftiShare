@@ -13,25 +13,25 @@ import java.util.List;
  * Created by KS-KIM on 19/02/06.
  */
 
-public class AppDbHelper implements DbHelper {
+public class AppDBHelper implements DBHelper {
 
-    private static volatile AppDbHelper INSTANCE;
+    private static volatile AppDBHelper INSTANCE;
 
     private CouponsDao mCouponsDao;
 
     private AppExecutors mAppExecutors;
 
-    private AppDbHelper(@NonNull AppExecutors appExecutors, @NonNull CouponsDao couponsDao) {
+    private AppDBHelper(@NonNull AppExecutors appExecutors, @NonNull CouponsDao couponsDao) {
         mAppExecutors = appExecutors;
         mCouponsDao = couponsDao;
     }
 
-    public static AppDbHelper getInstance(@NonNull AppExecutors appExecutors,
+    public static AppDBHelper getInstance(@NonNull AppExecutors appExecutors,
                                           @NonNull CouponsDao couponsDao) {
         if (INSTANCE == null) {
-            synchronized (AppDbHelper.class) {
+            synchronized (AppDBHelper.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = new AppDbHelper(appExecutors, couponsDao);
+                    INSTANCE = new AppDBHelper(appExecutors, couponsDao);
                 }
             }
         }

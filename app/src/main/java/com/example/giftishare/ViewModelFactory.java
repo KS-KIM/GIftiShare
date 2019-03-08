@@ -21,35 +21,14 @@ import android.app.Application;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 
-import com.example.giftishare.data.AppDataManager;
 import com.example.giftishare.data.DataManager;
-import com.example.giftishare.data.local.db.AppDatabase;
-import com.example.giftishare.data.local.db.AppDbHelper;
-import com.example.giftishare.data.local.file.AppKeystoreGenerationHelper;
-import com.example.giftishare.data.local.prefs.AppPreferencesHelper;
-import com.example.giftishare.data.remote.ethereum.AppSmartContractHelper;
-import com.example.giftishare.data.remote.ethereum.GiftiShare;
-import com.example.giftishare.data.remote.firebase.AppFirebaseDbHelper;
-import com.example.giftishare.utils.AppExecutors;
+import com.example.giftishare.di.Injection;
 import com.example.giftishare.view.addcoupon.AddCouponViewModel;
 import com.example.giftishare.view.addwallet.AddWalletViewModel;
 import com.example.giftishare.view.buycoupon.BuyCouponViewModel;
 import com.example.giftishare.view.buysellcoupons.BuySellCouponsViewModel;
 import com.example.giftishare.view.main.MainViewModel;
 import com.example.giftishare.view.onsalecoupons.OnSaleCouponsViewModel;
-
-import org.web3j.crypto.CipherException;
-import org.web3j.crypto.Credentials;
-import org.web3j.crypto.WalletUtils;
-import org.web3j.protocol.Web3j;
-import org.web3j.protocol.http.HttpService;
-import org.web3j.tx.gas.ContractGasProvider;
-import org.web3j.tx.gas.DefaultGasProvider;
-
-import java.io.IOException;
-
-import static com.example.giftishare.data.remote.ethereum.AppSmartContractHelper.CONTRACT_ADDRESS;
-import static com.example.giftishare.data.remote.ethereum.AppSmartContractHelper.ROPSTEN_NETWORK_ADDRESS;
 
 /**
  * A creator is used to inject the product ID into the ViewModel
@@ -70,42 +49,7 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
         if (INSTANCE == null) {
             synchronized (ViewModelFactory.class) {
                 if (INSTANCE == null) {
-                    // @TODO data source의 인스턴스 생성 방식 고민해보기
-                    // room database initialization
-                    AppExecutors appExecutors = new AppExecutors();
-                    AppDatabase db = AppDatabase.getInstance(application.getApplicationContext());
-                    AppDbHelper dbHelper = AppDbHelper.getInstance(appExecutors, db.couponDao());
-
-                    // firebase realtime database initialization
-                    AppFirebaseDbHelper appFirebaseDbHelper = AppFirebaseDbHelper.getInstance();
-
-                    // preference initialization
-                    AppPreferencesHelper preferencesHelper = AppPreferencesHelper
-                            .getInstance(application.getApplicationContext());
-
-                    // ethereum wallet generator initialization
-                    AppKeystoreGenerationHelper keystoreGenerationHelper = new AppKeystoreGenerationHelper();
-
-                    // smart contract initialization
-                    Web3j web3j = Web3j.build(new HttpService(ROPSTEN_NETWORK_ADDRESS));
-                    Credentials credentials = null;
-                    GiftiShare smartContract = null;
-                    ContractGasProvider contractGasProvider = new DefaultGasProvider();
-                    try {
-                        credentials = WalletUtils.loadCredentials(
-                                preferencesHelper.getWalletPassword(), preferencesHelper.getWalletPath());
-                        smartContract = GiftiShare.load(CONTRACT_ADDRESS, web3j, credentials, contractGasProvider);
-                    } catch (NullPointerException
-                            | IOException
-                            | CipherException e) {
-                        e.printStackTrace();
-                    }
-                    AppSmartContractHelper smartContractHelper = AppSmartContractHelper.getInstance(
-                            web3j, credentials, smartContract);
-
-                    // repository initialization
-                    DataManager dataManager = AppDataManager.getInstance(dbHelper,
-                            appFirebaseDbHelper, preferencesHelper, keystoreGenerationHelper, smartContractHelper);
+                    DataManager dataManager = Injection.provideDataManager(application.getApplicationContext());
                     INSTANCE = new ViewModelFactory(application, dataManager);
                 }
             }

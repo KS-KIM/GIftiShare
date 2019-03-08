@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.example.giftishare.data.model.Coupon;
+import com.example.giftishare.di.Injection;
 
 import org.web3j.crypto.CipherException;
 import org.web3j.crypto.Credentials;
@@ -115,6 +116,7 @@ public class AppSmartContractHelper implements SmartContractHelper {
         return mSmartContract.stopCouponSale(uuid).sendAsync();
     }
 
+    /* @TODO injection */
     @Override
     public void loadCredentialsAndSmartContract(String password, String source) {
         try {

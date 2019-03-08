@@ -7,29 +7,30 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Map;
 
-public class AppFirebaseDbHelper implements FirebaseDbHelper {
+public class AppFirebaseDBHelper implements FirebaseDBHelper {
 
-    public static final String TAG = AppFirebaseDbHelper.class.getSimpleName();
+    public static final String TAG = AppFirebaseDBHelper.class.getSimpleName();
 
     public final static String FIREBASE_CATEGORY_COUPONS = "coupons";
 
-    private static volatile AppFirebaseDbHelper INSTANCE;
+    private static volatile AppFirebaseDBHelper INSTANCE;
 
     private final DatabaseReference mDatabase;
 
-    private AppFirebaseDbHelper() {
+    private AppFirebaseDBHelper() {
         mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
-    public static AppFirebaseDbHelper getInstance() {
+    public static AppFirebaseDBHelper getInstance() {
         if (INSTANCE == null) {
-            synchronized (AppFirebaseDbHelper.class) {
+            synchronized (AppFirebaseDBHelper.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = new AppFirebaseDbHelper();
+                    INSTANCE = new AppFirebaseDBHelper();
                 }
             }
         }
@@ -64,12 +65,15 @@ public class AppFirebaseDbHelper implements FirebaseDbHelper {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        dataSnapshot.getRef().removeValue();
+                        for (DataSnapshot child: dataSnapshot.getChildren()) {
+                            child.getRef().removeValue();
+                        }
+                        Log.d(TAG, "Successfully removed data: " + dataSnapshot.getValue());
                     }
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-                        Log.e(TAG, "onCancelled", databaseError.toException());
+                        Log.e(TAG, "onCancelled: ", databaseError.toException());
                     }
                 });
     }

@@ -16,6 +16,7 @@ import java8.util.concurrent.CompletableFuture;
 
 public interface SmartContractHelper {
 
+    /* @TODO change returns CompletableFuture -> flowable */
     CompletableFuture<TransactionReceipt> buyCoupon(String uuid, String price);
 
     CompletableFuture<TransactionReceipt> resumeSaleCoupon(String uuid);

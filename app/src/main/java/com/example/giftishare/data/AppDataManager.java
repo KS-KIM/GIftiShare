@@ -3,8 +3,8 @@ package com.example.giftishare.data;
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
-import com.example.giftishare.data.local.db.AppDbHelper;
-import com.example.giftishare.data.local.db.DbHelper;
+import com.example.giftishare.data.local.db.AppDBHelper;
+import com.example.giftishare.data.local.db.DBHelper;
 import com.example.giftishare.data.local.file.AppKeystoreGenerationHelper;
 import com.example.giftishare.data.local.file.KeystoreGenerationHelper;
 import com.example.giftishare.data.local.prefs.AppPreferencesHelper;
@@ -12,8 +12,8 @@ import com.example.giftishare.data.local.prefs.PreferencesHelper;
 import com.example.giftishare.data.model.Coupon;
 import com.example.giftishare.data.remote.ethereum.AppSmartContractHelper;
 import com.example.giftishare.data.remote.ethereum.SmartContractHelper;
-import com.example.giftishare.data.remote.firebase.AppFirebaseDbHelper;
-import com.example.giftishare.data.remote.firebase.FirebaseDbHelper;
+import com.example.giftishare.data.remote.firebase.AppFirebaseDBHelper;
+import com.example.giftishare.data.remote.firebase.FirebaseDBHelper;
 import com.google.firebase.database.ValueEventListener;
 
 import org.web3j.crypto.Credentials;
@@ -33,9 +33,9 @@ public class AppDataManager implements DataManager {
 
     private volatile static DataManager INSTANCE = null;
 
-    private final DbHelper mDbHelper;
+    private final DBHelper mDBHelper;
 
-    private final FirebaseDbHelper mFirebaseDbHelper;
+    private final FirebaseDBHelper mFirebaseDBHelper;
 
     private final PreferencesHelper mPreferencesHelper;
 
@@ -43,27 +43,27 @@ public class AppDataManager implements DataManager {
 
     private final SmartContractHelper mSmartContractHelper;
 
-    private AppDataManager(@NonNull AppDbHelper appDbHelper,
-                           @NonNull AppFirebaseDbHelper appFirebaseDbHelper,
-                           @NonNull AppPreferencesHelper appPreferencesHelper,
-                           @NonNull AppKeystoreGenerationHelper appKeystoreGenerationHelper,
-                           @NonNull AppSmartContractHelper appSmartContractHelper) {
-        mDbHelper = appDbHelper;
-        mFirebaseDbHelper = appFirebaseDbHelper;
+    private AppDataManager(@NonNull DBHelper appDbHelper,
+                           @NonNull FirebaseDBHelper appFirebaseDbHelper,
+                           @NonNull PreferencesHelper appPreferencesHelper,
+                           @NonNull KeystoreGenerationHelper appKeystoreGenerationHelper,
+                           @NonNull SmartContractHelper appSmartContractHelper) {
+        mDBHelper = appDbHelper;
+        mFirebaseDBHelper = appFirebaseDbHelper;
         mKeystoreGenerationHelper = appKeystoreGenerationHelper;
         mPreferencesHelper = appPreferencesHelper;
         mSmartContractHelper = appSmartContractHelper;
     }
 
-    public static DataManager getInstance(@NonNull AppDbHelper appDbHelper,
-                                          @NonNull AppFirebaseDbHelper appFirebaseDbHelper,
-                                          @NonNull AppPreferencesHelper appPreferencesHelper,
-                                          @NonNull AppKeystoreGenerationHelper appKeystoreGenerationHelper,
-                                          @NonNull AppSmartContractHelper appSmartContractHelper) {
+    public static DataManager getInstance(@NonNull DBHelper appDbHelper,
+                                          @NonNull FirebaseDBHelper appFirebaseDBHelper,
+                                          @NonNull PreferencesHelper appPreferencesHelper,
+                                          @NonNull KeystoreGenerationHelper appKeystoreGenerationHelper,
+                                          @NonNull SmartContractHelper appSmartContractHelper) {
         if (INSTANCE == null) {
             synchronized (AppDataManager.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = new AppDataManager(appDbHelper, appFirebaseDbHelper,
+                    INSTANCE = new AppDataManager(appDbHelper, appFirebaseDBHelper,
                             appPreferencesHelper, appKeystoreGenerationHelper, appSmartContractHelper);
                 }
             }
@@ -78,43 +78,43 @@ public class AppDataManager implements DataManager {
     /* Room database */
     @Override
     public LiveData<List<Coupon>> getAllCoupons() {
-        return mDbHelper.getAllCoupons();
+        return mDBHelper.getAllCoupons();
     }
 
     @Override
     public LiveData<List<Coupon>> getCoupons(Boolean isSale) {
-        return mDbHelper.getCoupons(isSale);
+        return mDBHelper.getCoupons(isSale);
     }
 
     @Override
     public void saveCoupon(@NonNull Coupon coupon) {
-        mDbHelper.saveCoupon(coupon);
+        mDBHelper.saveCoupon(coupon);
     }
 
     @Override
     public void deleteAllCoupons() {
-        mDbHelper.deleteAllCoupons();
+        mDBHelper.deleteAllCoupons();
     }
 
     @Override
     public void deleteCoupon(@NonNull Coupon coupon) {
-        mDbHelper.deleteCoupon(coupon);
+        mDBHelper.deleteCoupon(coupon);
     }
 
     /* Firebase */
     @Override
     public void saveSaleCoupon(@NonNull Coupon coupon) {
-        mFirebaseDbHelper.saveSaleCoupon(coupon);
+        mFirebaseDBHelper.saveSaleCoupon(coupon);
     }
 
     @Override
     public void getSaleCoupons(String category, ValueEventListener listener) {
-        mFirebaseDbHelper.getSaleCoupons(category, listener);
+        mFirebaseDBHelper.getSaleCoupons(category, listener);
     }
 
     @Override
     public void deleteCoupon(String category, String id) {
-        mFirebaseDbHelper.deleteCoupon(category, id);
+        mFirebaseDBHelper.deleteCoupon(category, id);
     }
 
     public void deleteSaleCoupon(Coupon coupon) {

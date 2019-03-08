@@ -58,7 +58,6 @@ public final class Coupon implements Serializable {
         // require empty constructor
     }
 
-    // RoomDatabase에서는 오직 하나의 생성자만 허용하므로 나머지는 @Ignore를 통해 처리를 해주어야 함
     @Ignore
     public Coupon(@NonNull String id, @NonNull String name, @NonNull String category,
                   @NonNull String company, @NonNull String price, @NonNull String barcode,
@@ -77,6 +76,7 @@ public final class Coupon implements Serializable {
     }
 
     // generate new coupon from user
+    @Ignore
     public Coupon(@NonNull String name, @NonNull String category, @NonNull String company,
                   @NonNull String price, @NonNull String barcode, @NonNull Long deadline,
                   @NonNull String owner) {

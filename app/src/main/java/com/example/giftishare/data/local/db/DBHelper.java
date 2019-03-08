@@ -11,7 +11,7 @@ import java.util.List;
  * Created by KS-KIM on 19/02/06.
  */
 
-public interface DbHelper {
+public interface DBHelper {
 
     LiveData<List<Coupon>> getAllCoupons();
 
