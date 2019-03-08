@@ -3,11 +3,15 @@ package com.example.giftishare.view.onsalecoupons;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.giftishare.R;
+import com.example.giftishare.ScrollChildSwipeRefreshLayout;
 import com.example.giftishare.databinding.FragmentOnSaleCouponsBinding;
 import com.example.giftishare.data.model.CouponsCategoryType;
 
@@ -55,5 +59,16 @@ public class OnSaleCouponsFragment extends Fragment {
         Intent intent = getActivity().getIntent();
         CouponsCategoryType category = (CouponsCategoryType) intent.getSerializableExtra(CATEGORY_COUPONS);
         mOnSaleCouponsViewModel.start(category.toEng());
+    }
+
+    private void setupRefreshLayout() {
+        RecyclerView recyclerView = mFragmentOnSaleCouponsBinding.couponsListRecyclerView;
+        final ScrollChildSwipeRefreshLayout swipeRefreshLayout = mFragmentOnSaleCouponsBinding.refreshLayout;
+        swipeRefreshLayout.setColorSchemeColors(
+                ContextCompat.getColor(getActivity(), R.color.colorPrimary),
+                ContextCompat.getColor(getActivity(), R.color.colorAccent),
+                ContextCompat.getColor(getActivity(), R.color.colorPrimaryDark)
+        );
+        swipeRefreshLayout.setScrollUpChild(recyclerView);
     }
 }

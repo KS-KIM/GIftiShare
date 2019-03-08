@@ -35,7 +35,8 @@ public class BuyCouponViewModel extends AndroidViewModel {
         return mBuyCouponEvent;
     }
 
-    public void buyCoupon(Coupon coupon) {
+    public void buyCoupon() {
+        Coupon coupon = mCoupon.getValue();
         if (coupon.getOwner().equals(mDataManager.getCredentials().getAddress())) {
             mBuyCouponEvent.postValue(new Event<>("본인의 쿠폰은 구매할 수 없습니다."));
             return;

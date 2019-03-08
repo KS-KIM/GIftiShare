@@ -23,6 +23,10 @@ public class OnSaleCouponsViewModel extends AndroidViewModel {
 
     private final MutableLiveData<List<Coupon>> mCoupons = new MutableLiveData<>();
 
+    private final MutableLiveData<Boolean> mDataLoading = new MutableLiveData<>();
+
+    private final MutableLiveData<String> mCategory = new MutableLiveData<>();
+
     private final DataManager mDataManager;
 
     private final Context mContext;
@@ -39,11 +43,21 @@ public class OnSaleCouponsViewModel extends AndroidViewModel {
         mDataManager = dataManager;
     }
 
+    public MutableLiveData<String> getCategory() {
+        return mCategory;
+    }
+
+    public MutableLiveData<Boolean> isDataLoading() {
+        return mDataLoading;
+    }
+
     public void start(String category) {
+        mCategory.postValue(category);
         loadCoupons(category);
     }
 
     public void loadCoupons(String category) {
+        mDataLoading.setValue(true);
         mDataManager.getSaleCoupons(category, new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -55,11 +69,13 @@ public class OnSaleCouponsViewModel extends AndroidViewModel {
                 }
                 Log.d(TAG, "Coupon list Created. Number of coupons: " + coupons.size());
                 mCoupons.setValue(coupons);
+                mDataLoading.setValue(false);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 mCoupons.setValue(new ArrayList<>());
+                mDataLoading.setValue(false);
             }
         });
     }

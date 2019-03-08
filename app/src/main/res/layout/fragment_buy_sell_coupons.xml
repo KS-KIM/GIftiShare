@@ -10,8 +10,6 @@
             type="com.example.giftishare.view.buysellcoupons.BuySellCouponsViewModel" />
     </data>
 
-    <!-- @TODO ScrollChildSwipeRefreshLayout-->
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/coupons_list_recycler_view"
         android:layout_width="match_parent"

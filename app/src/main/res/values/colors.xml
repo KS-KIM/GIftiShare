@@ -7,4 +7,5 @@
     <color name="slate">#455a64</color>
     <color name="logoGray">#537776</color>
     <color name="hint">#60000000</color>
+    <color name="inputTextGray">#9b9b9b</color>
 </resources>
