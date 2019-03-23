@@ -2,6 +2,14 @@
 
 이더리움 스마트 컨트랙트를 기반으로 쿠폰, 기프티콘 등의 자산을 공유할 수 있는 안드로이드 어플리케이션입니다.
 
+## Features
+- 이더리움 지갑 생성
+- 이더 조회 및 전송
+- 트랜잭션 조회
+- 쿠폰 등록
+- 쿠폰 구매
+- 구폰 구매 및 판매목록 조회
+
 ## Architecture & Library
 
 - [MVVM (Model-View-ViewModel) Architecture Design Pattern](https://developer.android.com/jetpack/docs/guide#separation-of-concerns)
@@ -21,11 +29,17 @@
   - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 - [Google Firebase for Android](https://firebase.google.com/docs/android)
 - [Web3j Lightweight Java and Android Library](https://docs.web3j.io/)
-- [ZXing barcode scanning Library](https://github.com/zxing/zxing)
 
-## To be implemented
+## Plan to improve
 
-- [Dependency Injection (Dagger 2)](https://github.com/google/dagger)
+- 쿠폰 바코드로 보여주기
+  - [ZXing barcode scanning Library](https://github.com/zxing/zxing)
+- 의존성 주입
+  - [Dependency Injection (Dagger 2)](https://github.com/google/dagger)
+- 뷰 및 애니메이션 개선
+- 비밀번호 임시 저장 제거
+- 불필요한 BindingAdapter 코드 제거
+- 이더 송금기능 커스텀 다이얼로그로 분리
 
 ## Contributor
 
@@ -42,7 +56,7 @@
 - [Android Architecture](https://developer.android.com/jetpack/docs/guide)
 - [RecyclerView](https://thdev.tech/androiddev/2016/11/01/Android-RecyclerView-intro/)
 
-# [License](https://github.com/KS-KIM/giftishare-android/blob/master/LICENSE)
+# License
 
 Copyright (c) 2019 By KS-KIM. All right reserved.
 
