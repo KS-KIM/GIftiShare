@@ -29,7 +29,7 @@
   - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 - [Google Firebase for Android](https://firebase.google.com/docs/android)
 - [Web3j Lightweight Java and Android Library](https://docs.web3j.io/)
-- [ZXing barcode scanning Library](https://github.com/zxing/zxing)
+- [Zxing Android Embedded](https://github.com/journeyapps/zxing-android-embedded)
 
 ## Plan to improve
 
