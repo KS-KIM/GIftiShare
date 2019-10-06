@@ -1,4 +1,4 @@
-package com.example.giftishare.view.buycoupon;
+package com.example.giftishare.view.onsalecoupons.couponpurchase;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
@@ -10,7 +10,7 @@ import com.example.giftishare.data.DataManager;
 import com.example.giftishare.data.model.Coupon;
 import com.example.giftishare.helper.NotificationHelper;
 
-public class BuyCouponViewModel extends AndroidViewModel {
+public class CouponPurchaseViewModel extends AndroidViewModel {
 
     private final MutableLiveData<Coupon> mCoupon = new MutableLiveData<>();
 
@@ -18,7 +18,7 @@ public class BuyCouponViewModel extends AndroidViewModel {
 
     private final DataManager mDataManager;
 
-    public BuyCouponViewModel(Application context, DataManager dataManager) {
+    public CouponPurchaseViewModel(Application context, DataManager dataManager) {
         super(context);
         mDataManager = dataManager;
     }

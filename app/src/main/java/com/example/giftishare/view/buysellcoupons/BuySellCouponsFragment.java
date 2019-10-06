@@ -37,11 +37,12 @@ public class BuySellCouponsFragment extends Fragment {
         mBuySellCouponsViewModel = BuySellCouponsActivity.obtainViewModel(getActivity());
         mFragmentBuySellCouponsBinding.setBuySellCouponsViewModel(mBuySellCouponsViewModel);
         mFragmentBuySellCouponsBinding.setLifecycleOwner(getActivity());
-        setupListAdapter();
 
         Intent intent = getActivity().getIntent();
         boolean isSale = intent.getBooleanExtra(INTENT_IS_SALE, false);
         mBuySellCouponsViewModel.start(isSale);
+
+        setupListAdapter();
         return mFragmentBuySellCouponsBinding.getRoot();
     }
 

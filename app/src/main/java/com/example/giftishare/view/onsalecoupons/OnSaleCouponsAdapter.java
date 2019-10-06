@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.example.giftishare.data.model.Coupon;
 import com.example.giftishare.databinding.ItemOnSaleCouponBinding;
-import com.example.giftishare.view.buycoupon.BuyCouponActivity;
+import com.example.giftishare.view.onsalecoupons.couponpurchase.CouponPurchaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,12 +63,12 @@ public class OnSaleCouponsAdapter extends RecyclerView.Adapter<OnSaleCouponsAdap
 
         ItemOnSaleCouponBinding binding;
 
-        public CouponViewHolder(ItemOnSaleCouponBinding binding) {
+        public CouponViewHolder(@NonNull ItemOnSaleCouponBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
             OnSaleCouponsActionsListener listener = (Coupon coupon) -> {
                 Context context = binding.getRoot().getContext();
-                Intent intent = new Intent(context, BuyCouponActivity.class);
+                Intent intent = new Intent(context, CouponPurchaseActivity.class);
                 intent.putExtra(INTENT_BUY_COUPON, coupon);
                 context.startActivity(intent);
             };

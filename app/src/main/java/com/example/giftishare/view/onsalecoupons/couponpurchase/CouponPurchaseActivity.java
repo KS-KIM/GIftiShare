@@ -1,4 +1,4 @@
-package com.example.giftishare.view.buycoupon;
+package com.example.giftishare.view.onsalecoupons.couponpurchase;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -14,47 +14,47 @@ import com.example.giftishare.Event;
 import com.example.giftishare.R;
 import com.example.giftishare.ViewModelFactory;
 import com.example.giftishare.data.model.Coupon;
-import com.example.giftishare.databinding.ActivityBuyCouponBinding;
+import com.example.giftishare.databinding.ActivityCouponPurchaseBinding;
 import com.example.giftishare.helper.CategoryNameMapper;
 
 import static com.example.giftishare.view.onsalecoupons.OnSaleCouponsAdapter.INTENT_BUY_COUPON;
 
-public class BuyCouponActivity extends AppCompatActivity {
+public class CouponPurchaseActivity extends AppCompatActivity {
 
-    private ActivityBuyCouponBinding mBinding;
+    private ActivityCouponPurchaseBinding mBinding;
 
-    private BuyCouponViewModel mBuyCouponViewModel;
+    private CouponPurchaseViewModel mCouponPurchaseViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mBuyCouponViewModel = obtainViewModel(this);
+        mCouponPurchaseViewModel = obtainViewModel(this);
 
-        mBinding = DataBindingUtil.setContentView(BuyCouponActivity.this, R.layout.activity_buy_coupon);
+        mBinding = DataBindingUtil.setContentView(CouponPurchaseActivity.this, R.layout.activity_coupon_purchase);
         mBinding.setLifecycleOwner(this);
-        mBinding.setBuyCouponViewModel(mBuyCouponViewModel);
+        mBinding.setCouponPurchaseViewModel(mCouponPurchaseViewModel);
 
         setupToolBar();
 
         Intent intent = getIntent();
         Coupon coupon = (Coupon) intent.getSerializableExtra(INTENT_BUY_COUPON);
         mBinding.cardInfo.ivCouponImage.setImageResource(CategoryNameMapper.toImageDrawable(coupon.getCategory()));
-        mBuyCouponViewModel.start(coupon);
+        mCouponPurchaseViewModel.start(coupon);
 
         mBinding.btnDecline.setOnClickListener((View view) -> onBackPressed());
 
-        mBuyCouponViewModel.getBuyCouponEvent().observe(this,
+        mCouponPurchaseViewModel.getBuyCouponEvent().observe(this,
                 (Event<String> event) -> {
                     Toast.makeText(getApplicationContext(), event.getContentIfNotHandled(), Toast.LENGTH_LONG).show();
                     finish();
                 });
     }
 
-    private BuyCouponViewModel obtainViewModel(FragmentActivity activity) {
+    private CouponPurchaseViewModel obtainViewModel(FragmentActivity activity) {
         ViewModelFactory factory = ViewModelFactory.getInstance(activity.getApplication());
-        BuyCouponViewModel buyCouponViewModel = ViewModelProviders.of(this, factory).get(BuyCouponViewModel.class);
-        return buyCouponViewModel;
+        CouponPurchaseViewModel couponPurchaseViewModel = ViewModelProviders.of(this, factory).get(CouponPurchaseViewModel.class);
+        return couponPurchaseViewModel;
     }
 
     private void setupToolBar() {

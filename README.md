@@ -29,17 +29,12 @@
   - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 - [Google Firebase for Android](https://firebase.google.com/docs/android)
 - [Web3j Lightweight Java and Android Library](https://docs.web3j.io/)
+- [ZXing barcode scanning Library](https://github.com/zxing/zxing)
 
 ## Plan to improve
 
-- 쿠폰 바코드로 보여주기
-  - [ZXing barcode scanning Library](https://github.com/zxing/zxing)
-- 의존성 주입
+- 의존성 주입 라이브러리 적용
   - [Dependency Injection (Dagger 2)](https://github.com/google/dagger)
-- 뷰 및 애니메이션 개선
-- 비밀번호 임시 저장 제거
-- 불필요한 BindingAdapter 코드 제거
-- 이더 송금기능 커스텀 다이얼로그로 분리
 
 ## Contributor
 

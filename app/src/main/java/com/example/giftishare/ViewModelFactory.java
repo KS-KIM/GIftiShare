@@ -25,7 +25,8 @@ import com.example.giftishare.data.DataManager;
 import com.example.giftishare.di.Injection;
 import com.example.giftishare.view.addcoupon.AddCouponViewModel;
 import com.example.giftishare.view.addwallet.AddWalletViewModel;
-import com.example.giftishare.view.buycoupon.BuyCouponViewModel;
+import com.example.giftishare.view.buysellcoupons.purchasedcoupon.PurchasedCouponViewModel;
+import com.example.giftishare.view.onsalecoupons.couponpurchase.CouponPurchaseViewModel;
 import com.example.giftishare.view.buysellcoupons.BuySellCouponsViewModel;
 import com.example.giftishare.view.main.MainViewModel;
 import com.example.giftishare.view.onsalecoupons.OnSaleCouponsViewModel;
@@ -82,8 +83,10 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
             return (T) new AddCouponViewModel(mApplication, mDataManager);
         } else if (modelClass.isAssignableFrom(BuySellCouponsViewModel.class)) {
             return (T) new BuySellCouponsViewModel(mApplication, mDataManager);
-        } else if (modelClass.isAssignableFrom(BuyCouponViewModel.class)) {
-            return (T) new BuyCouponViewModel(mApplication, mDataManager);
+        } else if (modelClass.isAssignableFrom(CouponPurchaseViewModel.class)) {
+            return (T) new CouponPurchaseViewModel(mApplication, mDataManager);
+        } else if (modelClass.isAssignableFrom(PurchasedCouponViewModel.class)) {
+            return (T) new PurchasedCouponViewModel(mApplication, mDataManager);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

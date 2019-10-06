@@ -2,8 +2,10 @@ package com.example.giftishare.view.buysellcoupons;
 
 import android.databinding.BindingAdapter;
 import android.support.v7.widget.RecyclerView;
+import android.widget.ImageView;
 
 import com.example.giftishare.data.model.Coupon;
+import com.example.giftishare.helper.CategoryNameMapper;
 
 import java.util.List;
 
@@ -18,5 +20,10 @@ public class BuySellCouponsListBindings {
         if (adapter != null) {
             adapter.replaceItems(items);
         }
+    }
+
+    @BindingAdapter("imageResource")
+    public static void setImageResource(ImageView imageView, String categoryName) {
+        imageView.setImageResource(CategoryNameMapper.toImageDrawable(categoryName));
     }
 }

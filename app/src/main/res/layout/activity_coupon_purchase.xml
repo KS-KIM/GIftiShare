@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="buyCouponViewModel"
-            type="com.example.giftishare.view.buycoupon.BuyCouponViewModel" />
+            name="couponPurchaseViewModel"
+            type="com.example.giftishare.view.onsalecoupons.couponpurchase.CouponPurchaseViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -47,6 +47,17 @@
 
         </android.support.design.widget.AppBarLayout>
 
+        <TextView
+            android:id="@+id/title_coupon"
+            style="@style/TextStyle_Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:paddingTop="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/card_info"
+            app:layout_constraintTop_toBottomOf="@+id/app_bar"
+            android:text="해당 기프티콘을 구매하시겠습니까?" />
+
         <include
             android:id="@+id/card_info"
             layout="@layout/coupon_information"
@@ -54,9 +65,9 @@
             android:layout_height="0dp"
             android:fillViewport="true"
             android:paddingTop="16dp"
-            app:buyCouponViewModel="@{buyCouponViewModel}"
+            app:couponPurchaseViewModel="@{couponPurchaseViewModel}"
             app:layout_constraintBottom_toTopOf="@+id/btn_accept"
-            app:layout_constraintTop_toBottomOf="@+id/app_bar" />
+            app:layout_constraintTop_toBottomOf="@+id/title_coupon" />
 
         <android.support.design.button.MaterialButton
             android:id="@+id/btn_accept"
@@ -64,7 +75,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:onClick="@{() -> buyCouponViewModel.buyCoupon()}"
+            android:onClick="@{() -> couponPurchaseViewModel.buyCoupon()}"
             android:text="구매"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

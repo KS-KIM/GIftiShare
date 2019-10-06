@@ -60,6 +60,9 @@ dependencies {
     // web3j components
     implementation "org.web3j:core:$rootProject.web3jVersion"
 
+    // barcode image generate
+    implementation "com.journeyapps:zxing-android-embedded:$rootProject.zxingVersion"
+
     // test components
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
