@@ -30,11 +30,7 @@
 - [Google Firebase for Android](https://firebase.google.com/docs/android)
 - [Web3j Lightweight Java and Android Library](https://docs.web3j.io/)
 - [Zxing Android Embedded](https://github.com/journeyapps/zxing-android-embedded)
-
-## Plan to improve
-
-- 의존성 주입 라이브러리 적용
-  - [Dependency Injection (Dagger 2)](https://github.com/google/dagger)
+- [Dependency Injection (Dagger 2)](https://github.com/google/dagger)
 
 ## Contributor
 
